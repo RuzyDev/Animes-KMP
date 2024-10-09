@@ -55,7 +55,7 @@ kotlin {
 
 
 android {
-    namespace = "br.com.arcom.sign"
+    namespace = "br.com.arcom.autoriza"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
@@ -68,6 +68,6 @@ android {
 
 sqldelight{
     databases.create("AnimesHubDatabase"){
-        packageName.set("br.com.arcom.sign.database")
+        packageName.set("br.com.arcom.autoriza.database")
     }
 }

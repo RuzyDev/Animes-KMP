@@ -1,0 +1,17 @@
+CREATE TABLE rankingMangaEntity (
+  manga_id INTEGER,
+  ranking_type TEXT,
+  ranking_value INTEGER,
+  PRIMARY KEY (manga_id, ranking_type), -- Chave primária composta
+  FOREIGN KEY (manga_id) REFERENCES mangaEntity(id)
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO rankingMangaEntity (manga_id, ranking_type, ranking_value)
+VALUES (?, ?, ?);
+
+getByMangaType:
+SELECT * FROM rankingMangaEntity WHERE manga_id = ? AND ranking_type = ?;
+
+selectAll:
+SELECT * FROM rankingMangaEntity;

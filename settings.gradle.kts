@@ -14,6 +14,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Sign"
+rootProject.name = "Autoriza"
 include(":androidApp")
 include(":shared")

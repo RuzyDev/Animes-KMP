@@ -20,7 +20,7 @@ fun createDataStore(
     produceFile = { producePath().toPath() },
 )
 
-internal const val dataStoreFileName = "animeshub.preferences_pb"
+internal const val dataStoreFileName = "autoriza.preferences_pb"
 
 class AnimesHubDataStore(
     private val dataStore: DataStore<Preferences>

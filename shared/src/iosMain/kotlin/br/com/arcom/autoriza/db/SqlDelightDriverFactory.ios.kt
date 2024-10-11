@@ -6,6 +6,6 @@ import br.com.arcom.autoriza.database.AnimesHubDatabase
 
 actual class SqlDelightDriverFactory {
     actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(AnimesHubDatabase.Schema, "animeshub.db")
+        return NativeSqliteDriver(AnimesHubDatabase.Schema, "autoriza.db")
     }
 }

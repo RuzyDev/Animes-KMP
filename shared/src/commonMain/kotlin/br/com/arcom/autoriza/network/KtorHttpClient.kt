@@ -18,7 +18,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class KtorHttpClient(
-    private val animeshubDataStore: AnimesHubDataStore
+    private val autorizaDataStore: AnimesHubDataStore
 ) {
     fun httpClient(enableNetworkLogs: Boolean) = HttpClient {
         expectSuccess = false

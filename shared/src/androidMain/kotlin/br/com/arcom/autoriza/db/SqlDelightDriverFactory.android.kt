@@ -9,6 +9,6 @@ actual class SqlDelightDriverFactory(
     private val context: Context,
 ) {
     actual fun createDriver(): SqlDriver {
-        return AndroidSqliteDriver(AnimesHubDatabase.Schema, context, "animeshub.db")
+        return AndroidSqliteDriver(AnimesHubDatabase.Schema, context, "autoriza.db")
     }
 }

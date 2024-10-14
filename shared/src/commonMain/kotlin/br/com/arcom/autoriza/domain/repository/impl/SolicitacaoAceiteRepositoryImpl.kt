@@ -31,7 +31,16 @@ class SolicitacaoAceiteRepositoryImpl(
 
 ) : SolicitacaoAceiteRepository {
 
-    override suspend fun updateTopAnimes(type: TypeRakingAnime) {
+
+    override suspend fun getTopAnimes(type: TypeRakingAnime, page: Long): List<AnimeDetails> =
+        animeQueries.getTopAnimes(type.type, page).executeAsList().map { anime ->
+            val images = imageAnimeQueries.getByIdAnime(anime.id).executeAsList()
+                .map(ImageAnimeEntity::toExternalModel)
+            anime.toAnimeDetails(images)
+        }
+
+
+    override suspend fun updateSolicitacaoAceite(idUsuario: Long) {
         val animes = topService.getTopAnime(type.type)
         val entity = animes.data
         entity.forEach {
@@ -44,34 +53,7 @@ class SolicitacaoAceiteRepositoryImpl(
         }
     }
 
-    override suspend fun updateTopMangas(type: TypeRakingManga) {
-        val mangas = topService.getTopAnime(type.type)
-        val entity = mangas.data
-        entity.forEach {
-            rankingMangaQueries.insertOrUpdate(it.malId, type.type, it.rank)
-            mangaQueries.insertOrUpdate(id = it.malId, title = it.title)
-            imageMangaQueries.insertOrUpdate(
-                id_manga = it.malId,
-                url = it.networkAnimeImagesTop?.jpg?.imageUrl
-            )
-        }
-    }
-
-    override suspend fun getTopAnimes(type: TypeRakingAnime, page: Long): List<AnimeDetails> =
-        animeQueries.getTopAnimes(type.type, page).executeAsList().map { anime ->
-            val images = imageAnimeQueries.getByIdAnime(anime.id).executeAsList()
-                .map(ImageAnimeEntity::toExternalModel)
-            anime.toAnimeDetails(images)
-        }
-
-    override suspend fun getTopMangas(type: TypeRakingManga, page: Long): List<MangaDetails> =
-        mangaQueries.getTopMangas(type.type, page).executeAsList().map { manga ->
-            val images = imageMangaQueries.getByIdManga(manga.id).executeAsList()
-                .map(ImageMangaEntity::toExternalModel)
-            manga.toMangaDetails(images)
-        }
-
-    override fun observeTopAnimes(type: TypeRakingAnime, page: Long): Flow<List<AnimeDetails>> =
+    override fun observeSolicitacaoAceite(page: Long): Flow<List<SolicitacaoAceite>> {
         animeQueries.getTopAnimes(type.type, page).asFlow().mapToList(Dispatchers.IO).map {
             it.map { anime ->
                 val images = imageAnimeQueries.getByIdAnime(anime.id).executeAsList()
@@ -79,22 +61,6 @@ class SolicitacaoAceiteRepositoryImpl(
                 anime.toAnimeDetails(images)
             }
         }
-
-    override fun observeTopMangas(type: TypeRakingManga, page: Long): Flow<List<MangaDetails>> =
-        mangaQueries.getTopMangas(type.type, page).asFlow().mapToList(Dispatchers.IO).map {
-            it.map { manga ->
-                val images = imageMangaQueries.getByIdManga(manga.id).executeAsList()
-                    .map(ImageMangaEntity::toExternalModel)
-                manga.toMangaDetails(images)
-            }
-        }
-
-    override suspend fun updateSolicitacaoAceite(idUsuario: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeSolicitacaoAceite(page: Long): Flow<List<SolicitacaoAceite>> {
-        TODO("Not yet implemented")
     }
 
 }

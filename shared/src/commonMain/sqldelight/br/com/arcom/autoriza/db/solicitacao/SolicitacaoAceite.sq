@@ -1,0 +1,22 @@
+CREATE TABLE solicitacaoAceiteEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_solicitacao INTEGER,
+    id_usuario INTEGER,
+    id_empresa INTEGER,
+    descricao TEXT,
+    status TEXT,
+    tipo_solicitacao TEXT
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO solicitacaoAceiteEntity (
+    id_solicitacao,
+    id_usuario,
+    id_empresa,
+    descricao,
+    status,
+    tipo_solicitacao
+) VALUES ( ?,?,?,?,?,?);
+
+getById:
+SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;

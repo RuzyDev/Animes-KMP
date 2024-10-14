@@ -1,6 +1,7 @@
 package br.com.arcom.autoriza.di
 
 import br.com.arcom.autoriza.database.AnimesHubDatabase
+import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.autoriza.domain.interactor.anime.GetTopAnimeWithPage
 import br.com.arcom.autoriza.domain.interactor.anime.UpdateTopAnimes
 import br.com.arcom.autoriza.domain.interactor.manga.GetTopMangaWithPage
@@ -27,6 +28,8 @@ val coreModule = module {
     }
     single { AnimesHubDataStore(get()) }
 
+
+    //----------Repositorys--------------
     single<TopRepository> {
         TopRepositoryImpl(
             topService = get(),
@@ -40,12 +43,6 @@ val coreModule = module {
     }
 
     //----------Domains--------------
-    //Anime
-    single { ObserveTopAnimes(get()) }
-    single { UpdateTopAnimes(get(), get()) }
-    single { GetTopAnimeWithPage(get(), get()) }
-    //Manga
-    single { ObserveTopMangas(get()) }
-    single { UpdateTopMangas(get(), get()) }
-    single { GetTopMangaWithPage(get(), get()) }
+    //Solicitacao
+    single { UpdateSolicitacoes(get(), get()) }
 }

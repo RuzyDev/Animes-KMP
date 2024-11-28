@@ -1,11 +1,12 @@
 CREATE TABLE solicitacaoAceiteEntity (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_solicitacao INTEGER,
-    id_usuario INTEGER,
-    id_empresa INTEGER,
-    descricao TEXT,
-    status TEXT,
-    tipo_solicitacao TEXT
+    id_solicitacao INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
+    id_empresa INTEGER NOT NULL,
+    descricao TEXT NOT NULL,
+    status TEXT NOT NULL,
+    tipo_solicitacao TEXT NOT NULL,
+    data_solicitacao TEXT NOT NULL
 );
 
 insertOrUpdate:
@@ -20,3 +21,6 @@ INSERT OR REPLACE INTO solicitacaoAceiteEntity (
 
 getById:
 SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;
+
+getAll:
+SELECT * FROM solicitacaoAceiteEntity ORDER BY data_solicitacao;

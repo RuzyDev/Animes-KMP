@@ -1,5 +1,7 @@
 package br.com.arcom.autoriza.model.solicitacao
 
+import br.com.arcom.autoriza.db.solicitacao.SolicitacaoAceiteEntity
+
 data class SolicitacaoAceite(
     val idSolicitacao: Long,
     val idUsuario: Long,
@@ -9,12 +11,12 @@ data class SolicitacaoAceite(
     val tipoSolicitacao: TipoSolicitacao
 )
 
-
-//fun GetTopAnimes.toAnimeDetails(listImages: List<ImageAnime>) =
-//    AnimeDetails(
-//        id = id,
-//        title = title ?: "Not found",
-//        images = listImages,
-//        rank = ranking_value,
-//        rank_type = TypeRakingAnime.getType(ranking_type)
-//    )
+//fun SolicitacaoAceiteEntity.toExternalModel() =
+//    SolicitacaoAceite(
+//        idSolicitacao = id_solicitacao,
+//        idUsuario = idUsuario,
+//        idEmpresa = idEmpresa,
+//        descricao = descricao,
+//        status = status,
+//        tipoSolicitacao = tipoSolicitacao,
+//)

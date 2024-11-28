@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.room)
     alias(libs.plugins.ksp)
 }
 
@@ -39,8 +38,6 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.korio)
             implementation(libs.androidx.datastore)
-
-            implementation(libs.androidx.room.runtime)
         }
         commonTest.dependencies {
             implementation(libs.bundles.test)
@@ -71,15 +68,7 @@ android {
 }
 
 sqldelight{
-    databases.create("AnimesHubDatabase"){
+    databases.create("AutorizaDatabase"){
         packageName.set("br.com.arcom.autoriza.database")
     }
-}
-
-dependencies {
-    ksp(libs.androidx.room.compiler)
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
 }

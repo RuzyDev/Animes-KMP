@@ -1,11 +1,10 @@
 package br.com.arcom.autoriza.network.service.impl
 
-import br.com.arcom.autoriza.network.models.top.anime.NetworkTopAnime
-import br.com.arcom.autoriza.network.service.TopService
+import br.com.arcom.autoriza.network.models.NetworkSolicitacaoAceite
+import br.com.arcom.autoriza.network.service.SolicitacaoService
 import br.com.arcom.autoriza.network.util.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -14,21 +13,23 @@ import io.ktor.http.contentType
 
 class SolicitacaoServiceImpl(
     private val api: HttpClient
-) : TopService {
+) : SolicitacaoService {
 
-    override suspend fun getTopAnime(filter: String): NetworkTopAnime =
+    override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Short): List<NetworkSolicitacaoAceite>? =
         safeApiCall {
-            api.post(urlString = "api/ivendas/autoriza"){
-                parameter()
+            api.post(urlString = "api/autoriza"){
+                parameter("idUsuario", idUsuario)
+                parameter("nroPagina", nroPagina)
                 contentType(ContentType.Application.Json)
             }.body()
         }
 
-    override suspend fun getTopManga(filter: String): NetworkTopAnime =
-        safeApiCall {
-            api.get(urlString = "top/manga"){
-                parameter("filter", filter)
+    override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite){
+        safeApiCall<Unit> {
+            api.post(urlString = "api/autoriza") {
+                setBody(solicitacao)
                 contentType(ContentType.Application.Json)
             }.body()
         }
+    }
 }

@@ -1,15 +1,8 @@
 package br.com.arcom.autoriza.di
 
-import br.com.arcom.autoriza.database.AnimesHubDatabase
 import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
-import br.com.arcom.autoriza.domain.interactor.anime.GetTopAnimeWithPage
-import br.com.arcom.autoriza.domain.interactor.anime.UpdateTopAnimes
-import br.com.arcom.autoriza.domain.interactor.manga.GetTopMangaWithPage
-import br.com.arcom.autoriza.domain.interactor.manga.UpdateTopMangas
-import br.com.arcom.autoriza.domain.observers.ObserveTopAnimes
-import br.com.arcom.autoriza.domain.observers.ObserveTopMangas
-import br.com.arcom.autoriza.domain.repository.TopRepository
-import br.com.arcom.autoriza.domain.repository.impl.TopRepositoryImpl
+import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
+import br.com.arcom.autoriza.domain.repository.impl.SolicitacaoAceiteRepositoryImpl
 import br.com.arcom.autoriza.util.AppCoroutineDispatchers
 import br.com.arcom.autoriza.util.datastore.AnimesHubDataStore
 import kotlinx.coroutines.Dispatchers
@@ -30,19 +23,13 @@ val coreModule = module {
 
 
     //----------Repositorys--------------
-    single<TopRepository> {
-        TopRepositoryImpl(
-            topService = get(),
-            animeQueries = get<AnimesHubDatabase>().animeQueries,
-            mangaQueries = get<AnimesHubDatabase>().mangaQueries,
-            imageMangaQueries = get<AnimesHubDatabase>().imageMangaQueries,
-            imageAnimeQueries = get<AnimesHubDatabase>().imageAnimeQueries,
-            rankingAnimeQueries = get<AnimesHubDatabase>().rankingAnimeQueries,
-            rankingMangaQueries = get<AnimesHubDatabase>().rankingMangaQueries
+    single<SolicitacaoAceiteRepository> {
+        SolicitacaoAceiteRepositoryImpl(
+            solicitacaoService = get()
         )
     }
 
     //----------Domains--------------
     //Solicitacao
-    single { UpdateSolicitacoes(get(), get()) }
+    single { UpdateSolicitacoes(get()) }
 }

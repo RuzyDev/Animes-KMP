@@ -32,7 +32,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 
     fun refresh() {
         coroutineScope.launch {
-            updateSolicitacoes.invoke(UpdateSolicitacoes.Params(159707, 0))
+            updateSolicitacoes.invoke(UpdateSolicitacoes.Params(145078, 0))
         }
     }
 

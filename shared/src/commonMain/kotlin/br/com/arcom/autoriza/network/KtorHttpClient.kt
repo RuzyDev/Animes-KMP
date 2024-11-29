@@ -25,7 +25,7 @@ class KtorHttpClient(
 
         defaultRequest {
             url {
-                protocol = URLProtocol.HTTPS
+                protocol = URLProtocol.HTTP
                 host = BASE_URL
             }
         }

@@ -17,7 +17,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Short): List<NetworkSolicitacaoAceite>? =
         safeApiCall {
-            api.post(urlString = "api/autoriza"){
+            api.post(urlString = "/api/autoriza/v1/buscar?rotina=buscar-solicitacoes"){
                 parameter("idUsuario", idUsuario)
                 parameter("nroPagina", nroPagina)
                 contentType(ContentType.Application.Json)

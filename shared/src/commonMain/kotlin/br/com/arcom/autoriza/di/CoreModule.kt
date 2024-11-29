@@ -1,10 +1,13 @@
 package br.com.arcom.autoriza.di
 
+import br.com.arcom.autoriza.database.AutorizaDatabase
+import br.com.arcom.autoriza.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
+import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
 import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.autoriza.domain.repository.impl.SolicitacaoAceiteRepositoryImpl
 import br.com.arcom.autoriza.util.AppCoroutineDispatchers
-import br.com.arcom.autoriza.util.datastore.AnimesHubDataStore
+import br.com.arcom.autoriza.util.datastore.AutorizaDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.serialization.json.Json
@@ -19,17 +22,24 @@ val coreModule = module {
             main = Dispatchers.Main
         )
     }
-    single { AnimesHubDataStore(get()) }
+    single { AutorizaDataStore(get()) }
 
 
     //----------Repositorys--------------
     single<SolicitacaoAceiteRepository> {
         SolicitacaoAceiteRepositoryImpl(
-            solicitacaoService = get()
+            solicitacaoService = get(),
+            solicitacaoAceiteDao = get()
         )
     }
 
-    //----------Domains--------------
+    //-------------Daos------------------
+    single { SolicitacaoAceiteDao(
+        solicitacaoAceiteQueries = get<AutorizaDatabase>().solicitacaoAceiteQueries)
+    }
+
+    //------------Domains----------------
     //Solicitacao
-    single { UpdateSolicitacoes(get()) }
+    single { UpdateSolicitacoes(get(), get()) }
+    single { ObserveSolicitacoes(get()) }
 }

@@ -11,24 +11,24 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.arcom.autoriza.android.utils.TrackDisposableJank
-import br.com.arcom.autoriza.app.navigation.AnimesHubNavigation
-import br.com.arcom.autoriza.app.navigation.TopLevelDestination
+import br.com.arcom.autoriza.android.ui.app.navigation.AutorizaNavigation
+import br.com.arcom.autoriza.android.ui.app.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun rememberAnimesHubAppState(
+fun rememberAutorizaAppState(
     windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
-): AnimesHubAppState {
+): AutorizaAppState {
     NavigationTrackingSideEffect(navController)
     return remember(navController, coroutineScope, windowSizeClass) {
-        AnimesHubAppState(navController, coroutineScope, windowSizeClass)
+        AutorizaAppState(navController, coroutineScope, windowSizeClass)
     }
 }
 
 @Stable
-class AnimesHubAppState(
+class AutorizaAppState(
     val navController: NavHostController,
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass
@@ -47,7 +47,7 @@ class AnimesHubAppState(
     val shouldShowNavRail: Boolean
         get() = !shouldShowBottomBar
 
-    fun navigate(destination: AnimesHubNavigation, route: String? = null) {
+    fun navigate(destination: AutorizaNavigation, route: String? = null) {
         androidx.tracing.trace("Navigation: $destination") {
             if (destination is TopLevelDestination) {
                 navController.navigate(route ?: destination.getRoute()) {

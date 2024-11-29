@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun iconButtonColorAnimesHub() = IconButtonColors(
+fun iconButtonColorAutoriza() = IconButtonColors(
     containerColor = Color.Transparent,
     contentColor = MaterialTheme.colorScheme.primary,
     disabledContainerColor = Color.Transparent,

@@ -29,10 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.designsystem.theme.CornerShapeAnimesHub
+import br.com.arcom.autoriza.designsystem.theme.CornerShapeAutoriza
 import br.com.arcom.autoriza.designsystem.theme.lightColor
 
-enum class AnimesHubIcons(val icon: TypeIcon, val title: Int) {
+enum class AutorizaIcons(val icon: TypeIcon, val title: Int) {
     PESQUISA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Search),
         R.string.pesquisa
@@ -60,7 +60,7 @@ fun Boolean.IconExpanded(tint: Color) {
 }
 
 @Composable
-fun AnimesHubIcons.Composable(
+fun AutorizaIcons.Composable(
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current
 ) {
@@ -89,7 +89,7 @@ fun AnimesHubIcons.Composable(
 }
 
 @Composable
-fun AnimesHubIcons.ExtendedFloating(
+fun AutorizaIcons.ExtendedFloating(
     title: Int? = null,
     onClick: () -> Unit
 ) {
@@ -136,7 +136,7 @@ fun AnimesHubIcons.ExtendedFloating(
 }
 
 @Composable
-fun AnimesHubIcons.Floating(
+fun AutorizaIcons.Floating(
     onClick: () -> Unit
 ) {
     when (this.icon) {
@@ -174,7 +174,7 @@ fun AnimesHubIcons.Floating(
 
 
 @Composable
-fun AnimesHubIcons.IconButton(
+fun AutorizaIcons.IconButton(
     modifier: Modifier = Modifier,
     colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     notification: Boolean = false,
@@ -224,13 +224,13 @@ fun AnimesHubIcons.IconButton(
 }
 
 @Composable
-fun AnimesHubIcons.ComposableButton(
+fun AutorizaIcons.ComposableButton(
     onClick: () -> Unit
 ) {
     val icon = this.icon
     Button(
         onClick = onClick,
-        shape = CornerShapeAnimesHub,
+        shape = CornerShapeAutoriza,
         contentPadding = PaddingValues(8.dp),
         modifier = Modifier.size(42.dp),
         colors = ButtonColors(

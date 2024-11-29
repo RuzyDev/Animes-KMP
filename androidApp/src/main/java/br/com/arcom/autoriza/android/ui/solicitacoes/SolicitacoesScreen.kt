@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.android.ui.home
+package br.com.arcom.autoriza.android.ui.solicitacoes
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -25,36 +25,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.arcom.autoriza.presentation.SolicitacoesUiState
 import coil.ImageLoader
 import coil.compose.AsyncImage
-import br.com.arcom.autoriza.model.anime.AnimeDetails
-import br.com.arcom.autoriza.presentation.HomeUiState
-import br.com.arcom.autoriza.presentation.HomeViewModel
+import br.com.arcom.autoriza.presentation.SolicitacoesViewModel
 import br.com.arcom.autoriza.util.onSuccess
 import org.koin.compose.koinInject
 
 @Composable
-fun HomeRoute(viewModel: HomeViewModel = koinInject()) {
+fun SolicitacoesRoute(viewModel: SolicitacoesViewModel = koinInject()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    HomeScreen(
+    SolicitacoesScreen(
         uiState = uiState,
         refresh = viewModel::refresh
     )
 }
 
 @Composable
-private fun HomeScreen(
-    uiState: HomeUiState,
+private fun SolicitacoesScreen(
+    uiState: SolicitacoesUiState,
     refresh: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        floatingActionButton = {
-            FloatingActionButton(onClick = refresh ) {
-                Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
-            }
-        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -65,42 +59,9 @@ private fun HomeScreen(
         ) {
             uiState.topAnimes.onSuccess {
                 items(it) {
-                    CardAnime(it)
+
                 }
             }
-
-            if (uiState.loadingTopAnimes) {
-                item {
-                    CircularProgressIndicator()
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun CardAnime(anime: AnimeDetails) {
-    val context = LocalContext.current
-
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceContainer,
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.fillMaxWidth(.9f)
-    ) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(12.dp)
-        ) {
-            AsyncImage(model = anime.images.first().url,
-                contentDescription = "Image anime",
-                imageLoader = ImageLoader(context),
-                modifier = Modifier.size(80.dp, 100.dp)
-            )
-            Text(
-                text = "Anime: ${anime.title ?: "Não encontrado"}",
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
         }
     }
 }

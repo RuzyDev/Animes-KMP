@@ -1,21 +1,21 @@
-package br.com.arcom.autoriza.app.navigation
+package br.com.arcom.autoriza.android.ui.app.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import br.com.arcom.autoriza.android.ui.home.HomeNavigation
-import br.com.arcom.autoriza.android.ui.home.home
+import br.com.arcom.autoriza.android.ui.solicitacoes.SolicitacoesNavigation
+import br.com.arcom.autoriza.android.ui.solicitacoes.solicitacoes
 import kotlin.reflect.KFunction1
 
 @Composable
-fun AnimesHubNavHost(
+fun AutorizaNavHost(
     navController: NavHostController,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    startDestination: String = HomeNavigation.getRoute(),
+    startDestination: String = SolicitacoesNavigation.getRoute(),
     onBackClickWithDestination: KFunction1<String, Unit>,
-    navigate: (AnimesHubNavigation, String?) -> Unit,
+    navigate: (AutorizaNavigation, String?) -> Unit,
     navigateAndDestroy: (String) -> Unit,
     navigateAndDestroyAll: (String) -> Unit,
 ) {
@@ -25,6 +25,6 @@ fun AnimesHubNavHost(
         modifier = modifier,
     ) {
         //Home
-        home()
+        solicitacoes()
     }
 }

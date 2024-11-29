@@ -16,8 +16,9 @@ INSERT OR REPLACE INTO solicitacaoAceiteEntity (
     id_empresa,
     descricao,
     status,
-    tipo_solicitacao
-) VALUES ( ?,?,?,?,?,?);
+    tipo_solicitacao,
+    data_solicitacao
+) VALUES ( ?,?,?,?,?,?, ?);
 
 getById:
 SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;

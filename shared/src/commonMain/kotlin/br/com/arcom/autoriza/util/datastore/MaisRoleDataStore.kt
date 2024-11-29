@@ -22,7 +22,7 @@ fun createDataStore(
 
 internal const val dataStoreFileName = "autoriza.preferences_pb"
 
-class AnimesHubDataStore(
+class AutorizaDataStore(
     private val dataStore: DataStore<Preferences>
 ) {
 

@@ -1,9 +1,10 @@
-package br.com.arcom.autoriza.app.navigation
+package br.com.arcom.autoriza.android.ui.app.navigation
 
-import AnimesHubIcons
+import AutorizaIcons
+import br.com.arcom.autoriza.android.ui.app.navigation.AutorizaNavigation
 
 data class TopLevelDestination(
     val routeNavigation: String,
-    val icon: AnimesHubIcons,
+    val icon: AutorizaIcons,
     val text: Int
-) : AnimesHubNavigation(routeNavigation)
+) : AutorizaNavigation(routeNavigation)

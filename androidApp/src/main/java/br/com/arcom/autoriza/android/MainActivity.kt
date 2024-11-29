@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import br.com.arcom.autoriza.app.AnimesHubApp
-import br.com.arcom.autoriza.designsystem.theme.AnimesHubTheme
+import br.com.arcom.autoriza.app.AutorizaApp
+import br.com.arcom.autoriza.designsystem.theme.AutorizaTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -16,8 +16,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this)
 
-            AnimesHubTheme {
-                AnimesHubApp(windowSizeClass = windowSizeClass)
+            AutorizaTheme {
+                AutorizaApp(windowSizeClass = windowSizeClass)
             }
         }
     }

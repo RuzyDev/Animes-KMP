@@ -8,7 +8,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import br.com.arcom.autoriza.android.ui.designsystem.theme.AnimesHubTypography
+import br.com.arcom.autoriza.android.ui.designsystem.theme.AutorizaTypography
 
 
 private val LightColors = lightColorScheme(
@@ -147,7 +147,7 @@ private fun darkColorsDynamic(palette: DynamicPalette) = darkColorScheme(
 )
 
 @Composable
-fun AnimesHubTheme(
+fun AutorizaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicColor: Boolean = true,
     content: @Composable () -> Unit
@@ -167,7 +167,7 @@ fun AnimesHubTheme(
 
     MaterialTheme(
         colorScheme = myColorScheme,
-        typography = AnimesHubTypography,
+        typography = AutorizaTypography,
         content = content
     )
 }

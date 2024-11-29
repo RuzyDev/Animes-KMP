@@ -13,13 +13,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import br.com.arcom.autoriza.app.navigation.AnimesHubNavHost
+import br.com.arcom.autoriza.android.ui.app.navigation.AutorizaNavHost
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun AnimesHubApp(
+fun AutorizaApp(
     windowSizeClass: WindowSizeClass,
-    appState: AnimesHubAppState = rememberAnimesHubAppState(
+    appState: AutorizaAppState = rememberAutorizaAppState(
         windowSizeClass = windowSizeClass
     )
 ) {
@@ -34,7 +34,7 @@ fun AnimesHubApp(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
-        AnimesHubNavHost(
+        AutorizaNavHost(
             navController = appState.navController,
             onBackClick = { appState.onBackClick(currentRoute = currentDestination?.route) },
             onBackClickWithDestination = appState::onBackClickWithDestination,

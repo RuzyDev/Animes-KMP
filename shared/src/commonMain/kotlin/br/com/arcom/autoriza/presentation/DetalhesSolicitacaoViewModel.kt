@@ -2,8 +2,7 @@ package br.com.arcom.autoriza.presentation
 
 import br.com.arcom.autoriza.domain.collectStatus
 import br.com.arcom.autoriza.domain.interactor.RegistrarSolicitacao
-import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
-import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
+import br.com.arcom.autoriza.domain.observers.ObserveDetalhesSolicitacao
 import br.com.arcom.autoriza.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.autoriza.model.solicitacao.StatusSolicitacao
 import br.com.arcom.autoriza.presentation.util.UiMessage
@@ -19,32 +18,26 @@ import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
+class DetalhesSolicitacaoViewModel(
+    val idSolicitacao: String
+) : CoroutineViewModel(), KoinComponent {
 
-    private val observeSolicitacoes: ObserveSolicitacoes by inject()
-    private val updateSolicitacoes: UpdateSolicitacoes by inject()
+    private val observeDetalhesSolicitacao: ObserveDetalhesSolicitacao by inject()
     private val registrarSolicitacao: RegistrarSolicitacao by inject()
 
     private val uiMessage = UiMessageManager()
 
-    val uiState: StateFlow<SolicitacoesUiState> =
+    val uiState: StateFlow<DetalhesSolicitacaoUiState> =
         combine(
-            updateSolicitacoes.inProgress,
             registrarSolicitacao.inProgress,
-            observeSolicitacoes.flow.asResultState(),
+            observeDetalhesSolicitacao.flow.asResultState(),
             uiMessage.observable,
-            ::SolicitacoesUiState
+            ::DetalhesSolicitacaoUiState
         ).stateIn(
             coroutineScope,
             SharingStarted.WhileSubscribed(5000),
-            SolicitacoesUiState.Empty
+            DetalhesSolicitacaoUiState.Empty
         )
-
-    fun refresh() {
-        coroutineScope.launch {
-            updateSolicitacoes.invoke(UpdateSolicitacoes.Params(145078, 0))
-        }
-    }
 
     fun responderSolicitacao(solicitacao: SolicitacaoAceite, reposta: Boolean) {
         val result = solicitacao.copy(
@@ -56,25 +49,23 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
-    fun clearMessage(id: Long) {
+    fun clearMessage(id: Long){
         coroutineScope.launch {
             uiMessage.clearMessage(id)
         }
     }
 
     init {
-        refresh()
-        observeSolicitacoes(ObserveSolicitacoes.Params())
+        observeDetalhesSolicitacao(ObserveDetalhesSolicitacao.Params(idSolicitacao))
     }
 }
 
-data class SolicitacoesUiState(
-    val loadingSolicitacoes: Boolean = false,
-    val loadingRegistando: Boolean = false,
-    val solicitacoes: ResultState<List<SolicitacaoAceite>> = ResultState.Loading,
+data class DetalhesSolicitacaoUiState(
+    val loadingRegistrando: Boolean = false,
+    val solicitacao: ResultState<SolicitacaoAceite> = ResultState.Loading,
     val uiMessage: UiMessage? = null
 ) {
     companion object {
-        val Empty = SolicitacoesUiState()
+        val Empty = DetalhesSolicitacaoUiState()
     }
 }

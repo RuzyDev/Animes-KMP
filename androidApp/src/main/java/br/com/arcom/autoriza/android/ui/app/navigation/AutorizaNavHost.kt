@@ -4,27 +4,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import br.com.arcom.autoriza.android.ui.solicitacoes.SolicitacoesNavigation
-import br.com.arcom.autoriza.android.ui.solicitacoes.solicitacoes
+import br.com.arcom.autoriza.android.ui.app.AutorizaAppState
+import br.com.arcom.autoriza.android.ui.perfil.PerfilNavigation
+import br.com.arcom.autoriza.android.ui.perfil.perfil
+import br.com.arcom.autoriza.android.ui.solicitacao.detalhessolicitacao.detalhesSolicitacao
+import br.com.arcom.autoriza.android.ui.solicitacao.detalhessolicitacao.navigateToDetalhesSolicitacao
+import br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes.SolicitacoesNavigation
+import br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes.solicitacoes
 import kotlin.reflect.KFunction1
 
 @Composable
 fun AutorizaNavHost(
-    navController: NavHostController,
-    onBackClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    startDestination: String = SolicitacoesNavigation.getRoute(),
-    onBackClickWithDestination: KFunction1<String, Unit>,
-    navigate: (AutorizaNavigation, String?) -> Unit,
-    navigateAndDestroy: (String) -> Unit,
-    navigateAndDestroyAll: (String) -> Unit,
+    appState: AutorizaAppState,
+    modifier: Modifier
 ) {
+    val navController = appState.navController
     NavHost(
         navController = navController,
-        startDestination = startDestination,
-        modifier = modifier,
+        startDestination = PerfilNavigation,
+        modifier =  modifier
     ) {
-        //Home
-        solicitacoes()
+        perfil()
+        solicitacoes (navController::navigateToDetalhesSolicitacao)
+        detalhesSolicitacao()
     }
 }

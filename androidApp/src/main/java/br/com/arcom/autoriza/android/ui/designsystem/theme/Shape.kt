@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.designsystem.theme
+package br.com.arcom.autoriza.android.ui.designsystem.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp

@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface SolicitacaoAceiteRepository {
 
     suspend fun updateSolicitacaoAceite(idUsuario: Long, page: Short)
-    fun observeSolicitacaoAceite(page: Long): Flow<List<SolicitacaoAceite>>
+    suspend fun registrarSolicitacao(solicitacao: SolicitacaoAceite)
+    fun observeSolicitacoesAceite(page: Long): Flow<List<SolicitacaoAceite>>
+    fun observeSolicitacaoAceite(id: String): Flow<SolicitacaoAceite>
 }

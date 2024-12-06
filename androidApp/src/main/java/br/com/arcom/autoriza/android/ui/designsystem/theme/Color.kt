@@ -64,6 +64,9 @@ val dark_surfaceTint = Color(0xFF89CEFF)
 val dark_outlineVariant = Color(0xFF41474D)
 val dark_scrim = Color(0xFF000000)
 
+val Verde = Color(0xFF7ED4AD)
+val Amarelo = Color(0xFFFFEB3B)
+
 fun Color.lightColor() = this.copy(0.3f)
 fun Color.secondaryColor() = this.copy(0.7f)
 fun Color.divider() = this.copy(0.1f)

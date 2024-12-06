@@ -1,35 +1,41 @@
 [versions]
-agp = "8.2.1"
-kotlin = "2.0.0"
+agp = "8.2.2"
+kotlin = "2.0.20"
 kotlinx = "1.8.1"
 kotlinx-datetime = "0.6.1"
-compose = "1.6.8"
-compose-material3 = "1.2.1"
-androidx-activityCompose = "1.9.1"
-lifecycle-compose = "2.8.4"
+compose = "1.7.5"
+compose-material3 = "1.3.1"
+androidx-activityCompose = "1.9.3"
+lifecycle-compose = "2.8.7"
 junit = "4.13.2"
-instrumented-test-compose = "1.7.0-beta07"
+instrumented-test-compose = "1.7.5"
 ext-junit = "1.2.1"
 espresso = "3.6.1"
 mockkCore = "1.13.2"
 mockkCommon = "1.12.5"
 sqlDelight = "2.0.2"
-kotlin-serialization = "2.0.20"
-kotlin-serialization-core = "1.6.2"
+kotlin-serialization-core = "1.6.3"
 koin = "3.5.6"
 ktor = "2.3.11"
 korio = "4.0.10"
 datastore = "1.1.1"
 koinAndroidxCompose = "3.5.3"
-androidx-navigation = "2.8.0"
+androidx-navigation = "2.8.4"
 androidx-metrics = "1.0.0-beta01"
 tracing = "1.2.0"
 coil = "2.7.0"
-paging-compose = "3.3.2"
+paging-compose = "3.3.4"
 touchlab-skie = "0.9.0-RC.3"
-room = "2.7.0-alpha09"
+room = "2.7.0-alpha11"
 ksp = "2.0.20-1.0.25"
-
+material3-adaptive = "1.1.0-alpha07"
+navigation-suite = "1.4.0-alpha04"
+material-icons = "1.7.5"
+kotlin-serialization-json = "1.6.3"
+lottie = "6.4.0"
+moko-resources = "0.22.3"
+moko-graphics = "0.9.0"
+multiplatform-resources = "0.24.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -51,11 +57,16 @@ androidx-navigation = { module = "androidx.navigation:navigation-compose", versi
 coil-compose = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
 androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
-
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
 #Material 3
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-material3-window = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "compose-material3" }
+androidx-compose-material3-navigationSuite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "navigation-suite" }
+androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-layout = { group = "androidx.compose.material3.adaptive", name = "adaptive-layout", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "material3-adaptive" }
+material-icons = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "material-icons" }
 
 #Unit Test Dependencies
 courotines-test = {module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx"}
@@ -81,19 +92,15 @@ sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", ver
 sqldelight-driver-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 
-#Room Dependencies
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-
 #Serialization Dependencies
 serialization-kotlin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 serialization-kotlin-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization-core" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 
 #Koin Dependencies
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 #Ktor Dependencies
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -113,20 +120,26 @@ test = ["junit",
     "courotines-test",
     "test-kotlin-annotation",
     "test-kotlin-common"]
-serialization-kotlin = ["serialization-kotlin", "serialization-kotlin_core"]
-material3 = ["compose-material3", "compose-material3-window"]
+serialization-kotlin = ["serialization-kotlin", "serialization-kotlin-core"]
+material3 = ["compose-material3",
+             "compose-material3-window",
+             "androidx-compose-material3-navigationSuite",
+             "androidx-compose-material3-adaptive",
+             "androidx-compose-material3-adaptive-layout",
+             "androidx-compose-material3-adaptive-navigation",
+             "material-icons"]
 
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 touchlab-skie = { id = "co.touchlab.skie", version.ref = "touchlab-skie" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }
 #SqlDelight
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+multiplatform-resources = { id = "dev.icerock.mobile.multiplatform-resources:dev.icerock.mobile.multiplatform-resources.gradle.plugin", version.ref = "multiplatform-resources" }

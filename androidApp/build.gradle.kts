@@ -2,15 +2,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "br.com.arcom.autoriza.android"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "br.com.arcom.autoriza.android"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = 28
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
@@ -48,6 +49,9 @@ dependencies {
     implementation(libs.androidx.tracing)
     implementation(libs.coil.compose)
     implementation(libs.paging.compose)
+    implementation(libs.datetime)
+    implementation(libs.lottie.compose)
+    implementation(libs.kotlinx.serialization.json)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.lifecycle.runtime.compose)

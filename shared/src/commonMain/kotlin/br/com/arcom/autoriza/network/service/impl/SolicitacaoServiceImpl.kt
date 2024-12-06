@@ -5,6 +5,7 @@ import br.com.arcom.autoriza.network.service.SolicitacaoService
 import br.com.arcom.autoriza.network.util.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -17,7 +18,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Short): List<NetworkSolicitacaoAceite>? =
         safeApiCall {
-            api.post(urlString = "/api/autoriza/v1/buscar?rotina=buscar-solicitacoes"){
+            api.get(urlString = "/api/autoriza/v1/buscar?rotina=buscar-solicitacoes"){
                 parameter("idUsuario", idUsuario)
                 parameter("nroPagina", nroPagina)
                 contentType(ContentType.Application.Json)
@@ -26,7 +27,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite){
         safeApiCall<Unit> {
-            api.post(urlString = "api/autoriza") {
+            api.post(urlString = "api/autoriza?rotina=registrar-solicitacao") {
                 setBody(solicitacao)
                 contentType(ContentType.Application.Json)
             }.body()

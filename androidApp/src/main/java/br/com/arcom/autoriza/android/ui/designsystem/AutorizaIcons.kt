@@ -6,9 +6,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -29,13 +39,49 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.designsystem.theme.CornerShapeAutoriza
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
 import br.com.arcom.autoriza.designsystem.theme.lightColor
 
 enum class AutorizaIcons(val icon: TypeIcon, val title: Int) {
     PESQUISA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Search),
         R.string.pesquisa
+    ),
+    CHECK(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Check),
+        R.string.check
+    ),
+    CLOSE(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Close),
+        R.string.fechar
+    ),
+    CHECK_CIRCLE(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.CheckCircle),
+        R.string.check
+    ),
+    CHECK_CIRCLE_OUTLINED(
+        TypeIcon.ImageVectorTypeIcon(Icons.Outlined.CheckCircle),
+        R.string.check
+    ),
+    PERSON(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Person),
+        R.string.perfil
+    ),
+    PERSON_OUTLINED(
+        TypeIcon.ImageVectorTypeIcon(Icons.Outlined.Person),
+        R.string.perfil
+    ),
+    VOLTAR(
+        TypeIcon.ImageVectorTypeIcon(Icons.AutoMirrored.Outlined.KeyboardArrowLeft),
+        R.string.voltar
+    ),
+    AVANCAR(
+        TypeIcon.ImageVectorTypeIcon(Icons.AutoMirrored.Outlined.KeyboardArrowRight),
+        R.string.avancar
+    ),
+    ALERTA(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Warning),
+        R.string.alerta
     );
 }
 
@@ -145,7 +191,7 @@ fun AutorizaIcons.Floating(
                 onClick = onClick,
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
-            ){
+            ) {
                 Icon(
                     imageVector = this.icon.imageVector,
                     contentDescription = "ImageVectorTypeIcon"
@@ -159,7 +205,7 @@ fun AutorizaIcons.Floating(
                 onClick = onClick,
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
-            ){
+            ) {
                 Icon(
                     painter = painterResource(id = this.icon.id),
                     contentDescription = "DrawableResourceTypeIcon"

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import br.com.arcom.autoriza.app.AutorizaApp
+import br.com.arcom.autoriza.android.ui.app.AutorizaApp
 import br.com.arcom.autoriza.designsystem.theme.AutorizaTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,10 +14,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val windowSizeClass = calculateWindowSizeClass(activity = this)
-
             AutorizaTheme {
-                AutorizaApp(windowSizeClass = windowSizeClass)
+                AutorizaApp()
             }
         }
     }

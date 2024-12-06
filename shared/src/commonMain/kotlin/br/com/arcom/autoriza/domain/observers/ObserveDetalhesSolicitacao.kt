@@ -5,15 +5,15 @@ import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.autoriza.model.solicitacao.SolicitacaoAceite
 import kotlinx.coroutines.flow.Flow
 
-class ObserveSolicitacoes(
+class ObserveDetalhesSolicitacao(
     private val solicitacaoAceiteRepository: SolicitacaoAceiteRepository
-) : SubjectInteractor<ObserveSolicitacoes.Params, List<SolicitacaoAceite>>() {
+) : SubjectInteractor<ObserveDetalhesSolicitacao.Params, SolicitacaoAceite>() {
 
     data class Params(
-        val page: Long = 0
+        val id: String
     )
 
-    override fun createObservable(params: Params): Flow<List<SolicitacaoAceite>> {
-        return solicitacaoAceiteRepository.observeSolicitacoesAceite(page = params.page)
+    override fun createObservable(params: Params): Flow<SolicitacaoAceite> {
+        return solicitacaoAceiteRepository.observeSolicitacaoAceite(params.id)
     }
 }

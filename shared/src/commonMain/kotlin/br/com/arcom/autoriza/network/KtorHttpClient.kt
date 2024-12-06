@@ -12,6 +12,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
+import io.ktor.client.request.bearerAuth
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.URLProtocol
 import io.ktor.serialization.kotlinx.json.json
@@ -28,6 +29,7 @@ class KtorHttpClient(
                 protocol = URLProtocol.HTTP
                 host = BASE_URL
             }
+            bearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTs4OzIwMjQtMTEtMjlUMTY6MjU6MjguMDY3NDYyIiwiZXhwIjoxNzM1NTAwMzI4fQ.9Id-7VUT4BLm47vz-UBEVfJimtOPo5EHi_dCXcmZt04")
         }
 
         if (enableNetworkLogs) {

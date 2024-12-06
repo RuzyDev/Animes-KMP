@@ -1,8 +1,11 @@
 package br.com.arcom.autoriza.di
 
 import br.com.arcom.autoriza.database.AutorizaDatabase
+import br.com.arcom.autoriza.db.dao.impl.SolicitacaoAceiteDaoImpl
 import br.com.arcom.autoriza.db.dao.SolicitacaoAceiteDao
+import br.com.arcom.autoriza.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
+import br.com.arcom.autoriza.domain.observers.ObserveDetalhesSolicitacao
 import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
 import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.autoriza.domain.repository.impl.SolicitacaoAceiteRepositoryImpl
@@ -34,12 +37,17 @@ val coreModule = module {
     }
 
     //-------------Daos------------------
-    single { SolicitacaoAceiteDao(
-        solicitacaoAceiteQueries = get<AutorizaDatabase>().solicitacaoAceiteQueries)
+    single<SolicitacaoAceiteDao> {
+        SolicitacaoAceiteDaoImpl(
+            solicitacaoAceiteQueries = get<AutorizaDatabase>().solicitacaoAceiteQueries
+        )
     }
 
     //------------Domains----------------
-    //Solicitacao
+    //Solicitacao - Interactors
     single { UpdateSolicitacoes(get(), get()) }
+    single { RegistrarSolicitacao(get(), get()) }
+    //Solicitacao - Observers
     single { ObserveSolicitacoes(get()) }
+    single { ObserveDetalhesSolicitacao(get()) }
 }

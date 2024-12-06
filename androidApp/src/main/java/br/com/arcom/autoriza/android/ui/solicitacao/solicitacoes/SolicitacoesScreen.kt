@@ -83,11 +83,9 @@ private fun SolicitacoesScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(vertical = 16.dp)
         ) {
-            uiState.solicitacoes.onSuccess {
-                items(it) { solicitacao ->
-                    CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
-                        responderSolicitacao(solicitacao, resposta)
-                    }
+            items(uiState.solicitacoes) { solicitacao ->
+                CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
+                    responderSolicitacao(solicitacao, resposta)
                 }
             }
         }

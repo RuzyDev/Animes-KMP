@@ -40,14 +40,14 @@ fun LoadingAnimacao(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.primary
         )
-//        Icon(
-//            painter = painterResource(id = R.drawable.),
-//            contentDescription = "Logo app",
-//            tint = MaterialTheme.colorScheme.primary,
-//            modifier = Modifier
-//                .requiredSize(size / 2)
-//                .align(Alignment.Center)
-//        )
+        Icon(
+            painter = painterResource(id = R.drawable.ic_logo),
+            contentDescription = "Logo app",
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .requiredSize(size / 2)
+                .align(Alignment.Center)
+        )
     }
 }
 

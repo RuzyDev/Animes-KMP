@@ -17,6 +17,7 @@ class MainApplication : Application() {
         initKoin {
             androidLogger(level = Level.NONE)
             androidContext(androidContext = this@MainApplication)
+
         }
     }
 }

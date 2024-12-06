@@ -12,8 +12,7 @@ import shared
 struct HomeScreen: View {
     
     let viewModel = HomeViewModel()
-    
-    let animes = viewModel.uiState.
+
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

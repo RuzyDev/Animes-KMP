@@ -29,7 +29,7 @@ fun UiMessageDialog(
         icon = { AutorizaIcons.ALERTA.Composable() },
         text = { Text(text = uiMessage.message) },
         confirmButton = {
-            stringResource(id = R.string.confirmar).TextButtonArcomID(onClick = confirmMsg)
+            stringResource(id = R.string.confirmar).TextButtonAutoriza(onClick = confirmMsg)
         },
         properties = DialogProperties(
             usePlatformDefaultWidth = true

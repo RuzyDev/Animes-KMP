@@ -31,6 +31,7 @@ fun AutorizaScaffold(
     contentColor: Color = MaterialTheme.colorScheme.onSurface,
     onBackClick: (() -> Unit)? = null,
     uiMessage: UiMessage?,
+    loading: Boolean = false,
     clearMessage: (Long) -> Unit,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -71,6 +72,7 @@ fun AutorizaScaffold(
             content()
         }
     }
+    LoadingScreen(loading)
 }
 
 @Composable

@@ -26,6 +26,9 @@ fun AutorizaNavHost(
     ) {
         perfil()
         solicitacoes (navController::navigateToDetalhesSolicitacao)
-        detalhesSolicitacao()
+        detalhesSolicitacao(
+            onBackClick = navController::popBackStack,
+            navigateToSolicitacoes = { appState.navigateToTopLevelDestination(TopLevelDestination.SOLICITACOES) }
+        )
     }
 }

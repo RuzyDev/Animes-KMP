@@ -15,6 +15,8 @@ import korlibs.io.async.launch
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -31,7 +33,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         combine(
             updateSolicitacoes.inProgress,
             registrarSolicitacao.inProgress,
-            observeSolicitacoes.flow.asResultState(),
+            observeSolicitacoes.flow,
             uiMessage.observable,
             ::SolicitacoesUiState
         ).stateIn(
@@ -39,6 +41,12 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
             SharingStarted.WhileSubscribed(5000),
             SolicitacoesUiState.Empty
         )
+
+    fun observeUiState(onChange: (SolicitacoesUiState) -> Unit) {
+        uiState.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
 
     fun refresh() {
         coroutineScope.launch {
@@ -71,7 +79,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 data class SolicitacoesUiState(
     val loadingSolicitacoes: Boolean = false,
     val loadingRegistando: Boolean = false,
-    val solicitacoes: ResultState<List<SolicitacaoAceite>> = ResultState.Loading,
+    val solicitacoes: List<SolicitacaoAceite> = emptyList(),
     val uiMessage: UiMessage? = null
 ) {
     companion object {

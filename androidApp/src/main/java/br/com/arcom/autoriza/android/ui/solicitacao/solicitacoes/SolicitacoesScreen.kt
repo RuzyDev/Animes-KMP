@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaScaffold
+import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaTopBar
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutorizaCard
 import br.com.arcom.autoriza.designsystem.theme.Verde
@@ -70,7 +71,10 @@ private fun SolicitacoesScreen(
     AutorizaScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
-        uiMessage = uiState.uiMessage
+        uiMessage = uiState.uiMessage,
+        topBar = {
+            AutorizaTopBar(title = stringResource(R.string.solicitacoes))
+        }
     ) {
         LazyColumn(
             modifier = Modifier

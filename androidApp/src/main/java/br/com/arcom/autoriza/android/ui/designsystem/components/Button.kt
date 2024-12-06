@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
 
 @Composable
-fun String.TextButtonArcomID(
+fun String.TextButtonAutoriza(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 12.dp),

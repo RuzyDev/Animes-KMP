@@ -2,52 +2,65 @@ package br.com.arcom.autoriza.android.ui.designsystem.components
 
 import AutorizaIcons
 import Composable
-import ComposableButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.designsystem.theme.secondaryColor
 import br.com.arcom.autoriza.util.format.getPeriodoDia
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun AutorizaTopBar(
     title: String,
     onBackClick: (() -> Unit)? = null,
-    actions: @Composable (() -> Unit)? = null
+    actions: (@Composable () -> Unit)? = null
 ) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = title, style = MaterialTheme.typography.titleMedium) },
-        navigationIcon = {
-            if (onBackClick != null) {
-                AutorizaIcons.VOLTAR.ComposableButton(onClick = onBackClick)
+    Box(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 8.dp)) {
+        if (onBackClick != null) {
+            IconButton(
+                onClick = onBackClick,
+                modifier = Modifier.align(Alignment.CenterStart)
+            ) {
+                AutorizaIcons.VOLTAR.Composable(
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                )
             }
-        },
-        actions = { actions?.invoke() },
-        colors = TopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            scrolledContainerColor = MaterialTheme.colorScheme.primary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-            actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
+        }
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.align(Alignment.Center),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold
         )
-    )
+        if (actions != null) {
+            Row(
+                modifier = Modifier.align(Alignment.CenterEnd),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) { actions() }
+        }
+    }
 }
 
 /**

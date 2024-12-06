@@ -21,7 +21,8 @@ fun NavController.navigateToDetalhesSolicitacao(id: String) =
     navigate(route = DetalhesSolicitacaoNavigation(id))
 
 fun NavGraphBuilder.detalhesSolicitacao(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    navigateToSolicitacoes: () -> Unit
 ) {
     composable<DetalhesSolicitacaoNavigation> { backStackEntry ->
         val profile: DetalhesSolicitacaoNavigation = backStackEntry.toRoute()

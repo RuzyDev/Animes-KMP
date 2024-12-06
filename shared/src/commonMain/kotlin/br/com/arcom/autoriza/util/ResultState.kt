@@ -26,6 +26,11 @@ inline fun <T : Any?> ResultState<T>.onFailure(crossinline action: (exception: T
     return this
 }
 
+inline fun <T : Any?> ResultState<T>.onResult(crossinline onSuccess: (T) -> Unit, crossinline onFailure: (Throwable) -> Unit): ResultState<T> {
+    if (this is ResultState.Success) onSuccess(this.data) else if (this is ResultState.Failure) onFailure(this.exception)
+    return this
+}
+
 fun <T> Flow<T>.asResultState(): Flow<ResultState<T>> = this.map<T, ResultState<T>>{
     ResultState.Success(it)
 }.onStart {
@@ -34,3 +39,8 @@ fun <T> Flow<T>.asResultState(): Flow<ResultState<T>> = this.map<T, ResultState<
     it.printStackTrace()
     emit(ResultState.Failure(it))
 }
+
+fun <T> ResultState<T>.getOrNull(): T? = if (this is ResultState.Success) data else null
+fun <T> ResultState<T>.isSuccess(): Boolean = this is ResultState.Success
+fun <T> ResultState<T>.isFailure(): Boolean = this is ResultState.Failure
+fun <T> ResultState<T>.isLoading(): Boolean = this is ResultState.Loading

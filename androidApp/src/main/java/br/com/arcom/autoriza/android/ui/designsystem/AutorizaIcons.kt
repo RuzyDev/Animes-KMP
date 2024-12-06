@@ -271,6 +271,7 @@ fun AutorizaIcons.IconButton(
 
 @Composable
 fun AutorizaIcons.ComposableButton(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     val icon = this.icon
@@ -278,7 +279,7 @@ fun AutorizaIcons.ComposableButton(
         onClick = onClick,
         shape = CornerShapeAutoriza,
         contentPadding = PaddingValues(8.dp),
-        modifier = Modifier.size(42.dp),
+        modifier = modifier.size(42.dp),
         colors = ButtonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,

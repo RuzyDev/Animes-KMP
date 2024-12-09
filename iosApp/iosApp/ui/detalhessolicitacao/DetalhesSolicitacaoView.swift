@@ -20,31 +20,11 @@ struct DetalhesSolicitacaoView: View {
     var body: some View {
         NavigationStack{
             ScrollView{
-                
-                
-                switch states.uiState.solicitacao {
-                case ResultStateSuccess (let solicitacao):
-                    VStack {
-                        Text(solicitacaoAceite.data.data.formatBrasil())
-                    }
-                case .failure(let error):
-                    Text("Erro: \(error.localizedDescription)")
-                case .loading:
-                    ProgressView("Carregando...")
+                if let solicitacao = states.uiState.solicitacao {
+                    InformacoesSolicitacao(solicitacaoAceite: solicitacao, responderSolicitacao: states.responderSolicitacao)
                 }
-                
-                
-                
-                if states.uiState.solicitacao as? ResultStateSuccess {
-                    InformacoesSolicitacao(states.uiState.solicitacao)
-                } else if let failure = states.uiState.solicitacao as? ResultStateSuccess {
-                    
-                } else {
-                    
-                }
-                
             }
-        }
+        }.navigationTitle("Detalhes solicitação")
     }
 }
 

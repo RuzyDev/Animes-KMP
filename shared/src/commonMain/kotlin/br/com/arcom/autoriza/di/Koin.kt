@@ -12,6 +12,13 @@ fun initKoin(enableNetworkLogs: Boolean = true, additionalModule: Module = modul
         modules(platformModule, apiModule(enableNetworkLogs), coreModule, databaseModule, uiModule, additionalModule)
     }
 
+fun initKoinIos() =
+    startKoin {
+        modules(platformModule, apiModule(true), coreModule, databaseModule, uiModule, module {  })
+    }
+
+
+
 // called by iOS etc
 // fun initKoin() = initKoin(enableNetworkLogs = false) {}
 

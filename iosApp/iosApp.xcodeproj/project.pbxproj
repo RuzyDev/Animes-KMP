@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
-		15D0197C2D037B49008B0729 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF73C02C947DE700E81EBF /* HomeScreen.swift */; };
-		15D0197D2D037B49008B0729 /* HomeObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF73C22C94A2D200E81EBF /* HomeObservable.swift */; };
+		15D0197C2D037B49008B0729 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF73C02C947DE700E81EBF /* Navigation.swift */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		FBEF73BE2C947D5600E81EBF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FBEF73BA2C9470E400E81EBF /* libsqlite3.tbd */; };
@@ -38,11 +37,13 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBEF73BA2C9470E400E81EBF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FBEF73BC2C94717400E81EBF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		FBEF73C02C947DE700E81EBF /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		FBEF73C22C94A2D200E81EBF /* HomeObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeObservable.swift; sourceTree = "<group>"; };
+		FBEF73C02C947DE700E81EBF /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		15000E9C2D075491004D1CD3 /* perfil */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = perfil; sourceTree = "<group>"; };
+		15000E9D2D07608E004D1CD3 /* detalhessolicitacao */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = detalhessolicitacao; sourceTree = "<group>"; };
+		15000EA22D077F51004D1CD3 /* core */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = core; sourceTree = "<group>"; };
 		15D0197F2D038227008B0729 /* solicitacoes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = solicitacoes; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -86,6 +87,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				15000EA22D077F51004D1CD3 /* core */,
 				FBEF73BF2C947DCC00E81EBF /* ui */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -108,9 +110,10 @@
 		FBEF73BF2C947DCC00E81EBF /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				15000E9D2D07608E004D1CD3 /* detalhessolicitacao */,
+				15000E9C2D075491004D1CD3 /* perfil */,
 				15D0197F2D038227008B0729 /* solicitacoes */,
-				FBEF73C02C947DE700E81EBF /* HomeScreen.swift */,
-				FBEF73C22C94A2D200E81EBF /* HomeObservable.swift */,
+				FBEF73C02C947DE700E81EBF /* Navigation.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -133,6 +136,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				15000E9C2D075491004D1CD3 /* perfil */,
+				15000E9D2D07608E004D1CD3 /* detalhessolicitacao */,
+				15000EA22D077F51004D1CD3 /* core */,
 				15D0197F2D038227008B0729 /* solicitacoes */,
 			);
 			name = iosApp;
@@ -210,8 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15D0197C2D037B49008B0729 /* HomeScreen.swift in Sources */,
-				15D0197D2D037B49008B0729 /* HomeObservable.swift in Sources */,
+				15D0197C2D037B49008B0729 /* Navigation.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);

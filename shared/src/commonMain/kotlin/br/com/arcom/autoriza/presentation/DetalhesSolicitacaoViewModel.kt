@@ -14,6 +14,8 @@ import korlibs.io.async.launch
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,7 +32,7 @@ class DetalhesSolicitacaoViewModel(
     val uiState: StateFlow<DetalhesSolicitacaoUiState> =
         combine(
             registrarSolicitacao.inProgress,
-            observeDetalhesSolicitacao.flow.asResultState(),
+            observeDetalhesSolicitacao.flow,
             uiMessage.observable,
             ::DetalhesSolicitacaoUiState
         ).stateIn(
@@ -58,11 +60,17 @@ class DetalhesSolicitacaoViewModel(
     init {
         observeDetalhesSolicitacao(ObserveDetalhesSolicitacao.Params(idSolicitacao))
     }
+
+    fun observeUiState(onChange: (DetalhesSolicitacaoUiState) -> Unit) {
+        uiState.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
 }
 
 data class DetalhesSolicitacaoUiState(
     val loadingRegistrando: Boolean = false,
-    val solicitacao: ResultState<SolicitacaoAceite> = ResultState.Loading,
+    val solicitacao: SolicitacaoAceite? = null,
     val uiMessage: UiMessage? = null
 ) {
     companion object {

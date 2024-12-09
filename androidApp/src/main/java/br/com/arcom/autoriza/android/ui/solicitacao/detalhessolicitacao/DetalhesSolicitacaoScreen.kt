@@ -75,8 +75,7 @@ fun DetalhesSolicitacaoScreen(
                 title = stringResource(R.string.solicitacao),
                 onBackClick = onBackClick,
             )
-        },
-        loading = uiState.solicitacao.isLoading()
+        }
     ) {
         LazyColumn(
             Modifier.fillMaxWidth(),
@@ -84,18 +83,7 @@ fun DetalhesSolicitacaoScreen(
             contentPadding = PaddingValues(vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            uiState.solicitacao.onResult(
-                onSuccess = { solicitacao ->
-                    solicitacaoDetalhes(solicitacao, responderSolicitacao)
-                },
-                onFailure = { erro ->
-                    item {
-                        AnimationError(
-                            text = erro.message ?: stringResource(R.string.ocorreu_erro_solicitacao)
-                        )
-                    }
-                }
-            )
+            uiState.solicitacao?.let { solicitacaoDetalhes(it, responderSolicitacao) }
         }
     }
 }

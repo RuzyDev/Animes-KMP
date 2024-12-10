@@ -11,9 +11,11 @@ import shared
 
 struct SolicitacoesView: View {
     
+    @Binding var path: NavigationPath
     @StateObject var state: SolicitacoesState
     
-    init() {
+    init(path: Binding<NavigationPath>) {
+        _path = path
         _state = StateObject(wrappedValue: SolicitacoesState())
     }
     
@@ -21,7 +23,13 @@ struct SolicitacoesView: View {
             
         // Lista de solicitações
         List(state.uiState.solicitacoes, id: \.id) { solicitacao in
-            CardSolicitacaoView(solicitacao: solicitacao, verDetalhes: {id in }, responder: {aceito in })
+            CardSolicitacaoView(solicitacao: solicitacao,
+            verDetalhes: {id in
+                path.navigate(route: Route.detalhesSolicitacao(id: id))
+            },
+            responder: {aceito in
+                state.responderSolicitacao(solicitacao: solicitacao, resposta: aceito)
+            })
         }.refreshable {
             // Chama o refresh quando o usuário puxa para baixo
             state.refresh()

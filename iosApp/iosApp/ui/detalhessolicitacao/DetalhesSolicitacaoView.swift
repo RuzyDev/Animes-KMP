@@ -11,10 +11,12 @@ import shared
 
 struct DetalhesSolicitacaoView: View {
     
+    @Binding var path: NavigationPath
     @StateObject var states: DetalhesSolicitacaoState
     
-    init(idSolicitacao: String) {
-        _states = StateObject(wrappedValue: DetalhesSolicitacaoState(idSolicitacao: idSolicitacao))
+    init(path: Binding<NavigationPath>, idSolicitacao: String) {
+        self._path = path
+        self._states = StateObject(wrappedValue: DetalhesSolicitacaoState(idSolicitacao: idSolicitacao))
     }
     
     var body: some View {

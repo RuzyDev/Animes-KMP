@@ -35,7 +35,6 @@ struct SolicitacoesView: View {
             state.refresh()
         }
         .listStyle(.plain)
-        .navigationTitle("Solicitações")
     }
 }
 

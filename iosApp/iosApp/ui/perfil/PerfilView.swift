@@ -22,6 +22,6 @@ struct PerfilView: View {
     var body: some View {
         ScrollView{
             
-        }.navigationTitle("Perfil")
+        }
     }
 }

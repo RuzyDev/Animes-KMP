@@ -17,12 +17,12 @@ struct AppNavigation: View {
         NavigationStack(path: $path) {
             TabView(selection: $selectedTab) {
                 SolicitacoesView(path: $path)
-                    .tabItem {
-                        Label("Solicitações", systemImage: "checklist.checked")
-                    }
+                    .navigationTitle("Solicitações")
+                    .tabItem {Label("Solicitações", systemImage: "checklist.checked")}
                     .tag(TabRoute.solicitacoes.rawValue)
 
                 PerfilView(path: $path)
+                    .navigationTitle("Solicitações")
                     .tabItem {
                         Label("Perfil", systemImage: "person.crop.circle")
                     }
@@ -30,8 +30,8 @@ struct AppNavigation: View {
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
-                case .detalhesSolicitacao(let id):
-                    DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
+                    case .detalhesSolicitacao(let id):
+                        DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
                 }
             }
         }

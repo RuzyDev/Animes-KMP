@@ -20,11 +20,13 @@ struct DetalhesSolicitacaoView: View {
     }
     
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                if let solicitacao = states.uiState.solicitacao {
-                    InformacoesSolicitacao(solicitacaoAceite: solicitacao, responderSolicitacao: states.responderSolicitacao)
-                }
+        ScrollView{
+            if let solicitacao = states.uiState.solicitacao {
+                InformacoesSolicitacao(solicitacaoAceite: solicitacao, responderSolicitacao: states.responderSolicitacao)
+                Divider()
+                Text(solicitacao.descricao)
+                    .font(Font.body)
+                    .padding()
             }
         }.navigationTitle("Detalhes solicitação")
     }
@@ -39,7 +41,7 @@ struct InformacoesSolicitacao: View {
             // Coluna principal com as informações
             VStack(alignment: .leading, spacing: 4) {
                 Text(solicitacaoAceite.tipoSolicitacao.descricao)
-                    .font(.headline)
+                    .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 

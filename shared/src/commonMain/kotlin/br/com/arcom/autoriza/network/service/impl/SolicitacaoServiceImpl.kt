@@ -18,7 +18,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Short): List<NetworkSolicitacaoAceite>? =
         safeApiCall {
-            api.get(urlString = "/api/autoriza/v1/buscar?rotina=buscar-solicitacoes"){
+            api.get(urlString = "/api/apparcom/v1/buscar?rotina=buscar-solicitacoes"){
                 parameter("idUsuario", idUsuario)
                 parameter("nroPagina", nroPagina)
                 contentType(ContentType.Application.Json)
@@ -27,7 +27,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite){
         safeApiCall<Unit> {
-            api.post(urlString = "api/autoriza?rotina=registrar-solicitacao") {
+            api.post(urlString = "api/apparcom/atualizar?rotina=registrar-solicitacao") {
                 setBody(solicitacao)
                 contentType(ContentType.Application.Json)
             }.body()

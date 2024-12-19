@@ -1,9 +1,13 @@
 package br.com.arcom.autoriza.di
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import app.cash.sqldelight.db.SqlDriver
+import br.com.arcom.autoriza.data.datastore.createDataStore
+import br.com.arcom.autoriza.data.preferences.IOSPreferencesManager
+import br.com.arcom.autoriza.data.preferences.PreferencesManager
 import br.com.arcom.autoriza.db.SqlDelightDriverFactory
 import br.com.arcom.autoriza.util.AppChecker
-import br.com.arcom.autoriza.util.dataStore
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
 import kotlinx.cinterop.BetaInteropApi
@@ -20,7 +24,8 @@ actual val platformModule = module {
     single<SqlDriver> { SqlDelightDriverFactory().createDriver() }
     single<HttpClientEngine> { Darwin.create {} }
     single { AppChecker }
-    single { dataStore() }
+    single<DataStore<Preferences>> { createDataStore() }
+    single<PreferencesManager> { IOSPreferencesManager() }
 }
 
 @BetaInteropApi

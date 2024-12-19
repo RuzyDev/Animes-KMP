@@ -1,11 +1,13 @@
 package br.com.arcom.autoriza.network
 
 import br.com.arcom.autoriza.util.ConstantsShared.BASE_URL
-import br.com.arcom.autoriza.util.tokenstorage.AutorizaDataStore
+import br.com.arcom.autoriza.data.datastore.AppArcomStorage
 import br.com.arcom.autoriza.util.log.CommonLoggerImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -19,7 +21,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class KtorHttpClient(
-    private val autorizaDataStore: AutorizaDataStore
+    private val appArcomStorage: AppArcomStorage
 ) {
     fun httpClient(enableNetworkLogs: Boolean) = HttpClient {
         expectSuccess = false
@@ -30,6 +32,14 @@ class KtorHttpClient(
                 host = BASE_URL
             }
             bearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTs4OzIwMjQtMTEtMjlUMTY6MjU6MjguMDY3NDYyIiwiZXhwIjoxNzM1NTAwMzI4fQ.9Id-7VUT4BLm47vz-UBEVfJimtOPo5EHi_dCXcmZt04")
+        }
+
+        install(Auth){
+            bearer {
+                loadTokens {
+
+                }
+            }
         }
 
         if (enableNetworkLogs) {

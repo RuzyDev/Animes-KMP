@@ -36,6 +36,7 @@ lottie = "6.4.0"
 moko-resources = "0.22.3"
 moko-graphics = "0.9.0"
 multiplatform-resources = "0.24.3"
+androidx-security = "1.1.0-alpha06"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,6 +59,7 @@ coil-compose = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
 androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+androidx-security = { group = "androidx.security", name =  "security-crypto", version = "androidx-security" }
 
 #Material 3
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }

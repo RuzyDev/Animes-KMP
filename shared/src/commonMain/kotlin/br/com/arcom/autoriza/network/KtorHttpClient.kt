@@ -1,7 +1,7 @@
 package br.com.arcom.autoriza.network
 
 import br.com.arcom.autoriza.util.ConstantsShared.BASE_URL
-import br.com.arcom.autoriza.util.datastore.AutorizaDataStore
+import br.com.arcom.autoriza.util.tokenstorage.AutorizaDataStore
 import br.com.arcom.autoriza.util.log.CommonLoggerImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpResponseValidator

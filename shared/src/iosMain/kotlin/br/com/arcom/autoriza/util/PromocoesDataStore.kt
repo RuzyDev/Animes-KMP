@@ -2,8 +2,8 @@ package br.com.arcom.autoriza.util
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import br.com.arcom.autoriza.util.datastore.createDataStore
-import br.com.arcom.autoriza.util.datastore.dataStoreFileName
+import br.com.arcom.autoriza.util.tokenstorage.createDataStore
+import br.com.arcom.autoriza.util.tokenstorage.dataStoreFileName
 
 
 fun dataStore(): DataStore<Preferences> = createDataStore(

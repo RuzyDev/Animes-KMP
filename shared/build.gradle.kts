@@ -46,6 +46,7 @@ kotlin {
             api(libs.lifecycle.viewmodel)
             implementation(libs.sqldelight.driver.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.security)
         }
         iosMain.dependencies {
             implementation(libs.sqldelight.driver.ios)

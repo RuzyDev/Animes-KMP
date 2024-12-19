@@ -10,7 +10,7 @@ import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
 import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.autoriza.domain.repository.impl.SolicitacaoAceiteRepositoryImpl
 import br.com.arcom.autoriza.util.AppCoroutineDispatchers
-import br.com.arcom.autoriza.util.datastore.AutorizaDataStore
+import br.com.arcom.autoriza.util.tokenstorage.AutorizaDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.serialization.json.Json

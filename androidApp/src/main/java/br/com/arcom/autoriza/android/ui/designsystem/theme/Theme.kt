@@ -8,7 +8,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import br.com.arcom.autoriza.android.ui.designsystem.theme.AutorizaTypography
+import br.com.arcom.autoriza.android.ui.designsystem.theme.AppArcomTypography
 
 
 private val LightColors = lightColorScheme(
@@ -147,7 +147,7 @@ private fun darkColorsDynamic(palette: DynamicPalette) = darkColorScheme(
 )
 
 @Composable
-fun AutorizaTheme(
+fun AppArcomTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicColor: Boolean = true,
     content: @Composable () -> Unit
@@ -167,7 +167,7 @@ fun AutorizaTheme(
 
     MaterialTheme(
         colorScheme = myColorScheme,
-        typography = AutorizaTypography,
+        typography = AppArcomTypography,
         content = content
     )
 }

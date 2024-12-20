@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaScaffold
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaTopBar
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomTopBar
 import br.com.arcom.autoriza.presentation.PerfilViewModel
 import br.com.arcom.autoriza.presentation.util.UiMessage
 import org.koin.compose.koinInject
@@ -33,9 +33,9 @@ private fun PerfilScreen(
     uiMessage: UiMessage?,
     clearMessage: (Long) -> Unit
 ) {
-    AutorizaScaffold(
+    AppArcomScaffold(
         topBar = {
-            AutorizaTopBar(title = stringResource(R.string.perfil))
+            AppArcomTopBar(title = stringResource(R.string.perfil))
         },
         clearMessage = clearMessage,
         uiMessage = uiMessage

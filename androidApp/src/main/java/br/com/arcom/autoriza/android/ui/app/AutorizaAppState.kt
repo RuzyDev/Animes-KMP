@@ -36,16 +36,16 @@ import br.com.arcom.autoriza.android.utils.TrackDisposableJank
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun rememberAutorizaAppState(
+fun rememberAppArcomAppState(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
-): AutorizaAppState {
+): AppArcomAppState {
     NavigationTrackingSideEffect(navController)
     return remember(
         navController,
         coroutineScope
     ) {
-        AutorizaAppState(
+        AppArcomAppState(
             navController = navController,
             coroutineScope = coroutineScope
         )
@@ -53,7 +53,7 @@ fun rememberAutorizaAppState(
 }
 
 @Stable
-class AutorizaAppState(
+class AppArcomAppState(
     val navController: NavHostController,
     coroutineScope: CoroutineScope
 ) {

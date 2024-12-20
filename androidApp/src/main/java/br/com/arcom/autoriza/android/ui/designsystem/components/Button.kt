@@ -12,10 +12,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
 
 @Composable
-fun String.TextButtonAutoriza(
+fun String.TextButtonAppArcom(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
@@ -27,7 +27,7 @@ fun String.TextButtonAutoriza(
         onClick = onClick,
         colors = ButtonDefaults.textButtonColors(contentColor = color),
         contentPadding = contentPadding,
-        shape = CornerShapeAutoriza
+        shape = CornerShapeAppArcom
     ) {
         Text(
             text = text, style = MaterialTheme.typography.bodyMedium,

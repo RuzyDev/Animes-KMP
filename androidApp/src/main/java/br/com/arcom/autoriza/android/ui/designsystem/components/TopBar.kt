@@ -1,6 +1,6 @@
 package br.com.arcom.autoriza.android.ui.designsystem.components
 
-import AutorizaIcons
+import AppArcomIcons
 import Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +27,7 @@ import br.com.arcom.autoriza.util.format.getPeriodoDia
 
 
 @Composable
-fun AutorizaTopBar(
+fun AppArcomTopBar(
     title: String,
     onBackClick: (() -> Unit)? = null,
     actions: (@Composable () -> Unit)? = null
@@ -38,7 +38,7 @@ fun AutorizaTopBar(
                 onClick = onBackClick,
                 modifier = Modifier.align(Alignment.CenterStart)
             ) {
-                AutorizaIcons.VOLTAR.Composable(
+                AppArcomIcons.VOLTAR.Composable(
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                 )
@@ -94,7 +94,7 @@ fun TopBarTopLevel(refresh: () -> Unit) {
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-            AutorizaIcons.ALERTA.Composable(
+            AppArcomIcons.ALERTA.Composable(
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.width(18.dp)
             )

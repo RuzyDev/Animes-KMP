@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.android.ui.designsystem.components.AnimationError
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaScaffold
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaTopBar
-import br.com.arcom.autoriza.android.ui.designsystem.components.TextButtonAutoriza
-import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomTopBar
+import br.com.arcom.autoriza.android.ui.designsystem.components.TextButtonAppArcom
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.autoriza.designsystem.theme.Verde
 import br.com.arcom.autoriza.designsystem.theme.divider
 import br.com.arcom.autoriza.model.solicitacao.SolicitacaoAceite
@@ -66,12 +66,12 @@ fun DetalhesSolicitacaoScreen(
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
 ) {
 
-    AutorizaScaffold(
+    AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         topBar = {
-            AutorizaTopBar(
+            AppArcomTopBar(
                 title = stringResource(R.string.solicitacao),
                 onBackClick = onBackClick,
             )
@@ -124,7 +124,7 @@ private fun LazyListScope.solicitacaoDetalhes(
                         containerColor = Verde,
                         contentColor = Color.White
                     ),
-                    shape = CornerShapeAutoriza
+                    shape = CornerShapeAppArcom
                 ) {
                     Text(
                         text = stringResource(R.string.autorizar),
@@ -141,7 +141,7 @@ private fun LazyListScope.solicitacaoDetalhes(
                         containerColor = MaterialTheme.colorScheme.error,
                         contentColor = MaterialTheme.colorScheme.onError
                     ),
-                    shape = CornerShapeAutoriza
+                    shape = CornerShapeAppArcom
                 ) {
                     Text(
                         text = stringResource(R.string.negar),

@@ -1,6 +1,6 @@
 package br.com.arcom.autoriza.di
 
-import br.com.arcom.autoriza.database.AutorizaDatabase
+import br.com.arcom.autoriza.database.AppArcomDatabase
 import br.com.arcom.autoriza.db.dao.impl.SolicitacaoAceiteDaoImpl
 import br.com.arcom.autoriza.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.autoriza.domain.interactor.RegistrarSolicitacao
@@ -36,7 +36,7 @@ val coreModule = module {
     //-------------Daos------------------
     single<SolicitacaoAceiteDao> {
         SolicitacaoAceiteDaoImpl(
-            solicitacaoAceiteQueries = get<AutorizaDatabase>().solicitacaoAceiteQueries
+            solicitacaoAceiteQueries = get<AppArcomDatabase>().solicitacaoAceiteQueries
         )
     }
 

@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import br.com.arcom.autoriza.presentation.util.UiMessage
 
 @Composable
-fun AutorizaScaffold(
+fun AppArcomScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -76,7 +76,7 @@ fun AutorizaScaffold(
 }
 
 @Composable
-fun AutorizaScaffoldWithAnimationSuccess(
+fun AppArcomScaffoldWithAnimationSuccess(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -92,7 +92,7 @@ fun AutorizaScaffoldWithAnimationSuccess(
 ) {
     Crossfade(success, label = "") { s ->
         if (!s) {
-            AutorizaScaffold(
+            AppArcomScaffold(
                 modifier = modifier,
                 topBar = topBar,
                 bottomBar = bottomBar,

@@ -39,10 +39,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.autoriza.designsystem.theme.lightColor
 
-enum class AutorizaIcons(val icon: TypeIcon, val title: Int) {
+enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     PESQUISA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Search),
         R.string.pesquisa
@@ -106,7 +106,7 @@ fun Boolean.IconExpanded(tint: Color) {
 }
 
 @Composable
-fun AutorizaIcons.Composable(
+fun AppArcomIcons.Composable(
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current
 ) {
@@ -135,7 +135,7 @@ fun AutorizaIcons.Composable(
 }
 
 @Composable
-fun AutorizaIcons.ExtendedFloating(
+fun AppArcomIcons.ExtendedFloating(
     title: Int? = null,
     onClick: () -> Unit
 ) {
@@ -182,7 +182,7 @@ fun AutorizaIcons.ExtendedFloating(
 }
 
 @Composable
-fun AutorizaIcons.Floating(
+fun AppArcomIcons.Floating(
     onClick: () -> Unit
 ) {
     when (this.icon) {
@@ -220,7 +220,7 @@ fun AutorizaIcons.Floating(
 
 
 @Composable
-fun AutorizaIcons.IconButton(
+fun AppArcomIcons.IconButton(
     modifier: Modifier = Modifier,
     colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     notification: Boolean = false,
@@ -270,14 +270,14 @@ fun AutorizaIcons.IconButton(
 }
 
 @Composable
-fun AutorizaIcons.ComposableButton(
+fun AppArcomIcons.ComposableButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     val icon = this.icon
     Button(
         onClick = onClick,
-        shape = CornerShapeAutoriza,
+        shape = CornerShapeAppArcom,
         contentPadding = PaddingValues(8.dp),
         modifier = modifier.size(42.dp),
         colors = ButtonColors(

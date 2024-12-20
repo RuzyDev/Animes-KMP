@@ -1,6 +1,6 @@
 package br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes
 
-import AutorizaIcons
+import AppArcomIcons
 import Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,10 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaScaffold
-import br.com.arcom.autoriza.android.ui.designsystem.components.AutorizaTopBar
-import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutoriza
-import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAutorizaCard
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomTopBar
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcomCard
 import br.com.arcom.autoriza.designsystem.theme.Verde
 import br.com.arcom.autoriza.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.autoriza.presentation.SolicitacoesUiState
@@ -68,12 +68,12 @@ private fun SolicitacoesScreen(
     clearMessage: (Long) -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit
 ) {
-    AutorizaScaffold(
+    AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         topBar = {
-            AutorizaTopBar(title = stringResource(R.string.solicitacoes))
+            AppArcomTopBar(title = stringResource(R.string.solicitacoes))
         }
     ) {
         LazyColumn(
@@ -96,7 +96,7 @@ private fun SolicitacoesScreen(
 fun CardSolicitacao(solicitacao: SolicitacaoAceite, verDetalhes: (String) -> Unit, responder: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
-            .clip(CornerShapeAutorizaCard)
+            .clip(CornerShapeAppArcomCard)
             .clickable { verDetalhes(solicitacao.id) }
             .fillMaxWidth(.9f)
             .background(MaterialTheme.colorScheme.surfaceContainer)

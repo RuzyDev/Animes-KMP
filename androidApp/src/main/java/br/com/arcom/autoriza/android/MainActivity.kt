@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import br.com.arcom.autoriza.android.ui.app.AutorizaApp
-import br.com.arcom.autoriza.designsystem.theme.AutorizaTheme
+import br.com.arcom.autoriza.android.ui.app.AppArcomApp
+import br.com.arcom.autoriza.designsystem.theme.AppArcomTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -13,8 +13,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AutorizaTheme {
-                AutorizaApp()
+            AppArcomTheme {
+                AppArcomApp()
             }
         }
     }

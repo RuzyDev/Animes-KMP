@@ -29,14 +29,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
-import br.com.arcom.autoriza.android.ui.app.navigation.AutorizaNavHost
-import br.com.arcom.autoriza.android.ui.designsystem.components.navigation.AutorizaNavigationSuiteScaffold
+import br.com.arcom.autoriza.android.ui.app.navigation.AppArcomNavHost
+import br.com.arcom.autoriza.android.ui.designsystem.components.navigation.AppArcomNavigationSuiteScaffold
 import kotlin.reflect.KClass
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun AutorizaApp(
-    appState: AutorizaAppState = rememberAutorizaAppState(),
+fun AppArcomApp(
+    appState: AppArcomAppState = rememberAppArcomAppState(),
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo()
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -67,7 +67,7 @@ fun AutorizaApp(
             }
         }
     ) { padding ->
-        AutorizaNavHost(
+        AppArcomNavHost(
             appState = appState,
             modifier = Modifier
                 .fillMaxSize()

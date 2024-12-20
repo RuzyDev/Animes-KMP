@@ -1,6 +1,6 @@
 package br.com.arcom.autoriza.android.ui.designsystem.components
 
-import AutorizaIcons
+import AppArcomIcons
 import Composable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredSize
@@ -26,10 +26,10 @@ fun UiMessageDialog(
     AlertDialog(
         onDismissRequest = { /*TODO*/ },
         title = { Text(text = stringResource(id = R.string.alerta)) },
-        icon = { AutorizaIcons.ALERTA.Composable() },
+        icon = { AppArcomIcons.ALERTA.Composable() },
         text = { Text(text = uiMessage.message) },
         confirmButton = {
-            stringResource(id = R.string.confirmar).TextButtonAutoriza(onClick = confirmMsg)
+            stringResource(id = R.string.confirmar).TextButtonAppArcom(onClick = confirmMsg)
         },
         properties = DialogProperties(
             usePlatformDefaultWidth = true
@@ -47,7 +47,7 @@ fun DialogConfirmacao(
     modifier: Modifier = Modifier,
     title: String = stringResource(id = R.string.voce_tem_certeza),
     text: String? = null,
-    icon: AutorizaIcons? = null,
+    icon: AppArcomIcons? = null,
     closeDialog: () -> Unit,
     confirmClick: () -> Unit
 ) {

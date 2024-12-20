@@ -1,6 +1,7 @@
 package br.com.arcom.autoriza.presentation
 
 import br.com.arcom.autoriza.domain.collectStatus
+import br.com.arcom.autoriza.domain.interactor.RealizarLogin
 import br.com.arcom.autoriza.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
@@ -21,6 +22,8 @@ import org.koin.core.component.inject
 
 class LoginViewModel : CoroutineViewModel(), KoinComponent {
 
+    private val realizarLogin: RealizarLogin by inject()
+
     private val uiMessage = UiMessageManager()
 
     val uiState: StateFlow<UiMessage?> =
@@ -30,9 +33,10 @@ class LoginViewModel : CoroutineViewModel(), KoinComponent {
             null
         )
 
-    fun refresh() {
+    fun realizarLogin(idUsuario: Long, senha: String, navigateToHome: () -> Unit) {
         coroutineScope.launch {
-
+            realizarLogin.invoke(RealizarLogin.Params(idUsuario, senha))
+                .collectStatus(uiMessage, onSuccess = { navigateToHome() })
         }
     }
 
@@ -40,9 +44,5 @@ class LoginViewModel : CoroutineViewModel(), KoinComponent {
         coroutineScope.launch {
             uiMessage.clearMessage(id)
         }
-    }
-
-    init {
-        refresh()
     }
 }

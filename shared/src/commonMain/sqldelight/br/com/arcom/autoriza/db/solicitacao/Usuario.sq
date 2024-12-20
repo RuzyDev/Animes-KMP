@@ -1,0 +1,15 @@
+CREATE TABLE usuarioEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    data_bloqueio TEXT
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO usuarioEntity (
+    id,
+    nome,
+    data_bloqueio
+) VALUES ( ?, ? , ?);
+
+getById:
+SELECT * FROM usuarioEntity WHERE id = ?;

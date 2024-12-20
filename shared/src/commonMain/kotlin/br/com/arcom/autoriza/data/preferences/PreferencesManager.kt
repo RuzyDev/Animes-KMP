@@ -7,5 +7,6 @@ interface PreferencesManager {
 }
 
 enum class KeysPreferences{
-    TOKEN
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
 }

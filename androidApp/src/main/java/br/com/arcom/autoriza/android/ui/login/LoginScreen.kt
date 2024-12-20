@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.presentation.LoginViewModel
+import br.com.arcom.autoriza.presentation.util.UiMessage
 import br.com.arcom.sig.core.util.toCPF
 import br.com.arcom.sig.ui.designsystem.components.ModalBottomSheetSig
 import br.com.arcom.sig.ui.designsystem.components.SigButton
@@ -49,7 +50,7 @@ fun LoginRoute(
     LoginScreen(
         onBackClick = onBackClick,
         clearMessage = viewModel::clearMessage,
-        login = viewModel::login,
+        realizarLogin = viewModel::realizarLogin,
         navigateToHome = navigateToHome,
         uiState = uiState
     )
@@ -59,9 +60,9 @@ fun LoginRoute(
 fun LoginScreen(
     onBackClick: () -> Unit,
     clearMessage: (Long) -> Unit,
-    login: (Long, String, () -> Unit) -> Unit,
+    realizarLogin: (Long, String, () -> Unit) -> Unit,
     navigateToHome: () -> Unit,
-    uiState: LoginUiState = LoginUiState.Empty
+    uiState: UiMessage? = null
 ) {
     val dataNascimento = rememberFieldString()
     var ajuda by remember { mutableStateOf(false) }
@@ -70,7 +71,7 @@ fun LoginScreen(
         PrecisoAjudaContent { ajuda = false }
     }
 
-    SigScaffold(
+    Scaffold(
         onBackClick = onBackClick,
         clearMessage = clearMessage,
         uiState = uiState.uiState

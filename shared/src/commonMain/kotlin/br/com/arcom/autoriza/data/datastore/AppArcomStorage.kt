@@ -85,5 +85,5 @@ class AppArcomStorage(
 }
 
 enum class Keys {
-    TOKEN
+    LOGADO
 }

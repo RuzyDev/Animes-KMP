@@ -2,11 +2,16 @@ package br.com.arcom.autoriza.network
 
 import br.com.arcom.autoriza.util.ConstantsShared.BASE_URL
 import br.com.arcom.autoriza.data.datastore.AppArcomStorage
+import br.com.arcom.autoriza.data.datastore.Keys
+import br.com.arcom.autoriza.data.preferences.KeysPreferences
+import br.com.arcom.autoriza.data.preferences.PreferencesManager
+import br.com.arcom.autoriza.network.models.RefreshTokenResponse
 import br.com.arcom.autoriza.util.log.CommonLoggerImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -21,7 +26,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class KtorHttpClient(
-    private val appArcomStorage: AppArcomStorage
+    private val appArcomStorage: AppArcomStorage,
+    private val preferencesManager: PreferencesManager
 ) {
     fun httpClient(enableNetworkLogs: Boolean) = HttpClient {
         expectSuccess = false
@@ -31,13 +37,21 @@ class KtorHttpClient(
                 protocol = URLProtocol.HTTP
                 host = BASE_URL
             }
-            bearerAuth("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTs4OzIwMjQtMTEtMjlUMTY6MjU6MjguMDY3NDYyIiwiZXhwIjoxNzM1NTAwMzI4fQ.9Id-7VUT4BLm47vz-UBEVfJimtOPo5EHi_dCXcmZt04")
         }
 
         install(Auth){
             bearer {
                 loadTokens {
-
+                    val accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""
+                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
+                    BearerTokens(accessToken, refreshToken)
+                }
+                refreshTokens {
+                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
+                    val refresh = client.refreshAccessToken(refreshToken = refreshToken)
+                    preferencesManager.save(KeysPreferences.ACCESS_TOKEN, refresh.acessToken)
+                    preferencesManager.save(KeysPreferences.REFRESH_TOKEN, refresh.refreshToken)
+                    BearerTokens(refresh.acessToken, refresh.refreshToken)
                 }
             }
         }
@@ -70,24 +84,9 @@ class KtorHttpClient(
                 val statusCode = response.status.value
 
                 if (statusCode == 401) {
-
+                    appArcomStorage.clearString(Keys.LOGADO)
+                    preferencesManager.remove(KeysPreferences.ACCESS_TOKEN)
                 }
-
-                /*
-                                    when (statusCode) {
-                                        in 300..399 -> throw RedirectResponseException(response)
-                                        in 400..499 -> throw ClientRequestException(response)
-                                        in 500..599 -> throw ServerResponseException(response)
-                                    }
-
-                                    if (statusCode >= 600) {
-                                        throw ResponseException(response)
-                                    }
-                                }
-
-                                handleResponseException { cause: Throwable ->
-                                    throw cause
-                                }*/
             }
         }
 
@@ -110,4 +109,13 @@ class KtorHttpClient(
             )
         }
     }
+}
+
+suspend fun HttpClient.refreshAccessToken(refreshToken: String): RefreshTokenResponse {
+//    val response = this.post("https://api.exemplo.com/auth/refresh") {
+//        contentType(ContentType.Application.Json)
+//        setBody(mapOf("refreshToken" to refreshToken))
+//    }
+//    return response.body<RefreshTokenResponse>()
+    return RefreshTokenResponse("","")
 }

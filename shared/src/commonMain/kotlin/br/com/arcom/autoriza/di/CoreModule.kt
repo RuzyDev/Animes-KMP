@@ -24,8 +24,6 @@ val coreModule = module {
             main = Dispatchers.Main
         )
     }
-    single { AutorizaDataStore(get()) }
-
 
     //----------Repositorys--------------
     single<SolicitacaoAceiteRepository> {

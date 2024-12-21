@@ -1,5 +1,6 @@
 package br.com.arcom.autoriza.android.ui.login
 
+import AppArcomIcons
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -23,17 +24,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.autoriza.presentation.LoginViewModel
 import br.com.arcom.autoriza.presentation.util.UiMessage
 import br.com.arcom.sig.core.util.toCPF
-import br.com.arcom.sig.ui.designsystem.components.ModalBottomSheetSig
-import br.com.arcom.sig.ui.designsystem.components.SigButton
-import br.com.arcom.sig.ui.designsystem.components.SigScaffold
-import br.com.arcom.sig.ui.designsystem.components.TextButtonSig
-import br.com.arcom.sig.ui.designsystem.components.text.SigTextField
+import br.com.arcom.sig.ui.designsystem.components.ModalBottomSheetAppArcom
+import br.com.arcom.sig.ui.designsystem.components.AppArcomButton
+import br.com.arcom.sig.ui.designsystem.components.AppArcomScaffold
+import br.com.arcom.sig.ui.designsystem.components.TextButtonAppArcom
+import br.com.arcom.sig.ui.designsystem.components.text.AppArcomTextField
 import br.com.arcom.sig.ui.designsystem.components.text.rememberFieldString
 import br.com.arcom.sig.ui.designsystem.icon.Composable
-import br.com.arcom.sig.ui.designsystem.icon.SigIcon
+import br.com.arcom.sig.ui.designsystem.icon.AppArcomIcon
 import br.com.arcom.sig.ui.designsystem.util.MaskVisualTransformation
 import org.koin.compose.koinInject
 
@@ -71,10 +73,10 @@ fun LoginScreen(
         PrecisoAjudaContent { ajuda = false }
     }
 
-    Scaffold(
+    AppArcomScaffold (
         onBackClick = onBackClick,
         clearMessage = clearMessage,
-        uiState = uiState.uiState
+        uiMessage = uiState
     ) {
         Column(
             modifier = Modifier
@@ -98,14 +100,14 @@ fun LoginScreen(
                 fontWeight = FontWeight.Normal
             )
 
-            SigIcon.LOGO.Composable(
+            AppArcomIcons.LOGO.Composable(
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .height(200.dp)
                     .padding(vertical = 16.dp)
             )
 
-            SigTextField(
+            AppArcomTextField(
                 text = uiState.dadosLogin?.cpf?.toCPF() ?: "",
                 setText = {},
                 label = stringResource(id = R.string.cpf),
@@ -122,7 +124,7 @@ fun LoginScreen(
                 singleLine = true
             )
 
-            SigTextField(
+            AppArcomTextField(
                 valueState = dataNascimento,
                 label = stringResource(id = R.string.data_nascimento),
                 modifier = Modifier
@@ -137,7 +139,7 @@ fun LoginScreen(
                 singleLine = true
             )
 
-            SigButton(
+            AppArcomButton(
                 onClick = {
                     uiState.dadosLogin?.cpf?.let {
                         login(it, dataNascimento.value, navigateToHome)
@@ -150,7 +152,7 @@ fun LoginScreen(
                 enabled = uiState.dadosLogin != null
             )
 
-            stringResource(id = R.string.preciso_ajuda).TextButtonSig(
+            stringResource(id = R.string.preciso_ajuda).TextButtonAppArcom(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(top = 4.dp)
@@ -164,7 +166,7 @@ fun LoginScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PrecisoAjudaContent(close: () -> Unit) {
-    ModalBottomSheetSig(onDismissRequest = close) {
+    ModalBottomSheetAppArcom(onDismissRequest = close) {
         Text(
             text = stringResource(id = R.string.entre_contato_conosco),
             style = MaterialTheme.typography.bodyMedium,
@@ -183,7 +185,7 @@ private fun PrecisoAjudaContent(close: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.weight(1f)
             ) {
-                SigIcon.WHATSAPP.Composable(
+                AppArcomIcon.WHATSAPP.Composable(
                     modifier = Modifier.requiredSize(36.dp),
                     tint = MaterialTheme.colorScheme.primary
                 )
@@ -197,7 +199,7 @@ private fun PrecisoAjudaContent(close: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.weight(1f)
             ) {
-                SigIcon.TELEFONE.Composable(
+                AppArcomIcon.TELEFONE.Composable(
                     modifier = Modifier.requiredSize(36.dp),
                     tint = MaterialTheme.colorScheme.primary
                 )

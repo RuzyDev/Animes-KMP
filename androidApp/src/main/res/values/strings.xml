@@ -18,4 +18,8 @@
     <string name="ocorreu_um_erro">Ocorreu um erro</string>
     <string name="dados_nao_encontrados">Dados não encontrados</string>
     <string name="ocorreu_erro_solicitacao">Ocorreu um erro ao buscar a solicitação</string>
+    <string name="bem_vindo">Seja bem-vindo!</string>
+    <string name="entre_com_dados_continuar">Entre com os dados para continuar</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
 </resources>

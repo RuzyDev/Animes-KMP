@@ -1,8 +1,11 @@
 package br.com.arcom.autoriza.ui.designsystem.components.text
 
+import AppArcomIcons
+import Composable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -41,14 +45,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import br.com.arcom.atomx.ui.designsystem.util.conditional
-import br.com.arcom.atomx.ui.designsystem.util.shake
 import br.com.arcom.autoriza.R
-import br.com.arcom.autoriza.core.util.isNumberOrEmpty
-import br.com.arcom.autoriza.ui.designsystem.icon.Composable
+import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
+import br.com.arcom.autoriza.android.utils.conditional
+import br.com.arcom.autoriza.android.utils.shake
+import br.com.arcom.autoriza.designsystem.theme.lightColor
+import br.com.arcom.autoriza.designsystem.theme.secondaryColor
 import br.com.arcom.autoriza.ui.designsystem.icon.AppArcomIcon
+import br.com.arcom.autoriza.ui.designsystem.icon.Composable
 import br.com.arcom.autoriza.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.autoriza.ui.designsystem.theme.lightColor
-import br.com.arcom.autoriza.ui.designsystem.theme.secondaryColor
+import br.com.arcom.autoriza.util.format.isNumberOrEmpty
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -110,7 +117,9 @@ fun AppArcomTextField(
     maxLength: Int = Int.MAX_VALUE,
     maxLines: Int = Int.MAX_VALUE,
     readOnly: Boolean = false,
-    onlyNumbers: Boolean = false
+    onlyNumbers: Boolean = false,
+    icon: AppArcomIcons? = null,
+    iconClick: (() -> Unit)? = null
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
     val focusResquest = LocalFocusManager.current
@@ -164,7 +173,7 @@ fun AppArcomTextField(
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
             decorationBox = {
-                Box(
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(CornerShapeAppArcom)
@@ -178,7 +187,9 @@ fun AppArcomTextField(
                                 CornerShapeAppArcom
                             )
                         }
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     if (text.isEmpty() && placeholder != null) {
                         Text(
@@ -188,6 +199,16 @@ fun AppArcomTextField(
                     } else {
                         it()
                     }
+                    icon?.Composable(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clickable(
+                                indication = null,
+                                interactionSource = null,
+                                onClick = { iconClick?.invoke() }
+                            ),
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
                 }
             },
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface)
@@ -259,7 +280,7 @@ fun AppArcomTextFieldPesquisa(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                AppArcomIcon.PESQUISA.Composable(
+                AppArcomIcons.PESQUISA.Composable(
                     tint = MaterialTheme.colorScheme.onSurface.lightColor(),
                     modifier = Modifier.requiredSize(18.dp)
                 )

@@ -30,6 +30,7 @@ import br.com.arcom.autoriza.presentation.util.UiMessage
 import br.com.arcom.autoriza.ui.designsystem.components.text.AppArcomTextField
 import org.koin.compose.koinInject
 import br.com.arcom.autoriza.android.R
+import br.com.arcom.autoriza.ui.designsystem.components.text.rememberFieldString
 
 @Composable
 fun LoginRoute(
@@ -57,7 +58,8 @@ fun LoginScreen(
     navigateToHome: () -> Unit,
     uiState: UiMessage? = null
 ) {
-    val dataNascimento = rememberFieldString()
+    var idUsuario by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
     var ajuda by remember { mutableStateOf(false) }
 
     if (ajuda) {
@@ -77,7 +79,7 @@ fun LoginScreen(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.bem_vindo_sig),
+                text = stringResource(id = R.string.bem_vindo),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.fillMaxWidth(0.9f),
                 fontWeight = FontWeight.Bold
@@ -99,9 +101,9 @@ fun LoginScreen(
             )
 
             AppArcomTextField(
-                text = uiState.dadosLogin?.cpf?.toCPF() ?: "",
-                setText = {},
-                label = stringResource(id = R.string.cpf),
+                text = idUsuario,
+                setText = { idUsuario = it },
+                label = stringResource(id = R.string.usuario),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(top = 8.dp),
@@ -109,15 +111,14 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                 ),
-                enabled = false,
-                visualTransformation = MaskVisualTransformation("###.###.###-##"),
-                maxLines = 11,
+                maxLines = 6,
                 singleLine = true
             )
 
             AppArcomTextField(
-                valueState = dataNascimento,
-                label = stringResource(id = R.string.data_nascimento),
+                text = senha,
+                setText = { senha = it },
+                label = stringResource(id = R.string.senha),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(top = 8.dp),
@@ -127,7 +128,7 @@ fun LoginScreen(
                 ),
                 visualTransformation = MaskVisualTransformation("##/##/####"),
                 maxLength = 8,
-                singleLine = true
+                singleLine = true,
             )
 
             AppArcomButton(

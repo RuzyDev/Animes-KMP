@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -44,17 +43,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import br.com.arcom.atomx.ui.designsystem.util.conditional
 import br.com.arcom.autoriza.R
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.autoriza.android.utils.conditional
 import br.com.arcom.autoriza.android.utils.shake
 import br.com.arcom.autoriza.designsystem.theme.lightColor
 import br.com.arcom.autoriza.designsystem.theme.secondaryColor
-import br.com.arcom.autoriza.ui.designsystem.icon.AppArcomIcon
-import br.com.arcom.autoriza.ui.designsystem.icon.Composable
-import br.com.arcom.autoriza.ui.designsystem.theme.CornerShapeAppArcom
-import br.com.arcom.autoriza.ui.designsystem.theme.lightColor
 import br.com.arcom.autoriza.util.format.isNumberOrEmpty
 import kotlinx.coroutines.delay
 

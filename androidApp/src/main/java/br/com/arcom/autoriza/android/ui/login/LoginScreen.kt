@@ -30,6 +30,7 @@ import br.com.arcom.autoriza.presentation.util.UiMessage
 import br.com.arcom.autoriza.ui.designsystem.components.text.AppArcomTextField
 import org.koin.compose.koinInject
 import br.com.arcom.autoriza.android.R
+import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomButton
 import br.com.arcom.autoriza.ui.designsystem.components.text.rememberFieldString
 
 @Composable
@@ -60,11 +61,8 @@ fun LoginScreen(
 ) {
     var idUsuario by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
-    var ajuda by remember { mutableStateOf(false) }
+    var ocultarSenha by remember { mutableStateOf(true) }
 
-    if (ajuda) {
-        PrecisoAjudaContent { ajuda = false }
-    }
 
     AppArcomScaffold (
         onBackClick = onBackClick,
@@ -126,80 +124,22 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                 ),
-                visualTransformation = MaskVisualTransformation("##/##/####"),
                 maxLength = 8,
                 singleLine = true,
+                icon = if (ocultarSenha) AppArcomIcons.NAO_VISIVEL else AppArcomIcons.VISIVEL,
+                iconClick = { ocultarSenha = !ocultarSenha }
             )
 
             AppArcomButton(
                 onClick = {
-                    uiState.dadosLogin?.cpf?.let {
-                        login(it, dataNascimento.value, navigateToHome)
-                    }
+                    realizarLogin(idUsuario.toLong(), senha, navigateToHome)
                 },
                 text = stringResource(id = R.string.entrar),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(top = 16.dp),
-                enabled = uiState.dadosLogin != null
+                enabled = idUsuario.toLongOrNull() != null && senha.isNotEmpty()
             )
-
-            stringResource(id = R.string.preciso_ajuda).TextButtonAppArcom(
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .padding(top = 4.dp)
-            ) {
-                ajuda = true
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun PrecisoAjudaContent(close: () -> Unit) {
-    ModalBottomSheetAppArcom(onDismissRequest = close) {
-        Text(
-            text = stringResource(id = R.string.entre_contato_conosco),
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.fillMaxWidth(0.9f)
-        )
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(top = 16.dp),
-            maxLines = 2
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                AppArcomIcon.WHATSAPP.Composable(
-                    modifier = Modifier.requiredSize(36.dp),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = stringResource(id = R.string.numero_atendimento_suporte),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                AppArcomIcon.TELEFONE.Composable(
-                    modifier = Modifier.requiredSize(36.dp),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = stringResource(id = R.string.numero_atendimento_suporte),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
         }
     }
 }

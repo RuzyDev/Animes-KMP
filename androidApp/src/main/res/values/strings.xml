@@ -22,4 +22,12 @@
     <string name="entre_com_dados_continuar">Entre com os dados para continuar</string>
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
+    <string name="visivel">Visível</string>
+    <string name="nao_visivel">Não visível</string>
+    <string name="entrar">Entrar</string>
+    <string name="preciso_ajuda">Preciso de ajuda</string>
+    <string name="entre_contato_conosco">Se você está com dificuldades com o login, entre em contato conosco. Estamos aqui para ajudar!</string>
+    <string name="numero_atendimento_suporte">3218-4200</string>
+    <string name="telefone">Telefone</string>
+    <string name="whatsapp">WhatsApp</string>
 </resources>

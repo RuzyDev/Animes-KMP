@@ -79,6 +79,14 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
         TypeIcon.ImageVectorTypeIcon(Icons.AutoMirrored.Outlined.KeyboardArrowRight),
         R.string.avancar
     ),
+    VISIVEL(
+        TypeIcon.DrawableResourceTypeIcon(R.drawable.ic_visibility),
+        R.string.visivel
+    ),
+    NAO_VISIVEL(
+        TypeIcon.DrawableResourceTypeIcon(R.drawable.ic_visibility_off),
+        R.string.nao_visivel
+    ),
     ALERTA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Warning),
         R.string.alerta

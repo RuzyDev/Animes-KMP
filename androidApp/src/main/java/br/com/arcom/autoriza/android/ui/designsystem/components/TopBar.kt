@@ -63,6 +63,34 @@ fun AppArcomTopBar(
     }
 }
 
+@Composable
+fun AppArcomTopBarDrawer(
+    title: String,
+    openDrawer: () -> Unit
+) {
+    Box(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 8.dp)) {
+
+        IconButton(
+            onClick = openDrawer,
+            modifier = Modifier.align(Alignment.CenterStart)
+        ) {
+            AppArcomIcons.MENU.Composable(
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+            )
+        }
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.align(Alignment.Center),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
 /**
  * Top Bar mostrado apenas na HomeScreen
  */

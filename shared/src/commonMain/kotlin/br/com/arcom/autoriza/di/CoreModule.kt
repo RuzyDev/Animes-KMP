@@ -10,6 +10,7 @@ import br.com.arcom.autoriza.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.autoriza.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.autoriza.domain.observers.ObserveDetalhesSolicitacao
 import br.com.arcom.autoriza.domain.observers.ObserveSolicitacoes
+import br.com.arcom.autoriza.domain.observers.ObserveUsuario
 import br.com.arcom.autoriza.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.autoriza.domain.repository.UsuarioRepository
 import br.com.arcom.autoriza.domain.repository.impl.SolicitacaoAceiteRepositoryImpl
@@ -66,4 +67,5 @@ val coreModule = module {
     //Solicitacao - Observers
     single { ObserveSolicitacoes(get()) }
     single { ObserveDetalhesSolicitacao(get()) }
+    single { ObserveUsuario(get()) }
 }

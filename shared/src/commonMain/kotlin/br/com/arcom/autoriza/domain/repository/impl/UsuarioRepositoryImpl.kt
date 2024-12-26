@@ -7,7 +7,11 @@ import br.com.arcom.autoriza.data.preferences.PreferencesManager
 import br.com.arcom.autoriza.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.autoriza.db.dao.UsuarioDao
 import br.com.arcom.autoriza.domain.repository.UsuarioRepository
+import br.com.arcom.autoriza.model.Usuario
+import br.com.arcom.autoriza.model.toExternalModel
 import br.com.arcom.autoriza.network.service.UsuarioService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class UsuarioRepositoryImpl(
     private val usuarioService: UsuarioService,
@@ -26,6 +30,10 @@ class UsuarioRepositoryImpl(
         }else{
             throw Exception("Usuário não encontrado!")
         }
+    }
+
+    override fun getUsuario(): Flow<Usuario?> {
+        return usuarioDao.get().map { it?.toExternalModel() }
     }
 
 }

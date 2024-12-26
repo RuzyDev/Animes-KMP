@@ -3,6 +3,7 @@ package br.com.arcom.autoriza.db.dao.impl
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
+import app.cash.sqldelight.coroutines.mapToOneOrNull
 import br.com.arcom.autoriza.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.autoriza.db.dao.UsuarioDao
 import br.com.arcom.autoriza.db.solicitacao.SolicitacaoAceiteQueries
@@ -24,5 +25,5 @@ class UsuarioDaoImpl(
         )
     }
 
-    override fun get() = usuarioQueries.get().asFlow().mapToOne(Dispatchers.IO)
+    override fun get() = usuarioQueries.get().asFlow().mapToOneOrNull(Dispatchers.IO)
 }

@@ -1,28 +1,32 @@
 package br.com.arcom.autoriza.presentation
 
-import androidx.lifecycle.ViewModel
 import br.com.arcom.autoriza.data.datastore.AppArcomStorage
 import br.com.arcom.autoriza.data.datastore.Keys
-import br.com.arcom.autoriza.presentation.util.UiMessage
+import br.com.arcom.autoriza.domain.observers.ObserveUsuario
+import br.com.arcom.autoriza.model.Usuario
 import br.com.arcom.autoriza.util.ResultState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class MainActivityViewModel : CoroutineViewModel(), KoinComponent {
+class AppViewModel : CoroutineViewModel(), KoinComponent {
 
     private val appArcomStorage: AppArcomStorage by inject()
+    private val observeUsuario: ObserveUsuario by inject()
 
     private val logadoResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Loading)
     private val _logado = appArcomStorage.getBooleanStream(Keys.LOGADO)
 
-    val states = logadoResult.asStateFlow()
+    val uiState = combine(logadoResult, observeUsuario.flow, ::AppUiState).stateIn(
+        coroutineScope,
+        SharingStarted.WhileSubscribed(5000),
+        AppUiState.Empty
+    )
 
     init {
         _logado.onEach { value ->
@@ -35,5 +39,14 @@ class MainActivityViewModel : CoroutineViewModel(), KoinComponent {
                 logadoResult.emit(ResultState.Success(value))
             }
         }.launchIn(coroutineScope)
+    }
+}
+
+data class AppUiState(
+    val logado: ResultState<Boolean> = ResultState.Loading,
+    val usuario: Usuario? = null
+){
+    companion object{
+        val Empty = AppUiState()
     }
 }

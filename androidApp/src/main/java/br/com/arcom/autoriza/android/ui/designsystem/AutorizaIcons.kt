@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
@@ -78,6 +79,10 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     AVANCAR(
         TypeIcon.ImageVectorTypeIcon(Icons.AutoMirrored.Outlined.KeyboardArrowRight),
         R.string.avancar
+    ),
+    MENU(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Menu),
+        R.string.menu
     ),
     VISIVEL(
         TypeIcon.DrawableResourceTypeIcon(R.drawable.ic_visibility),

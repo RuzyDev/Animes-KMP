@@ -3,7 +3,6 @@ package br.com.arcom.autoriza.android.ui.app.navigation
 import AppArcomIcons
 import androidx.annotation.StringRes
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.android.ui.perfil.PerfilNavigation
 import br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes.SolicitacoesNavigation
 import kotlin.reflect.KClass
 
@@ -20,13 +19,6 @@ enum class TopLevelDestination(
         iconTextId = R.string.solicitacoes,
         titleTextId = R.string.solicitacoes,
         route = SolicitacoesNavigation::class
-    ),
-    PERFIL(
-        selectedIcon = AppArcomIcons.PERSON,
-        unselectedIcon = AppArcomIcons.PERSON_OUTLINED,
-        iconTextId = R.string.perfil,
-        titleTextId = R.string.perfil,
-        route = PerfilNavigation::class
-    );
+    )
 }
 

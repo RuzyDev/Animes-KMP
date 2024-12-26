@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UsuarioDao {
     suspend fun insertOrUpdate(usuario: NetworkUsuarioAppArcom)
-    fun get(): Flow<UsuarioEntity>
+    fun get(): Flow<UsuarioEntity?>
 }

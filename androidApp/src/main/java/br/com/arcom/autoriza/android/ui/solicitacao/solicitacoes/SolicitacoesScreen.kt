@@ -71,21 +71,22 @@ private fun SolicitacoesScreen(
     AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
-        uiMessage = uiState.uiMessage,
-        topBar = {
-            AppArcomTopBar(title = stringResource(R.string.solicitacoes))
-        }
+        uiMessage = uiState.uiMessage
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(vertical = 16.dp)
-        ) {
-            items(uiState.solicitacoes) { solicitacao ->
-                CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
-                    responderSolicitacao(solicitacao, resposta)
+        if (uiState.solicitacoes.isEmpty()){
+
+        }else{
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(vertical = 16.dp)
+            ) {
+                items(uiState.solicitacoes) { solicitacao ->
+                    CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
+                        responderSolicitacao(solicitacao, resposta)
+                    }
                 }
             }
         }

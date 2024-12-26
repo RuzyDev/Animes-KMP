@@ -39,6 +39,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -54,7 +55,7 @@ import kotlin.reflect.KClass
 @Composable
 fun AppArcomApp(
     usuario: Usuario?,
-    appState: AppArcomAppState = rememberAppArcomAppState(),
+    appState: AppArcomState = rememberAppArcomState(),
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo()
 ) {
     val currentDestination = appState.currentDestination
@@ -102,7 +103,7 @@ fun AppArcomApp(
 
 @Composable
 fun DrawerAppArcom(
-    appState: AppArcomAppState, currentDestination: NavDestination?,
+    appState: AppArcomState, currentDestination: NavDestination?,
     closeDrawer: () -> Unit,
     usuario: Usuario?
 ) {
@@ -131,7 +132,9 @@ fun DrawerAppArcom(
                     Text(
                         text = it.nome,
                         style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = it.id.toString(),

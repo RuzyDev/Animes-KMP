@@ -39,6 +39,7 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
                 logadoResult.emit(ResultState.Success(value))
             }
         }.launchIn(coroutineScope)
+        observeUsuario(Unit)
     }
 }
 

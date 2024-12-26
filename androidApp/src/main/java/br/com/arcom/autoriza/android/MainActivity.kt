@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.ui.app.AppArcomApp
 import br.com.arcom.autoriza.android.ui.login.LoginRoute
-import br.com.arcom.autoriza.designsystem.theme.AppArcomTheme
+import br.com.arcom.autoriza.android.ui.designsystem.theme.AppArcomTheme
 import br.com.arcom.autoriza.presentation.AppViewModel
 import br.com.arcom.autoriza.util.ResultState
 import org.koin.compose.koinInject

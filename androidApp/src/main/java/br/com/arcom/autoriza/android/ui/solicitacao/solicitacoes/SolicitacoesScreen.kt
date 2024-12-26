@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomTopBar
+import br.com.arcom.autoriza.android.ui.designsystem.components.NaoEncontrado
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.autoriza.android.ui.designsystem.theme.CornerShapeAppArcomCard
 import br.com.arcom.autoriza.designsystem.theme.Verde
@@ -74,7 +75,7 @@ private fun SolicitacoesScreen(
         uiMessage = uiState.uiMessage
     ) {
         if (uiState.solicitacoes.isEmpty()){
-
+            NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))
         }else{
             LazyColumn(
                 modifier = Modifier

@@ -44,15 +44,15 @@ class KtorHttpClient(
                 loadTokens {
                     val accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""
                     val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
-                    BearerTokens(accessToken, refreshToken)
+                    BearerTokens("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTs4OzIwMjQtMTItMjZUMTQ6NTM6MzguOTI5MzMwODkyIiwiZXhwIjoxNzM3OTE0MDE4fQ.vKLNnFHBjcUSUujZ8tVK7Ccb34jS1HZQJEPUFARUTMY", refreshToken)
                 }
-                refreshTokens {
-                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
-                    val refresh = client.refreshAccessToken(refreshToken = refreshToken)
-                    preferencesManager.save(KeysPreferences.ACCESS_TOKEN, refresh.acessToken)
-                    preferencesManager.save(KeysPreferences.REFRESH_TOKEN, refresh.refreshToken)
-                    BearerTokens(refresh.acessToken, refresh.refreshToken)
-                }
+//                refreshTokens {
+//                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
+//                    val refresh = client.refreshAccessToken(refreshToken = refreshToken)
+//                    preferencesManager.save(KeysPreferences.ACCESS_TOKEN, refresh.acessToken)
+//                    preferencesManager.save(KeysPreferences.REFRESH_TOKEN, refresh.refreshToken)
+//                    BearerTokens(refresh.acessToken, refresh.refreshToken)
+//                }
             }
         }
 
@@ -84,7 +84,7 @@ class KtorHttpClient(
                 val statusCode = response.status.value
 
                 if (statusCode == 401) {
-                    appArcomStorage.clearString(Keys.LOGADO)
+                    appArcomStorage.emitBoolean(false, Keys.LOGADO)
                     preferencesManager.remove(KeysPreferences.ACCESS_TOKEN)
                 }
             }

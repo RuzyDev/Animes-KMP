@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import br.com.arcom.autoriza.android.ui.app.AppArcomAppState
+import br.com.arcom.autoriza.android.ui.login.login
 import br.com.arcom.autoriza.android.ui.perfil.PerfilNavigation
 import br.com.arcom.autoriza.android.ui.perfil.perfil
 import br.com.arcom.autoriza.android.ui.solicitacao.detalhessolicitacao.detalhesSolicitacao

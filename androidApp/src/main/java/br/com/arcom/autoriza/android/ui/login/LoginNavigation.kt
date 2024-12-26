@@ -13,13 +13,9 @@ fun NavController.navigateToLogin(navOptions: NavOptions) =
     navigate(route = LoginNavigation, navOptions)
 
 fun NavGraphBuilder.login(
-    onBackClick: () -> Unit,
     navigateToHome: () -> Unit
 ) {
     composable<LoginNavigation> {
-        LoginRoute(
-            onBackClick = onBackClick,
-            navigateToHome = navigateToHome
-        )
+        LoginRoute()
     }
 }

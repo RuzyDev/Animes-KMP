@@ -6,6 +6,6 @@ import br.com.arcom.autoriza.database.AppArcomDatabase
 
 actual class SqlDelightDriverFactory {
     actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(AppArcomDatabase.Schema, "autoriza.db")
+        return NativeSqliteDriver(AppArcomDatabase.Schema, "apparcom.db")
     }
 }

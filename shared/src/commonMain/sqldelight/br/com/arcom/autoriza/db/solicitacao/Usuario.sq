@@ -11,5 +11,8 @@ INSERT OR REPLACE INTO usuarioEntity (
     data_bloqueio
 ) VALUES ( ?, ? , ?);
 
-getById:
-SELECT * FROM usuarioEntity WHERE id = ?;
+get:
+SELECT * FROM usuarioEntity LIMIT 1;
+
+deleteAll:
+DELETE FROM usuarioEntity;

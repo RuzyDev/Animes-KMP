@@ -35,25 +35,21 @@ import br.com.arcom.autoriza.ui.designsystem.components.text.rememberFieldString
 
 @Composable
 fun LoginRoute(
-    onBackClick: () -> Unit,
-    navigateToHome: () -> Unit,
     viewModel: LoginViewModel = koinInject(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LoginScreen(
-        onBackClick = onBackClick,
         clearMessage = viewModel::clearMessage,
         realizarLogin = viewModel::realizarLogin,
-        navigateToHome = navigateToHome,
+        navigateToHome = {},
         uiState = uiState
     )
 }
 
 @Composable
 fun LoginScreen(
-    onBackClick: () -> Unit,
     clearMessage: (Long) -> Unit,
     realizarLogin: (Long, String, () -> Unit) -> Unit,
     navigateToHome: () -> Unit,
@@ -65,7 +61,6 @@ fun LoginScreen(
 
 
     AppArcomScaffold (
-        onBackClick = onBackClick,
         clearMessage = clearMessage,
         uiMessage = uiState
     ) {
@@ -121,10 +116,9 @@ fun LoginScreen(
                     .fillMaxWidth(0.9f)
                     .padding(top = 8.dp),
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
+                    keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
-                maxLength = 8,
                 singleLine = true,
                 icon = if (ocultarSenha) AppArcomIcons.NAO_VISIVEL else AppArcomIcons.VISIVEL,
                 iconClick = { ocultarSenha = !ocultarSenha }

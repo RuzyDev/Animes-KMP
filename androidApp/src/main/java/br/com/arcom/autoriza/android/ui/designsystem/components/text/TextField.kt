@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -193,15 +194,18 @@ fun AppArcomTextField(
                     } else {
                         it()
                     }
+
+                    Spacer(Modifier.weight(1f))
+
                     icon?.Composable(
                         modifier = Modifier
-                            .size(32.dp)
+                            .size(24.dp)
                             .clickable(
                                 indication = null,
                                 interactionSource = null,
                                 onClick = { iconClick?.invoke() }
                             ),
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer.secondaryColor()
                     )
                 }
             },

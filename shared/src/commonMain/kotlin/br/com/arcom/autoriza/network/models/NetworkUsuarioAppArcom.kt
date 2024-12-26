@@ -11,7 +11,7 @@ data class NetworkUsuarioAppArcom(
     @SerialName("nome")
     val nome: String,
     @SerialName("dataBloqueio")
-    val dataBloqueio: LocalDateTime,
+    val dataBloqueio: LocalDateTime?,
     @SerialName("token")
     val token: String,
 )

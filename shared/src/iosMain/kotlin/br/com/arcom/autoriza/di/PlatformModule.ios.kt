@@ -3,6 +3,7 @@ package br.com.arcom.autoriza.di
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import app.cash.sqldelight.db.SqlDriver
+import br.com.arcom.autoriza.data.datastore.AppArcomStorage
 import br.com.arcom.autoriza.data.datastore.createDataStore
 import br.com.arcom.autoriza.data.preferences.IOSPreferencesManager
 import br.com.arcom.autoriza.data.preferences.PreferencesManager
@@ -24,7 +25,7 @@ actual val platformModule = module {
     single<SqlDriver> { SqlDelightDriverFactory().createDriver() }
     single<HttpClientEngine> { Darwin.create {} }
     single { AppChecker }
-    single<DataStore<Preferences>> { createDataStore() }
+    single<AppArcomStorage> { AppArcomStorage(createDataStore()) }
     single<PreferencesManager> { IOSPreferencesManager() }
 }
 

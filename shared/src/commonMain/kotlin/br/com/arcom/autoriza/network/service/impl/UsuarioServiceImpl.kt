@@ -5,6 +5,7 @@ import br.com.arcom.autoriza.network.models.NetworkSolicitacaoAceite
 import br.com.arcom.autoriza.network.models.NetworkUsuarioAppArcom
 import br.com.arcom.autoriza.network.service.SolicitacaoService
 import br.com.arcom.autoriza.network.service.UsuarioService
+import br.com.arcom.autoriza.network.util.bodyOrNull
 import br.com.arcom.autoriza.network.util.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -24,7 +25,7 @@ class UsuarioServiceImpl(
             api.post(urlString = "api/apparcom/v1/atualizar?rotina=login") {
                 setBody(NetworkLogin(idUsuario, senha))
                 contentType(ContentType.Application.Json)
-            }.body()
+            }.bodyOrNull()
         }
     }
 }

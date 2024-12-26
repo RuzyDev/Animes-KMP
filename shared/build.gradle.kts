@@ -69,7 +69,7 @@ android {
 }
 
 sqldelight{
-    databases.create("AutorizaDatabase"){
+    databases.create("AppArcomDatabase"){
         packageName.set("br.com.arcom.autoriza.database")
     }
 }

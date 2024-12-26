@@ -6,6 +6,7 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.http.HttpStatusCode
 import io.ktor.util.network.UnresolvedAddressException
 
 suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): T {
@@ -26,6 +27,14 @@ suspend fun <T : Any?> safeApiCall(apiCall: suspend () -> T): T {
     } catch (e: Exception) {
         val error = parseNetworkError(exception = e)
         throw error
+    }
+}
+
+suspend inline fun <reified T> HttpResponse.bodyOrNull(): T? {
+    return when (this.status) {
+        HttpStatusCode.NoContent -> null // Trata respostas 204 como nulas.
+        HttpStatusCode.Unauthorized -> throw Exception("Não autorizado!")
+        else -> this.body<T>() // Tenta processar o corpo da resposta para outros status válidos.
     }
 }
 

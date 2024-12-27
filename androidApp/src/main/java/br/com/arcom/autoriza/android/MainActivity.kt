@@ -7,7 +7,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.ui.app.AppArcomApp
-import br.com.arcom.autoriza.android.ui.login.LoginRoute
+import br.com.arcom.autoriza.android.ui.screens.login.LoginRoute
 import br.com.arcom.autoriza.android.ui.designsystem.theme.AppArcomTheme
 import br.com.arcom.autoriza.presentation.AppViewModel
 import br.com.arcom.autoriza.util.ResultState

@@ -3,7 +3,8 @@ package br.com.arcom.autoriza.android.ui.app.navigation
 import AppArcomIcons
 import androidx.annotation.StringRes
 import br.com.arcom.autoriza.android.R
-import br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes.SolicitacoesNavigation
+import br.com.arcom.autoriza.android.ui.screens.home.HomeNavigation
+import br.com.arcom.autoriza.android.ui.screens.solicitacao.solicitacoes.SolicitacoesNavigation
 import kotlin.reflect.KClass
 
 enum class TopLevelDestination(
@@ -13,12 +14,12 @@ enum class TopLevelDestination(
     @StringRes val titleTextId: Int,
     val route: KClass<*>
 ) {
-    SOLICITACOES(
-        selectedIcon = AppArcomIcons.CHECK_CIRCLE,
-        unselectedIcon = AppArcomIcons.CHECK_CIRCLE_OUTLINED,
-        iconTextId = R.string.solicitacoes,
-        titleTextId = R.string.solicitacoes,
-        route = SolicitacoesNavigation::class
+    HOME(
+        selectedIcon = AppArcomIcons.HOME,
+        unselectedIcon = AppArcomIcons.HOME_OUTLINED,
+        iconTextId = R.string.home,
+        titleTextId = R.string.home,
+        route = HomeNavigation::class
     )
 }
 

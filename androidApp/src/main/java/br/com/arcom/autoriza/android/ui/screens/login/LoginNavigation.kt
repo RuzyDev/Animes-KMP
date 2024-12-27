@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.android.ui.login
+package br.com.arcom.autoriza.android.ui.screens.login
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

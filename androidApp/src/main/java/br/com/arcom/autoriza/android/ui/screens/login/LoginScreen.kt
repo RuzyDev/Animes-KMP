@@ -1,17 +1,13 @@
-package br.com.arcom.autoriza.android.ui.login
+package br.com.arcom.autoriza.android.ui.screens.login
 
 import AppArcomIcons
 import Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,7 +27,7 @@ import br.com.arcom.autoriza.ui.designsystem.components.text.AppArcomTextField
 import org.koin.compose.koinInject
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomButton
-import br.com.arcom.autoriza.ui.designsystem.components.text.rememberFieldString
+import br.com.arcom.autoriza.presentation.LoginUiState
 
 @Composable
 fun LoginRoute(
@@ -43,7 +39,6 @@ fun LoginRoute(
     LoginScreen(
         clearMessage = viewModel::clearMessage,
         realizarLogin = viewModel::realizarLogin,
-        navigateToHome = {},
         uiState = uiState
     )
 }
@@ -51,9 +46,8 @@ fun LoginRoute(
 @Composable
 fun LoginScreen(
     clearMessage: (Long) -> Unit,
-    realizarLogin: (Long, String, () -> Unit) -> Unit,
-    navigateToHome: () -> Unit,
-    uiState: UiMessage? = null
+    realizarLogin: (Long, String) -> Unit,
+    uiState: LoginUiState
 ) {
     var idUsuario by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
@@ -62,7 +56,8 @@ fun LoginScreen(
 
     AppArcomScaffold (
         clearMessage = clearMessage,
-        uiMessage = uiState
+        uiMessage = uiState.uiMessage,
+        loading = uiState.loadingLogin
     ) {
         Column(
             modifier = Modifier
@@ -126,7 +121,7 @@ fun LoginScreen(
 
             AppArcomButton(
                 onClick = {
-                    realizarLogin(idUsuario.toLong(), senha, navigateToHome)
+                    realizarLogin(idUsuario.toLong(), senha)
                 },
                 text = stringResource(id = R.string.entrar),
                 modifier = Modifier

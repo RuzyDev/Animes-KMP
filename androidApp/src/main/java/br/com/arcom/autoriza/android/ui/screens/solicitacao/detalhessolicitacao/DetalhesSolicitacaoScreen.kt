@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.android.ui.solicitacao.detalhessolicitacao
+package br.com.arcom.autoriza.android.ui.screens.solicitacao.detalhessolicitacao
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

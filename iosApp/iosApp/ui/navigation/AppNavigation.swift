@@ -15,25 +15,19 @@ struct AppNavigation: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            TabView(selection: $selectedTab) {
-                SolicitacoesView(path: $path)
-                    .navigationTitle("Solicitações")
-                    .tabItem {Label("Solicitações", systemImage: "checklist.checked")}
-                    .tag(TabRoute.solicitacoes.rawValue)
-
-                PerfilView(path: $path)
-                    .navigationTitle("Solicitações")
-                    .tabItem {
-                        Label("Perfil", systemImage: "person.crop.circle")
-                    }
-                    .tag(TabRoute.perfil.rawValue)
-            }
-            .navigationDestination(for: Route.self) { route in
-                switch route {
-                    case .detalhesSolicitacao(let id):
-                        DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
-                }
-            }
+            LoginView(path: $path)
+//            TabView(selection: $selectedTab) {
+//                SolicitacoesView(path: $path)
+//                    .navigationTitle("Solicitações")
+//                    .tabItem {Label("Solicitações", systemImage: "checklist.checked")}
+//                    .tag(TabRoute.solicitacoes.rawValue)
+//            }
+//            .navigationDestination(for: Route.self) { route in
+//                switch route {
+//                    case .detalhesSolicitacao(let id):
+//                        DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
+//                }
+//            }
         }
     }
 }

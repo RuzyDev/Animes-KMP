@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.datetime)
     implementation(libs.lottie.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.accompanist.permissions)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.lifecycle.runtime.compose)

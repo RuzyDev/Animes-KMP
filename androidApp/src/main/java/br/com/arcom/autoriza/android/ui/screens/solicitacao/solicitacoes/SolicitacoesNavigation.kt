@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes
+package br.com.arcom.autoriza.android.ui.screens.solicitacao.solicitacoes
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -9,13 +9,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 object SolicitacoesNavigation
 
-fun NavController.navigateToSolicitacoes(navOptions: NavOptions) =
+fun NavController.navigateToSolicitacoes(navOptions: NavOptions? = null) =
     navigate(route = SolicitacoesNavigation, navOptions)
 
 fun NavGraphBuilder.solicitacoes(
+    onBackClick: () -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit
 ){
     composable<SolicitacoesNavigation> {
-        SolicitacoesRoute(navigateToDetalhesSolicitacao = navigateToDetalhesSolicitacao)
+        SolicitacoesRoute(
+            onBackClick = onBackClick,
+            navigateToDetalhesSolicitacao = navigateToDetalhesSolicitacao)
     }
 }

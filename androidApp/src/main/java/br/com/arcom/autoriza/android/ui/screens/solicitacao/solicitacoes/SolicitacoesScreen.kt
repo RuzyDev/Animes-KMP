@@ -1,4 +1,4 @@
-package br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes
+package br.com.arcom.autoriza.android.ui.screens.solicitacao.solicitacoes
 
 import AppArcomIcons
 import Composable
@@ -47,12 +47,14 @@ import org.koin.compose.koinInject
 
 @Composable
 fun SolicitacoesRoute(
+    onBackClick: () -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit,
     viewModel: SolicitacoesViewModel = koinInject()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     SolicitacoesScreen(
+        onBackClick = onBackClick,
         uiState = uiState,
         refresh = viewModel::refresh,
         responderSolicitacao = viewModel::responderSolicitacao,
@@ -63,6 +65,7 @@ fun SolicitacoesRoute(
 
 @Composable
 private fun SolicitacoesScreen(
+    onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
     refresh: () -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
@@ -72,7 +75,10 @@ private fun SolicitacoesScreen(
     AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
-        uiMessage = uiState.uiMessage
+        uiMessage = uiState.uiMessage,
+        topBar = {
+            AppArcomTopBar(title = stringResource(R.string.solicitacoes), onBackClick = onBackClick)
+        }
     ) {
         if (uiState.solicitacoes.isEmpty()){
             NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))

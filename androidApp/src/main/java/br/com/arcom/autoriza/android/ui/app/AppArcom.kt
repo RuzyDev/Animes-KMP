@@ -63,41 +63,19 @@ fun AppArcomApp(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    ModalNavigationDrawer(
-        drawerContent = {
-            DrawerAppArcom(
-                appState = appState,
-                currentDestination = currentDestination,
-                closeDrawer = { scope.launch { drawerState.close() } },
-                usuario = usuario
-            )
+    Scaffold(
+        modifier = Modifier.semantics {
+            testTagsAsResourceId = true
         },
-        gesturesEnabled = false,
-        drawerState = drawerState
-    ) {
-        Scaffold(
-            modifier = Modifier.semantics {
-                testTagsAsResourceId = true
-            },
-            contentColor = MaterialTheme.colorScheme.onBackground,
-            contentWindowInsets = WindowInsets(0, 0, 0, 0),
-            topBar = {
-                AnimatedVisibility(currentTopLevelDestination != null) {
-                    val title =
-                        currentTopLevelDestination?.let { stringResource(it.titleTextId) } ?: ""
-                    AppArcomTopBarDrawer(title = title) {
-                        scope.launch { drawerState.open() }
-                    }
-                }
-            }
-        ) { padding ->
-            AppArcomNavHost(
-                appState = appState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-            )
-        }
+        contentColor = MaterialTheme.colorScheme.onBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+    ) { padding ->
+        AppArcomNavHost(
+            appState = appState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        )
     }
 }
 
@@ -127,7 +105,8 @@ fun DrawerAppArcom(
             Column(
                 Modifier
                     .weight(1f)
-                    .padding(end = 4.dp)) {
+                    .padding(end = 4.dp)
+            ) {
                 usuario?.let {
                     Text(
                         text = it.nome,

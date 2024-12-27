@@ -30,7 +30,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.tracing.trace
 import br.com.arcom.autoriza.android.ui.app.navigation.TopLevelDestination
-import br.com.arcom.autoriza.android.ui.solicitacao.solicitacoes.navigateToSolicitacoes
+import br.com.arcom.autoriza.android.ui.screens.home.navigateToHome
+import br.com.arcom.autoriza.android.ui.screens.solicitacao.solicitacoes.navigateToSolicitacoes
 import br.com.arcom.autoriza.android.utils.TrackDisposableJank
 import kotlinx.coroutines.CoroutineScope
 
@@ -97,7 +98,7 @@ class AppArcomState(
                 restoreState = true
             }
             when (topLevelDestination) {
-                TopLevelDestination.SOLICITACOES -> navController.navigateToSolicitacoes(topLevelNavOptions)
+                TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Menu
@@ -18,7 +19,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.outlined.KeyboardArrowLeft
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -63,6 +64,14 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     CHECK_CIRCLE_OUTLINED(
         TypeIcon.ImageVectorTypeIcon(Icons.Outlined.CheckCircle),
         R.string.check
+    ),
+    HOME(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Home),
+        R.string.home
+    ),
+    HOME_OUTLINED(
+        TypeIcon.ImageVectorTypeIcon(Icons.Outlined.Home),
+        R.string.home
     ),
     PERSON(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Person),

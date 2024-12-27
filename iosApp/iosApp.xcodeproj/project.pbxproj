@@ -39,7 +39,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		15000E9C2D075491004D1CD3 /* perfil */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = perfil; sourceTree = "<group>"; };
+		15000E9C2D075491004D1CD3 /* login */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = login; sourceTree = "<group>"; };
 		15000E9D2D07608E004D1CD3 /* detalhessolicitacao */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = detalhessolicitacao; sourceTree = "<group>"; };
 		15000EA22D077F51004D1CD3 /* core */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = core; sourceTree = "<group>"; };
 		15000EA72D086B57004D1CD3 /* navigation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = navigation; sourceTree = "<group>"; };
@@ -64,6 +64,13 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1553BE1E2D1F414D006D0A90 /* screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = screens;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -109,9 +116,10 @@
 		FBEF73BF2C947DCC00E81EBF /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				1553BE1E2D1F414D006D0A90 /* screens */,
 				15000EA72D086B57004D1CD3 /* navigation */,
 				15000E9D2D07608E004D1CD3 /* detalhessolicitacao */,
-				15000E9C2D075491004D1CD3 /* perfil */,
+				15000E9C2D075491004D1CD3 /* login */,
 				15D0197F2D038227008B0729 /* solicitacoes */,
 			);
 			path = ui;
@@ -135,7 +143,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				15000E9C2D075491004D1CD3 /* perfil */,
+				15000E9C2D075491004D1CD3 /* login */,
 				15000E9D2D07608E004D1CD3 /* detalhessolicitacao */,
 				15000EA22D077F51004D1CD3 /* core */,
 				15000EA72D086B57004D1CD3 /* navigation */,

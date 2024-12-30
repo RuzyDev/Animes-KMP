@@ -15,7 +15,6 @@ struct AppNavigation: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            LoginView(path: $path)
 //            TabView(selection: $selectedTab) {
 //                SolicitacoesView(path: $path)
 //                    .navigationTitle("Solicitações")

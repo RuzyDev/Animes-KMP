@@ -59,9 +59,12 @@ struct LoginView: View {
                 HStack {
                     if ocultarSenha {
                         SecureField("Senha", text: $senha)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     } else {
                         TextField("Senha", text: $senha)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
+                    
                     Button(action: {
                         ocultarSenha.toggle()
                     }) {
@@ -69,10 +72,9 @@ struct LoginView: View {
                             .foregroundColor(.gray)
                     }
                 }
-                .keyboardType(.numberPad)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
+                .padding(.top, 8)
 
                 Button(action: {
                     state.realizarLogin(idUsuario: idUsuario, senha: senha)

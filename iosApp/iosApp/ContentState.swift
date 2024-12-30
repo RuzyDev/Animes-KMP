@@ -12,7 +12,7 @@ class ContentState: ObservableObject {
     private(set) var result: ResultState<SolicitacaoAceite> = ResultState.loading
     
     init(idSolicitacao: String) {
-        viewModel = AppViewModel(idSolicitacao: idSolicitacao )
+        viewModel = AppViewModel()
         
         viewModel.observeUiState{ value in
             self.uiState = value

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="onPrimary">@color/material_dynamic_primary100</color>
+    <color name="primary">@color/material_dynamic_primary40</color>
+    <color name="onSurface">@color/material_dynamic_neutral_variant10</color>
+    <color name="secondary">@color/material_dynamic_secondary40</color>
+</resources>

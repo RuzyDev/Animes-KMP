@@ -38,6 +38,7 @@ moko-graphics = "0.9.0"
 multiplatform-resources = "0.24.3"
 androidx-security = "1.1.0-alpha06"
 permissions = "0.36.0"
+android-material = "1.13.0-alpha09"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -64,6 +65,7 @@ androidx-security = { group = "androidx.security", name =  "security-crypto", ve
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "permissions" }
 
 #Material 3
+android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-material3-window = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "compose-material3" }
 androidx-compose-material3-navigationSuite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "navigation-suite" }

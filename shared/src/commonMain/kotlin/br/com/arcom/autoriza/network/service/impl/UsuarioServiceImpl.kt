@@ -22,7 +22,7 @@ class UsuarioServiceImpl(
 
     override suspend fun login(idUsuario: Long, senha: String): NetworkUsuarioAppArcom? {
         return safeApiCall {
-            api.post(urlString = "api/apparcom/v1/atualizar?rotina=login") {
+            api.post(urlString = "api/apparcom/v1/login") {
                 setBody(NetworkLogin(idUsuario, senha))
                 contentType(ContentType.Application.Json)
             }.bodyOrNull()

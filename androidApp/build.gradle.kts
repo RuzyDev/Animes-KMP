@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.lottie.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.accompanist.permissions)
+    implementation(libs.android.material)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.lifecycle.runtime.compose)

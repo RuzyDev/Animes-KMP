@@ -29,12 +29,15 @@ class KtorHttpClient(
     private val appArcomStorage: AppArcomStorage,
     private val preferencesManager: PreferencesManager
 ) {
+    var accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""
+    var refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
+
     fun httpClient(enableNetworkLogs: Boolean) = HttpClient {
         expectSuccess = false
 
         defaultRequest {
             url {
-                protocol = URLProtocol.HTTP
+                protocol = URLProtocol.HTTPS
                 host = BASE_URL
             }
         }
@@ -42,17 +45,13 @@ class KtorHttpClient(
         install(Auth){
             bearer {
                 loadTokens {
-                    val accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""
-                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
-                    BearerTokens("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTs4OzIwMjQtMTItMjZUMTQ6NTM6MzguOTI5MzMwODkyIiwiZXhwIjoxNzM3OTE0MDE4fQ.vKLNnFHBjcUSUujZ8tVK7Ccb34jS1HZQJEPUFARUTMY", refreshToken)
+                    BearerTokens(accessToken, refreshToken)
                 }
-//                refreshTokens {
-//                    val refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
-//                    val refresh = client.refreshAccessToken(refreshToken = refreshToken)
-//                    preferencesManager.save(KeysPreferences.ACCESS_TOKEN, refresh.acessToken)
-//                    preferencesManager.save(KeysPreferences.REFRESH_TOKEN, refresh.refreshToken)
-//                    BearerTokens(refresh.acessToken, refresh.refreshToken)
-//                }
+                refreshTokens {
+                    accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""
+                    refreshToken = preferencesManager.get(KeysPreferences.REFRESH_TOKEN) ?:  ""
+                    BearerTokens(accessToken, refreshToken)
+                }
             }
         }
 

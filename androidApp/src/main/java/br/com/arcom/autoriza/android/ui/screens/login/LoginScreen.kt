@@ -2,6 +2,7 @@ package br.com.arcom.autoriza.android.ui.screens.login
 
 import AppArcomIcons
 import Composable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,10 +15,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomScaffold
@@ -28,7 +33,6 @@ import org.koin.compose.koinInject
 import br.com.arcom.autoriza.android.R
 import br.com.arcom.autoriza.android.ui.designsystem.components.AppArcomButton
 import br.com.arcom.autoriza.presentation.LoginUiState
-
 @Composable
 fun LoginRoute(
     viewModel: LoginViewModel = koinInject(),
@@ -70,7 +74,8 @@ fun LoginScreen(
                 text = stringResource(id = R.string.bem_vindo),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.fillMaxWidth(0.9f),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
             )
 
             Text(
@@ -78,13 +83,16 @@ fun LoginScreen(
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.fillMaxWidth(0.9f),
-                fontWeight = FontWeight.Normal
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center
             )
 
-            AppArcomIcons.ALERTA.Composable(
-                tint = MaterialTheme.colorScheme.primary,
+            Image(
+                painter = painterResource(R.drawable.ic_logo),
+                contentDescription = "Logo app",
                 modifier = Modifier
-                    .height(200.dp)
+                    .fillMaxWidth(.6f)
+                    .weight(1f)
                     .padding(vertical = 16.dp)
             )
 
@@ -116,7 +124,8 @@ fun LoginScreen(
                 ),
                 singleLine = true,
                 icon = if (ocultarSenha) AppArcomIcons.NAO_VISIVEL else AppArcomIcons.VISIVEL,
-                iconClick = { ocultarSenha = !ocultarSenha }
+                iconClick = { ocultarSenha = !ocultarSenha },
+                visualTransformation = if (ocultarSenha) PasswordVisualTransformation() else VisualTransformation.None,
             )
 
             AppArcomButton(

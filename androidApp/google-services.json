@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "604750917563",
+    "project_id": "push-notification-arcomtemas",
+    "storage_bucket": "push-notification-arcomtemas.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604750917563:android:8a1f7dae0b9c65e2fede9e",
+        "android_client_info": {
+          "package_name": "br.com.arcom.apparcom.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604750917563-bn0c4ht7tibejd68k1usl42cgou6va3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGstgPSXvqBswkJc665LZulhvqwjOpvNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604750917563-bn0c4ht7tibejd68k1usl42cgou6va3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604750917563:android:b5189dd477fa3f69fede9e",
+        "android_client_info": {
+          "package_name": "br.com.arcom.sigx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604750917563-bn0c4ht7tibejd68k1usl42cgou6va3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGstgPSXvqBswkJc665LZulhvqwjOpvNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604750917563-bn0c4ht7tibejd68k1usl42cgou6va3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

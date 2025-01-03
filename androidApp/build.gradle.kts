@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.accompanist.permissions)
     implementation(libs.android.material)
+    implementation(libs.bundles.firebase)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.lifecycle.runtime.compose)

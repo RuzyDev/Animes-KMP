@@ -57,7 +57,7 @@ kotlin {
 
 
 android {
-    namespace = "br.com.arcom.autoriza"
+    namespace = "br.com.arcom.apparcom"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
@@ -70,6 +70,6 @@ android {
 
 sqldelight{
     databases.create("AppArcomDatabase"){
-        packageName.set("br.com.arcom.autoriza.database")
+        packageName.set("br.com.arcom.apparcom.database")
     }
 }

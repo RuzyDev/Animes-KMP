@@ -1,10 +1,10 @@
-//package br.com.arcom.autoriza.android.core.domain
+//package br.com.arcom.apparcom.android.core.domain
 //
 //import androidx.paging.PagingSource
 //import androidx.paging.PagingState
-//import br.com.arcom.autoriza.domain.interactor.anime.GetTopAnimeWithPage
-//import br.com.arcom.autoriza.model.anime.AnimeDetails
-//import br.com.arcom.autoriza.model.ranking.TypeRakingAnime
+//import br.com.arcom.apparcom.domain.interactor.anime.GetTopAnimeWithPage
+//import br.com.arcom.apparcom.model.anime.AnimeDetails
+//import br.com.arcom.apparcom.model.ranking.TypeRakingAnime
 //
 //class TopAnimePagingSource(
 //    private val getTopAnimeWithPage: GetTopAnimeWithPage,

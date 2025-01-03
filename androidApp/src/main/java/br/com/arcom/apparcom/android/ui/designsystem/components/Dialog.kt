@@ -15,8 +15,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.presentation.util.UiMessage
+import br.com.arcom.apparcom.android.R
 
 @Composable
 fun UiMessageDialog(

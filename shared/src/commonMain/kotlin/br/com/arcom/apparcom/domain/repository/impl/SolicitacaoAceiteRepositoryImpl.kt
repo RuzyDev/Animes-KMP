@@ -1,12 +1,12 @@
 package br.com.arcom.apparcom.domain.repository.impl
 
 import br.com.arcom.apparcom.db.dao.SolicitacaoAceiteDao
-import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
 import br.com.arcom.apparcom.domain.repository.SolicitacaoAceiteRepository
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.model.solicitacao.toExternalModel
 import br.com.arcom.apparcom.model.solicitacao.toNetwork
 import br.com.arcom.apparcom.network.service.SolicitacaoService
+import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

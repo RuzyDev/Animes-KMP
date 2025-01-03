@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomTopBar
 import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
@@ -34,6 +33,7 @@ import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoUiState
 import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoViewModel
 import br.com.arcom.apparcom.util.format.formatBrasil
+import br.com.arcom.apparcom.android.R
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

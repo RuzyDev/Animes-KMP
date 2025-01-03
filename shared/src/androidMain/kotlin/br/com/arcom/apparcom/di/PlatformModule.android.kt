@@ -2,10 +2,10 @@ package br.com.arcom.apparcom.di
 
 import app.cash.sqldelight.db.SqlDriver
 import br.com.arcom.apparcom.data.datastore.AppArcomStorage
-import br.com.arcom.apparcom.db.SqlDelightDriverFactory
 import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
+import br.com.arcom.apparcom.db.SqlDelightDriverFactory
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
 import org.koin.core.module.Module

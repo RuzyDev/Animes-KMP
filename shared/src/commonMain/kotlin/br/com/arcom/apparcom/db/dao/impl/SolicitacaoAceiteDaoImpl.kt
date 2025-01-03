@@ -4,8 +4,8 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import br.com.arcom.apparcom.db.dao.SolicitacaoAceiteDao
-import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteQueries
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
+import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 

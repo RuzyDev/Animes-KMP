@@ -6,10 +6,10 @@ plugins {
 }
 
 android {
-    namespace = "br.com.arcom.autoriza.android"
+    namespace = "br.com.arcom.apparcom.android"
     compileSdk = 35
     defaultConfig {
-        applicationId = "br.com.arcom.autoriza.android"
+        applicationId = "br.com.arcom.apparcom.android"
         minSdk = 28
         targetSdk = 35
         versionCode = 1

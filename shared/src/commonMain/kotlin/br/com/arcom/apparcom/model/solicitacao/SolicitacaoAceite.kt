@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.model.solicitacao
 
-import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
+import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
 import kotlinx.datetime.LocalDateTime
 
 data class SolicitacaoAceite(

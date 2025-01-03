@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomTopBar
 import br.com.arcom.apparcom.android.ui.designsystem.components.NaoEncontrado
@@ -35,6 +34,7 @@ import br.com.arcom.apparcom.designsystem.theme.Verde
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
+import br.com.arcom.apparcom.android.R
 import org.koin.compose.koinInject
 
 @Composable

@@ -29,6 +29,8 @@ import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextField
 import org.koin.compose.koinInject
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomButton
 import br.com.arcom.apparcom.presentation.LoginUiState
+import br.com.arcom.apparcom.android.R
+
 @Composable
 fun LoginRoute(
     viewModel: LoginViewModel = koinInject(),

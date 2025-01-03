@@ -40,9 +40,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.apparcom.designsystem.theme.lightColor
+import br.com.arcom.apparcom.android.R
 
 enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     PESQUISA(

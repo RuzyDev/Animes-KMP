@@ -34,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
 import br.com.arcom.apparcom.android.ui.designsystem.theme.TopCornerShapeAppArcomCard
@@ -43,6 +42,7 @@ import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.presentation.HomeUiState
 import br.com.arcom.apparcom.presentation.HomeViewModel
 import br.com.arcom.apparcom.util.format.getPeriodoDia
+import br.com.arcom.apparcom.android.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import org.koin.compose.koinInject

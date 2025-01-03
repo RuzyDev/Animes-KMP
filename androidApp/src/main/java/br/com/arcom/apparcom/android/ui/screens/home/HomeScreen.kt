@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,6 +44,8 @@ import br.com.arcom.apparcom.presentation.HomeUiState
 import br.com.arcom.apparcom.presentation.HomeViewModel
 import br.com.arcom.apparcom.util.format.getPeriodoDia
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.util.format.getQtdPalavras
+import br.com.arcom.apparcom.util.format.toNome
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import org.koin.compose.koinInject
@@ -77,14 +80,11 @@ fun HomeScreen(
     AppArcomScaffold(
         clearMessage = clearMessage,
         topBar = { TopBarHome(uiState.usuario) },
-        containerColor = MaterialTheme.colorScheme.primary,
         uiMessage = uiState.uiMessage
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .clip(TopCornerShapeAppArcomCard)
-                .background(MaterialTheme.colorScheme.surface),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(top = 16.dp, bottom = 32.dp),
@@ -102,8 +102,7 @@ private fun TopBarHome(usuario: Usuario?) {
 
     Box(
         Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary),
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -113,30 +112,30 @@ private fun TopBarHome(usuario: Usuario?) {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = stringResource(id = R.string.ola, getPeriodoDia()),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = usuario?.nome?.getQtdPalavras()?.toNome() ?: "Usuário",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.End,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Icon(
                 painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = "DrawableResourceTypeIcon",
-                tint = MaterialTheme.colorScheme.onPrimary,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(28.dp)
             )
-
-            Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
-                Text(
-                    text = stringResource(id = R.string.ola, getPeriodoDia()),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimary.secondaryColor(),
-                    textAlign = TextAlign.End
-                )
-                Text(
-                    text = usuario?.nome ?: "Usuário",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    textAlign = TextAlign.End,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
         }
     }
 }
@@ -157,7 +156,13 @@ private fun LazyListScope.menuSolicitacoes(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Column(Modifier.weight(1f), horizontalAlignment = Alignment.Start) {
+            Image(
+                painter = painterResource(R.drawable.ic_check_illustration),
+                contentDescription = "",
+                modifier = Modifier
+                    .height(98.dp)
+            )
+            Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
                 Text(
                     text = stringResource(R.string.solicitacao_descricao),
                     style = MaterialTheme.typography.titleSmall,
@@ -177,12 +182,6 @@ private fun LazyListScope.menuSolicitacoes(
                     maxLines = 1
                 )
             }
-            Image(
-                painter = painterResource(R.drawable.ic_check_illustration),
-                contentDescription = "",
-                modifier = Modifier
-                    .height(86.dp)
-            )
         }
     }
 }

@@ -23,9 +23,14 @@ import androidx.compose.ui.unit.dp
 fun AppArcomTopBar(
     title: String,
     onBackClick: (() -> Unit)? = null,
+    onRefresh: (() -> Unit)? = null,
     actions: (@Composable () -> Unit)? = null
 ) {
-    Box(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 8.dp)) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(horizontal = 8.dp)) {
         if (onBackClick != null) {
             IconButton(
                 onClick = onBackClick,
@@ -46,12 +51,21 @@ fun AppArcomTopBar(
             maxLines = 1,
             fontWeight = FontWeight.Bold
         )
-        if (actions != null) {
-            Row(
-                modifier = Modifier.align(Alignment.CenterEnd),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) { actions() }
+        Row(
+            modifier = Modifier.align(Alignment.CenterEnd),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (onRefresh != null) {
+                IconButton(
+                    onClick = onRefresh
+                ) {
+                    AppArcomIcons.RECARREGAR.Composable(
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+            actions?.invoke()
         }
     }
 }
@@ -61,7 +75,11 @@ fun AppArcomTopBarDrawer(
     title: String,
     openDrawer: () -> Unit
 ) {
-    Box(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 8.dp)) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(horizontal = 8.dp)) {
 
         IconButton(
             onClick = openDrawer,

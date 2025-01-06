@@ -9,6 +9,7 @@ import br.com.arcom.apparcom.domain.interactor.RealizarLogin
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.apparcom.domain.observers.ObserveDetalhesSolicitacao
+import br.com.arcom.apparcom.domain.observers.ObserveQtdSolicitacoesPendentes
 import br.com.arcom.apparcom.domain.observers.ObserveSolicitacoes
 import br.com.arcom.apparcom.domain.observers.ObserveUsuario
 import br.com.arcom.apparcom.domain.repository.SolicitacaoAceiteRepository
@@ -68,4 +69,5 @@ val coreModule = module {
     single { ObserveSolicitacoes(get()) }
     single { ObserveDetalhesSolicitacao(get()) }
     single { ObserveUsuario(get()) }
+    single { ObserveQtdSolicitacoesPendentes(get()) }
 }

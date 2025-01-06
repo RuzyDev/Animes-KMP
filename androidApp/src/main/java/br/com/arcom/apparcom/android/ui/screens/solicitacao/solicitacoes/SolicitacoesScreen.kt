@@ -1,5 +1,6 @@
 package br.com.arcom.apparcom.android.ui.screens.solicitacao.solicitacoes
 
+import Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +40,8 @@ import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.android.ui.designsystem.components.DialogCheck
+import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
 import org.koin.compose.koinInject
 
@@ -54,6 +58,8 @@ fun SolicitacoesRoute(
         uiState = uiState,
         refresh = viewModel::refresh,
         responderSolicitacao = viewModel::responderSolicitacao,
+        setSearch = viewModel::setSearch,
+        setFiltro = viewModel::setFiltro,
         clearMessage = viewModel::clearMessage,
         navigateToDetalhesSolicitacao = navigateToDetalhesSolicitacao
     )
@@ -64,42 +70,78 @@ private fun SolicitacoesScreen(
     onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
     refresh: () -> Unit,
+    setSearch: (String) -> Unit,
+    setFiltro: (TipoSolicitacao) -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
     clearMessage: (Long) -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit
 ) {
     var pesquisa by remember { mutableStateOf("") }
+    var filtro by remember { mutableStateOf(TipoSolicitacao.TODOS) }
+    var openFiltro by remember { mutableStateOf(false) }
+
+    if (openFiltro) {
+        DialogCheck(
+            onDismissRequest = { openFiltro = false },
+            itens = TipoSolicitacao.entries,
+            selected = filtro,
+            label = { it.descricao },
+            onSelected = {
+                filtro = it
+                openFiltro = false
+                setFiltro(it)
+            }
+        )
+    }
 
     AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         topBar = {
-            AppArcomTopBar(title = stringResource(R.string.solicitacoes), onBackClick = onBackClick)
+            AppArcomTopBar(
+                title = stringResource(R.string.solicitacoes),
+                onBackClick = onBackClick,
+                onRefresh = refresh)
         }
     ) {
         if (uiState.solicitacoes.isEmpty()) {
             NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))
         } else {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(.9f),
+                    modifier = Modifier.fillMaxWidth(.9f).padding(vertical = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     AppArcomTextFieldPesquisa(
                         modifier = Modifier.weight(1f),
                         text = pesquisa,
-                        setText = { pesquisa = it }
+                        setText = {
+                            pesquisa = it
+                            setSearch(it)
+                        }
                     )
-                    AppArcomIcons.
+                    AppArcomIcons.FILTRO.Composable(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clickable(
+                                interactionSource = null,
+                                indication = null
+                            ) {
+                                openFiltro = !openFiltro
+                            },
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(vertical = 16.dp)
+                    contentPadding = PaddingValues(bottom = 16.dp)
                 ) {
                     items(uiState.solicitacoes) { solicitacao ->
                         CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->

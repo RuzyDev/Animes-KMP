@@ -6,16 +6,19 @@ import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.apparcom.domain.observers.ObserveSolicitacoes
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
+import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.presentation.util.UiMessage
 import br.com.arcom.apparcom.presentation.util.UiMessageManager
 import br.com.arcom.apparcom.util.format.dataHoraAtual
 import korlibs.io.async.launch
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -26,6 +29,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     private val registrarSolicitacao: RegistrarSolicitacao by inject()
 
     private val uiMessage = UiMessageManager()
+    private val _pesquisa = MutableStateFlow("" to TipoSolicitacao.TODOS)
 
     val uiState: StateFlow<SolicitacoesUiState> =
         combine(
@@ -68,9 +72,23 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
+    fun setSearch(search: String){
+        _pesquisa.update {
+            search to it.second
+        }
+    }
+
+    fun setFiltro(filtro: TipoSolicitacao){
+        _pesquisa.update {
+            it.first to filtro
+        }
+    }
+
     init {
         refresh()
-        observeSolicitacoes(ObserveSolicitacoes.Params())
+        _pesquisa.onEach { (search, filtro) ->
+            observeSolicitacoes(ObserveSolicitacoes.Params(search = search, filtro = filtro))
+        }.launchIn(coroutineScope)
     }
 }
 

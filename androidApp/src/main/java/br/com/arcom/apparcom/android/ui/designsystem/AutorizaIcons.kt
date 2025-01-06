@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.CheckCircle
@@ -51,6 +52,10 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     ),
     CHECK(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Check),
+        R.string.check
+    ),
+    CHECK_BOX(
+        TypeIcon.DrawableResourceTypeIcon(R.drawable.ic_check_box),
         R.string.check
     ),
     CLOSE(
@@ -105,9 +110,13 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Warning),
         R.string.alerta
     ),
+    RECARREGAR(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Refresh),
+        R.string.refresh
+    ),
     FILTRO(
-        TypeIcon.ImageVectorTypeIcon(Icons.Default.Tune),
-        R.string.alerta
+        TypeIcon.DrawableResourceTypeIcon(R.drawable.ic_tune),
+        R.string.filtrar
     );
 }
 

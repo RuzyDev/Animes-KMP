@@ -42,4 +42,6 @@
     </plurals>
     <string name="solicitacao_descricao">Aceite ou recuse solicitações</string>
     <string name="menus">Menus</string>
+    <string name="filtrar">Filtrar</string>
+    <string name="refresh">Refresh</string>
 </resources>

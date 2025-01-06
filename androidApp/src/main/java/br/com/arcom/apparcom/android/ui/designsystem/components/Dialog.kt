@@ -2,21 +2,37 @@ package br.com.arcom.apparcom.android.ui.designsystem.components
 
 import AppArcomIcons
 import Composable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import br.com.arcom.apparcom.presentation.util.UiMessage
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
+import br.com.arcom.apparcom.designsystem.theme.divider
+import br.com.arcom.apparcom.designsystem.theme.lightColor
+import br.com.arcom.apparcom.designsystem.theme.secondaryColor
 
 @Composable
 fun UiMessageDialog(
@@ -106,4 +122,54 @@ fun DialogConfirmacao(
                 )
             }
         } else null)
+}
+
+@Composable
+fun <T> DialogCheck(
+    onDismissRequest: () -> Unit,
+    itens: List<T>,
+    selected: T,
+    label: (T) -> String,
+    onSelected: (T) -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismissRequest,
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(.9f)
+                .clip(CornerShapeAppArcom)
+                .background(MaterialTheme.colorScheme.surface)
+        ) {
+            itens.forEachIndexed { index, item ->
+                val selectedItem = item == selected
+                Row(
+                    Modifier
+                        .clickable { onSelected(item) }
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    (if (selectedItem) AppArcomIcons.CHECK else AppArcomIcons.CHECK_BOX).Composable(
+                        tint = if (selectedItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.secondaryColor(),
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Text(
+                        text = label(item),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (selectedItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.secondaryColor(),
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                if (index < itens.lastIndex) {
+                    HorizontalDivider(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.onSurface.divider()
+                    )
+                }
+            }
+        }
+    }
 }

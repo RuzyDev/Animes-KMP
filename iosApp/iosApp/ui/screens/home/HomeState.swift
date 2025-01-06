@@ -11,5 +11,17 @@ import shared
 
 class HomeState: ObservableObject {
    
+    let viewModel: HomeViewModel
+    
+    @Published
+    private(set) var uiState: HomeUiState = HomeUiState.companion.Empty
+
+    init() {
+        viewModel = HomeViewModel()
+        
+        viewModel.observeUiState{ value in
+            self.uiState = value
+        }
+    }
     
 }

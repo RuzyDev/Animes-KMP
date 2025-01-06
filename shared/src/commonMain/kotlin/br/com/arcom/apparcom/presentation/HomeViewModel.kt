@@ -8,6 +8,8 @@ import br.com.arcom.apparcom.presentation.util.UiMessageManager
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -35,6 +37,12 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
         coroutineScope.launch {
             uiMessage.clearMessage(id)
         }
+    }
+
+    fun observeUiState(onChange: (HomeUiState) -> Unit) {
+        uiState.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
     }
 
     init {

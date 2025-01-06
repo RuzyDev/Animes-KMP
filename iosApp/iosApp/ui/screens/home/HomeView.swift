@@ -12,99 +12,102 @@ import shared
 struct HomeView: View {
     
     @Binding var path: NavigationPath
+    @StateObject var state: HomeState
     
     init(path: Binding<NavigationPath>) {
         _path = path
+        _state = StateObject(wrappedValue: HomeState())
     }
     
     var body: some View {
-        VStack{
-            TopBarHome(usuarioNome: "Ruan")
-            List{
-                SolicitacaoCard()
-            }
-        }
+        HomeScreen(navigateToSolicitacoes: {} , uiState: state.uiState)
     }
 }
 
 
-struct TopBarHome: View {
-    let usuarioNome: String? // Substitua por dados reais
-    var periodoDia: String { getPeriodoDia() }
+struct HomeScreen: View {
+    var navigateToSolicitacoes: () -> Void
+    var uiState: HomeUiState
 
     var body: some View {
-        HStack {
-            Image(systemName: "logo") // Substitua pelo nome real do asset
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
-                .foregroundColor(Color("onPrimary"))
-            
-            Spacer()
-            
-            VStack(alignment: .trailing, spacing: 4) {
-                Text("Olá, \(periodoDia)")
-                    .font(.system(size: 14, weight: .medium)) // Substitua conforme necessário
-                    .foregroundColor(Color("onPrimarySecondary"))
-                
-                Text(usuarioNome ?? "Usuário")
-                    .font(.system(size: 18, weight: .semibold)) // Substitua conforme necessário
-                    .foregroundColor(Color("onPrimary"))
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+        VStack {
+            TopBarHome(usuario: uiState.usuario)
+            ScrollView {
+                VStack(spacing: 8) {
+                    MenuSolicitacoes(
+                        navigateToSolicitacoes: navigateToSolicitacoes,
+                        qtdSolicitacoesPendentes: uiState.qtdSolicitacoesPendentes
+                    )
+                }
+                .padding(.top, 16)
+                .padding(.bottom, 32)
             }
-        }
-        .padding(.vertical, 12)
-        .padding(.horizontal)
-        .background(Color("primary"))
-        .frame(maxWidth: .infinity)
-    }
-
-    func getPeriodoDia() -> String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        switch hour {
-        case 0..<12:
-            return "Bom dia"
-        case 12..<18:
-            return "Boa tarde"
-        default:
-            return "Boa noite"
         }
     }
 }
 
-struct SolicitacaoCard: View {
-    var descricao: String = "Descrição da Solicitação" // Substitua pelo texto correto
-    var pendentes: Int = 10 // Substitua pelo valor correto
-    var navigateToSolicitacoes: () -> Void = {} // Substitua pela navegação real
+struct TopBarHome: View {
+    var usuario: Usuario?
+
+    var body: some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading) {
+                Text("Olá, \(getPeriodoDia())")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+
+                Text(usuario?.nome.getQtdPalavras().toNome() ?? "Usuário")
+                    .font(.headline)
+                    .foregroundColor(.blue)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .fontWeight(.bold)
+            }
+            Spacer()
+            Image("ic_logo")
+                .resizable()
+                .frame(width: 28, height: 28)
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+    }
+}
+
+struct MenuSolicitacoes: View {
+    var navigateToSolicitacoes: () -> Void
+    var qtdSolicitacoesPendentes: Int64
 
     var body: some View {
         HStack(spacing: 8) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(descricao)
-                    .font(.system(size: 16, weight: .semibold)) // Ajuste conforme o design
-                    .foregroundColor(Color("onPrimaryContainer"))
+            Image("ic_check_illustration")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 98)
+
+            VStack(alignment: .trailing, spacing: 4) {
+                Text("Descrição da solicitação")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
                     .lineLimit(1)
                     .truncationMode(.tail)
 
-                Text("\(pendentes) pendentes") // Substitua por pluralização conforme necessário
-                    .font(.system(size: 20, weight: .semibold)) // Ajuste conforme o design
-                    .foregroundColor(Color("onPrimaryContainer"))
+                Text("\(qtdSolicitacoesPendentes) pendente(s)")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
                     .lineLimit(1)
                     .truncationMode(.tail)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            Image("check_illustration") // Substitua pelo nome real do asset
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 86)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
         .padding(12)
-        .background(Color("primaryContainer"))
-        .clipShape(RoundedRectangle(cornerRadius: 12)) // Substitua por CornerShapeAppArcom equivalente
+        .background(Color.blue.opacity(0.2))
+        .cornerRadius(8)
         .onTapGesture {
             navigateToSolicitacoes()
         }
+        .padding(.horizontal, 16)
     }
 }

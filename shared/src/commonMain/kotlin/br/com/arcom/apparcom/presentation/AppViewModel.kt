@@ -19,32 +19,27 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
     private val appArcomStorage: AppArcomStorage by inject()
     private val observeUsuario: ObserveUsuario by inject()
 
-    private val logadoResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Loading)
     private val _logado = appArcomStorage.getBooleanStream(Keys.LOGADO)
 
-    val uiState = combine(logadoResult, observeUsuario.flow, ::AppUiState).stateIn(
+    val uiState = combine(_logado, observeUsuario.flow, ::AppUiState).stateIn(
         coroutineScope,
         SharingStarted.WhileSubscribed(5000),
         AppUiState.Empty
     )
 
     init {
-        _logado.onEach { value ->
-            val result = logadoResult.value
-            if(result is ResultState.Success) {
-                if(result.data != value) {
-                    logadoResult.emit(ResultState.Success(value))
-                }
-            }else{
-                logadoResult.emit(ResultState.Success(value))
-            }
-        }.launchIn(coroutineScope)
         observeUsuario(Unit)
+    }
+
+    fun observeUiState(onChange: (AppUiState) -> Unit) {
+        uiState.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
     }
 }
 
 data class AppUiState(
-    val logado: ResultState<Boolean> = ResultState.Loading,
+    val logado: Boolean? = null,
     val usuario: Usuario? = null
 ){
     companion object{

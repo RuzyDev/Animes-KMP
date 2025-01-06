@@ -11,15 +11,13 @@ import shared
 
 struct LoginView: View {
     
-    @Binding var path: NavigationPath
     @StateObject var state: LoginState
     
     @State private var idUsuario: String = ""
     @State private var senha: String = ""
     @State private var ocultarSenha: Bool = true
     
-    init(path: Binding<NavigationPath>) {
-        _path = path
+    init() {
         _state = StateObject(wrappedValue: LoginState())
     }
     

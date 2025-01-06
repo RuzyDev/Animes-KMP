@@ -23,18 +23,12 @@ class MainActivity : ComponentActivity() {
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
             AppArcomTheme {
-                when(val data = uiState.logado){
-                    is ResultState.Success -> {
-                        if (data.data){
-                            AppArcomApp(uiState.usuario)
-                        }else{
-                            LoginRoute()
-                        }
+                uiState.logado?.let { logado ->
+                    if (logado) {
+                        AppArcomApp(uiState.usuario)
+                    } else {
+                        LoginRoute()
                     }
-                    is ResultState.Loading -> {
-
-                    }
-                    else -> {}
                 }
             }
         }

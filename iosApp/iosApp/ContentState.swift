@@ -6,12 +6,9 @@ class ContentState: ObservableObject {
     let viewModel:AppViewModel
 
     @Published
-    private(set) var uiState: DetalhesSolicitacaoUiState = DetalhesSolicitacaoUiState.companion.Empty
+    private(set) var uiState: AppUiState = AppUiState.companion.Empty
     
-    @Published
-    private(set) var result: ResultState<SolicitacaoAceite> = ResultState.loading
-    
-    init(idSolicitacao: String) {
+    init() {
         viewModel = AppViewModel()
         
         viewModel.observeUiState{ value in
@@ -23,9 +20,4 @@ class ContentState: ObservableObject {
         viewModel.dispose()
     }
     
-
-    func responderSolicitacao(solicitacao: SolicitacaoAceite, resposta: Bool){
-        viewModel.responderSolicitacao(solicitacao: solicitacao, reposta: resposta)
-    }
-            
 }

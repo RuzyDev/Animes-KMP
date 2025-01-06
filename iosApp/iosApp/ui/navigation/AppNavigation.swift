@@ -15,18 +15,14 @@ struct AppNavigation: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-//            TabView(selection: $selectedTab) {
-//                SolicitacoesView(path: $path)
-//                    .navigationTitle("Solicitações")
-//                    .tabItem {Label("Solicitações", systemImage: "checklist.checked")}
-//                    .tag(TabRoute.solicitacoes.rawValue)
-//            }
-//            .navigationDestination(for: Route.self) { route in
-//                switch route {
-//                    case .detalhesSolicitacao(let id):
-//                        DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
-//                }
-//            }
+            
+            HomeView(path: $path)
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                    case .detalhesSolicitacao(let id):
+                        DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
+                    }
+                }
         }
     }
 }

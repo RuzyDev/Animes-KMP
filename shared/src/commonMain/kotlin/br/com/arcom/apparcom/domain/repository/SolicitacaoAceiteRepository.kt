@@ -9,4 +9,5 @@ interface SolicitacaoAceiteRepository {
     suspend fun registrarSolicitacao(solicitacao: SolicitacaoAceite)
     fun observeSolicitacoesAceite(page: Long): Flow<List<SolicitacaoAceite>>
     fun observeSolicitacaoAceite(id: String): Flow<SolicitacaoAceite>
+    fun observeQtdSolicitacoesPendentes(): Flow<Long>
 }

@@ -1,5 +1,6 @@
 package br.com.arcom.apparcom.presentation
 
+import br.com.arcom.apparcom.domain.observers.ObserveQtdSolicitacoesPendentes
 import br.com.arcom.apparcom.domain.observers.ObserveUsuario
 import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.presentation.util.UiMessage
@@ -15,12 +16,14 @@ import org.koin.core.component.inject
 class HomeViewModel : CoroutineViewModel(), KoinComponent {
 
     private val observeUsuario: ObserveUsuario by inject()
+    private val observeQtdSolicitacoesPendentes: ObserveQtdSolicitacoesPendentes by inject()
     private val uiMessage = UiMessageManager()
 
     val uiState: StateFlow<HomeUiState> =
         combine(
             uiMessage.observable,
             observeUsuario.flow,
+            observeQtdSolicitacoesPendentes.flow,
             ::HomeUiState
         ).stateIn(
             coroutineScope,
@@ -36,12 +39,14 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
 
     init {
         observeUsuario(Unit)
+        observeQtdSolicitacoesPendentes(Unit)
     }
 }
 
 data class HomeUiState(
     val uiMessage: UiMessage? = null,
-    val usuario: Usuario? = null
+    val usuario: Usuario? = null,
+    val qtdSolicitacoesPendentes: Long = 0
 ) {
     companion object {
         val Empty = HomeUiState()

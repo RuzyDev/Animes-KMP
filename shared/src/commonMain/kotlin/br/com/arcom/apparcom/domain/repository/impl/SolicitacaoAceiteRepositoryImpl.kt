@@ -36,4 +36,7 @@ class SolicitacaoAceiteRepositoryImpl(
     override fun observeSolicitacaoAceite(id: String): Flow<SolicitacaoAceite> =
         solicitacaoAceiteDao.getById(id).map(SolicitacaoAceiteEntity::toExternalModel)
 
+    override fun observeQtdSolicitacoesPendentes(): Flow<Long> =
+        solicitacaoAceiteDao.getQtdNaoRespondidas()
+
 }

@@ -28,3 +28,6 @@ SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;
 
 getAll:
 SELECT * FROM solicitacaoAceiteEntity ORDER BY data;
+
+getQtdNaoRespondidas:
+SELECT count(*) FROM solicitacaoAceiteEntity WHERE data_resposta IS NULL;

@@ -8,6 +8,7 @@ import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
 import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.Flow
 
 class SolicitacaoAceiteDaoImpl(
     private val solicitacaoAceiteQueries: SolicitacaoAceiteQueries
@@ -27,6 +28,6 @@ class SolicitacaoAceiteDaoImpl(
     }
 
     override fun getAllStream() = solicitacaoAceiteQueries.getAll().asFlow().mapToList(Dispatchers.IO)
-
     override fun getById(id: String) = solicitacaoAceiteQueries.getById(id).asFlow().mapToOne(Dispatchers.IO)
+    override fun getQtdNaoRespondidas(): Flow<Long> = solicitacaoAceiteQueries.getQtdNaoRespondidas().asFlow().mapToOne(Dispatchers.IO)
 }

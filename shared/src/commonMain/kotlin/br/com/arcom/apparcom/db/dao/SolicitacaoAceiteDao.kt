@@ -8,4 +8,5 @@ interface SolicitacaoAceiteDao {
     suspend fun insertOrUpdate(solicitacao: NetworkSolicitacaoAceite)
     fun getAllStream(): Flow<List<SolicitacaoAceiteEntity>>
     fun getById(id: String): Flow<SolicitacaoAceiteEntity>
+    fun getQtdNaoRespondidas(): Flow<Long>
 }

@@ -16,6 +16,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +38,7 @@ import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
 import org.koin.compose.koinInject
 
 @Composable
@@ -64,6 +68,8 @@ private fun SolicitacoesScreen(
     clearMessage: (Long) -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit
 ) {
+    var pesquisa by remember { mutableStateOf("") }
+
     AppArcomScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
@@ -72,19 +78,33 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(title = stringResource(R.string.solicitacoes), onBackClick = onBackClick)
         }
     ) {
-        if (uiState.solicitacoes.isEmpty()){
+        if (uiState.solicitacoes.isEmpty()) {
             NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))
-        }else{
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(vertical = 16.dp)
-            ) {
-                items(uiState.solicitacoes) { solicitacao ->
-                    CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
-                        responderSolicitacao(solicitacao, resposta)
+        } else {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(.9f),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    AppArcomTextFieldPesquisa(
+                        modifier = Modifier.weight(1f),
+                        text = pesquisa,
+                        setText = { pesquisa = it }
+                    )
+                    AppArcomIcons.
+                }
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    contentPadding = PaddingValues(vertical = 16.dp)
+                ) {
+                    items(uiState.solicitacoes) { solicitacao ->
+                        CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
+                            responderSolicitacao(solicitacao, resposta)
+                        }
                     }
                 }
             }
@@ -93,7 +113,11 @@ private fun SolicitacoesScreen(
 }
 
 @Composable
-fun CardSolicitacao(solicitacao: SolicitacaoAceite, verDetalhes: (String) -> Unit, responder: (Boolean) -> Unit) {
+fun CardSolicitacao(
+    solicitacao: SolicitacaoAceite,
+    verDetalhes: (String) -> Unit,
+    responder: (Boolean) -> Unit
+) {
     Row(
         modifier = Modifier
             .clip(CornerShapeAppArcomCard)

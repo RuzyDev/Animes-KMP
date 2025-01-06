@@ -104,6 +104,10 @@ enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
     ALERTA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Warning),
         R.string.alerta
+    ),
+    FILTRO(
+        TypeIcon.ImageVectorTypeIcon(Icons.Default.Tune),
+        R.string.alerta
     );
 }
 

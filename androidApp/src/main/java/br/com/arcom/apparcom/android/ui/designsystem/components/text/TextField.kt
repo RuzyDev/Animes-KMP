@@ -227,8 +227,7 @@ fun AppArcomTextFieldPesquisa(
     maxLength: Int = Int.MAX_VALUE,
     maxLines: Int = Int.MAX_VALUE,
     readOnly: Boolean = false,
-    onlyNumbers: Boolean = false,
-    onClick: ((String) -> Unit)? = null
+    onlyNumbers: Boolean = false
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
     val focusResquest = LocalFocusManager.current
@@ -252,7 +251,6 @@ fun AppArcomTextFieldPesquisa(
         keyboardActions = KeyboardActions(onSearch = {
             if (!focusResquest.moveFocus(FocusDirection.Next)) {
                 keyboard?.hide()
-                onClick?.invoke(text)
             }
         }),
         singleLine = singleLine,

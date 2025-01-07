@@ -10,10 +10,10 @@ struct ContentView: View {
     
 	var body: some View {
         if(state.uiState.logado != nil){
-            if(state.uiState.logado == false){
-                LoginView()
-            }else{
+            if(state.uiState.logado == true){
                 AppNavigation()
+            }else{
+                LoginView()
             }
         }
 	}

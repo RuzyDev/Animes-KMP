@@ -22,38 +22,40 @@ struct LoginView: View {
     }
     
     var body: some View {
+        ZStack{
+        
             VStack(spacing: 4) {
                 if let message = state.uiState.uiMessage {
                     Text(message.message)
                         .foregroundColor(.red)
                         .padding(.bottom, 16)
                 }
-
+                
                 Text("Bem-vindo")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
-
+                
                 Text("Entre com seus dados para continuar")
                     .font(.title3)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
-
-                Image(systemName: "exclamationmark.triangle.fill")
+                
+                Image("ic_arcom")
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.blue)
-                    .frame(height: 200)
-                    .padding(.vertical, 16)
-
+                    .frame(maxHeight: .infinity)
+                    .padding(16)
+                
                 TextField("Usuário", text: $idUsuario)
                     .keyboardType(.numberPad)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
-
+                
                 HStack {
                     if ocultarSenha {
                         SecureField("Senha", text: $senha)
@@ -73,9 +75,11 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, UIScreen.main.bounds.width * 0.05)
                 .padding(.top, 8)
-
+                
                 Button(action: {
-                    state.realizarLogin(idUsuario: idUsuario, senha: senha)
+                    withAnimation {
+                                            state.realizarLogin(idUsuario: idUsuario, senha: senha)
+                                        }
                 }) {
                     Text("Entrar")
                         .frame(maxWidth: .infinity)
@@ -92,5 +96,15 @@ struct LoginView: View {
             .overlay(
                 state.uiState.loadingLogin ? ProgressView().scaleEffect(1.5) : nil
             )
+            
+            if state.uiState.loadingLogin {
+                    ProgressView("Carregando...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .background(Color.black.opacity(0.3))
+                        .ignoresSafeArea()
+                        .transition(.opacity)
+            }
         }
+        
+    }
 }

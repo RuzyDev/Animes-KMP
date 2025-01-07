@@ -11,9 +11,5 @@ import SwiftUI
 
 enum Route: Hashable {
     case detalhesSolicitacao(id: String)
-}
-
-enum TabRoute: Int, CaseIterable, Hashable {
-    case solicitacoes = 0
-    case perfil = 1
+    case solicitacoes
 }

@@ -11,7 +11,6 @@ import SwiftUI
 
 struct AppNavigation: View {
     @State private var path = NavigationPath()
-    @State private var selectedTab: Int = TabRoute.solicitacoes.rawValue
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -21,6 +20,8 @@ struct AppNavigation: View {
                     switch route {
                     case .detalhesSolicitacao(let id):
                         DetalhesSolicitacaoView(path: $path, idSolicitacao: id)
+                    case .solicitacoes:
+                        SolicitacoesView(path: $path)
                     }
                 }
         }

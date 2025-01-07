@@ -22,19 +22,30 @@ struct SolicitacoesView: View {
     var body: some View {
             
         // Lista de solicitações
-        List(state.uiState.solicitacoes, id: \.id) { solicitacao in
-            CardSolicitacaoView(solicitacao: solicitacao,
-            verDetalhes: {id in
-                path.navigate(route: Route.detalhesSolicitacao(id: id))
-            },
-            responder: {aceito in
-                state.responderSolicitacao(solicitacao: solicitacao, resposta: aceito)
-            })
+        VStack{
+            if(state.uiState.solicitacoes.isEmpty){
+                SemDados(label: "Sem solicitações no momento")
+            }else{
+                SearchWithFilterView(
+                    searchText: $state.search,
+                    selectedFilter: $state.filter
+                )
+                List(state.uiState.solicitacoes, id: \.id) { solicitacao in
+                    CardSolicitacaoView(solicitacao: solicitacao,
+                    verDetalhes: {id in
+                        path.navigate(route: Route.detalhesSolicitacao(id: id))
+                    },
+                    responder: {aceito in
+                        state.responderSolicitacao(solicitacao: solicitacao, resposta: aceito)
+                    })
+                }
+            }
         }.refreshable {
             // Chama o refresh quando o usuário puxa para baixo
             state.refresh()
         }
         .listStyle(.plain)
+        .navigationTitle("Solicitações")
     }
 }
 
@@ -90,6 +101,83 @@ struct CardSolicitacaoView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
             verDetalhes(solicitacao.id)
+        }
+    }
+}
+
+
+struct SearchWithFilterView: View {
+    @State private var showFilters: Bool = false
+    @Binding var searchText: String
+    @Binding var selectedFilter: TipoSolicitacao
+
+    var body: some View {
+        HStack(spacing: 8) {
+            // Campo de pesquisa
+            TextField("Pesquisar...", text: $searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.leading, 8)
+                .frame(maxHeight: 40)
+                .overlay(
+                    HStack {
+                        if !searchText.isEmpty {
+                            Button(action: {
+                                searchText = ""
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.trailing, 8)
+                        }
+                    },
+                    alignment: .trailing
+                )
+            
+            // Botão de filtros
+            Button(action: {
+                showFilters.toggle()
+            }) {
+                Image(systemName: "line.horizontal.3.decrease.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 28, height: 28)
+                    .foregroundColor(.blue)
+            }
+            .sheet(isPresented: $showFilters) {
+                FiltersView(
+                    selectedFilter: $selectedFilter,
+                    selectFilter: { value in
+                        selectedFilter = value
+                        showFilters = false
+                    })
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+struct FiltersView: View {
+    @Binding var selectedFilter: TipoSolicitacao
+    let selectFilter: (TipoSolicitacao) -> Void
+    let availableFilters = TipoSolicitacao.entries
+    
+    var body: some View {
+        NavigationView {
+            List(availableFilters, id: \.self) { filter in
+                HStack {
+                    Text(filter.descricao)
+                    Spacer()
+                    if selectedFilter == filter {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.blue)
+                    }
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    selectFilter(filter) // Atualiza o filtro selecionado
+                }
+            }
+            .navigationTitle("Filtros")
         }
     }
 }

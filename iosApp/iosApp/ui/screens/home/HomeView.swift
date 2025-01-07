@@ -20,7 +20,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        HomeScreen(navigateToSolicitacoes: {} , uiState: state.uiState)
+        HomeScreen(navigateToSolicitacoes: { path.navigate(route: Route.solicitacoes) } , uiState: state.uiState)
     }
 }
 
@@ -58,16 +58,17 @@ struct TopBarHome: View {
                     .foregroundColor(.gray)
 
                 Text(usuario?.nome.getQtdPalavras().toNome() ?? "Usuário")
-                    .font(.headline)
+                    .font(.title)
                     .foregroundColor(.blue)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .fontWeight(.bold)
             }
             Spacer()
-            Image("ic_logo")
+            Image("ic_arcom")
                 .resizable()
-                .frame(width: 28, height: 28)
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 28)
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
@@ -85,8 +86,10 @@ struct MenuSolicitacoes: View {
                 .scaledToFit()
                 .frame(height: 98)
 
+            Spacer()
+            
             VStack(alignment: .trailing, spacing: 4) {
-                Text("Descrição da solicitação")
+                Text("Aceite ou recuse solicitações")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
@@ -94,11 +97,11 @@ struct MenuSolicitacoes: View {
                     .truncationMode(.tail)
 
                 Text("\(qtdSolicitacoesPendentes) pendente(s)")
-                    .font(.title)
+                    .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
                     .lineLimit(1)
-                    .truncationMode(.tail)
+                
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)

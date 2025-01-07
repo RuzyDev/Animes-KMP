@@ -12,6 +12,18 @@ import shared
 class SolicitacoesState: ObservableObject {
     
     let viewModel:SolicitacoesViewModel
+    
+    @Published var search: String = "" {
+            didSet {
+                viewModel.setSearch(search: self.search) // Atualiza a pesquisa sempre que o texto muda
+            }
+        }
+    
+    @Published var filter: TipoSolicitacao = TipoSolicitacao.todos {
+            didSet {
+                viewModel.setFiltro(filtro: self.filter)
+            }
+        }
 
     @Published
     private(set) var uiState: SolicitacoesUiState = SolicitacoesUiState.companion.Empty

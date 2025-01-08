@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface UsuarioRepository {
     suspend fun realizarLogin(idUsuario: Long, senha: String)
-    fun getUsuario(): Flow<Usuario?>
+    fun getUsuarioStream(): Flow<Usuario?>
+    fun getUsuario(): Usuario?
 }

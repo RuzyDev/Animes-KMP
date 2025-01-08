@@ -2,12 +2,13 @@ package br.com.arcom.apparcom.model.solicitacao
 
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
 import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
+import br.com.arcom.apparcom.db.util.toListLongDb
 import kotlinx.datetime.LocalDateTime
 
 data class SolicitacaoAceite(
     val id: String,
     val idSolicitacao: Long,
-    val idUsuario: Long,
+    val idUsuarios: List<Long>,
     val idEmpresa: Long,
     val descricao: String,
     val status: StatusSolicitacao,
@@ -20,7 +21,7 @@ fun SolicitacaoAceiteEntity.toExternalModel() =
     SolicitacaoAceite(
         id = id,
         idSolicitacao = id_solicitacao,
-        idUsuario = id_usuario,
+        idUsuarios = id_usuarios.toListLongDb(),
         idEmpresa = id_empresa,
         descricao = descricao,
         status = StatusSolicitacao.getByValue(status),
@@ -33,7 +34,7 @@ fun SolicitacaoAceite.toNetwork() =
     NetworkSolicitacaoAceite(
         id = id,
         idSolicitacao = idSolicitacao,
-        idUsuario = idUsuario,
+        idUsuarios = idUsuarios,
         idEmpresa = idEmpresa,
         descricao = descricao,
         status = status.value,

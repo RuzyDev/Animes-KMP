@@ -31,8 +31,12 @@ class UsuarioRepositoryImpl(
         }
     }
 
-    override fun getUsuario(): Flow<Usuario?> {
-        return usuarioDao.get().map { it?.toExternalModel() }
+    override fun getUsuarioStream(): Flow<Usuario?> {
+        return usuarioDao.getStream().map { it?.toExternalModel() }
+    }
+
+    override fun getUsuario(): Usuario? {
+        return usuarioDao.get()?.toExternalModel()
     }
 
 }

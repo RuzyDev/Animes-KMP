@@ -102,40 +102,45 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
-                onRefresh = refresh)
+                onRefresh = refresh
+            )
         }
     ) {
-        if (uiState.solicitacoes.isEmpty()) {
-            NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))
-        } else {
-            Column(modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(.9f)
+                    .padding(vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(.9f).padding(vertical = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    AppArcomTextFieldPesquisa(
-                        modifier = Modifier.weight(1f),
-                        text = pesquisa,
-                        setText = {
-                            pesquisa = it
-                            setSearch(it)
-                        }
-                    )
-                    AppArcomIcons.FILTRO.Composable(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clickable(
-                                interactionSource = null,
-                                indication = null
-                            ) {
-                                openFiltro = !openFiltro
-                            },
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+                AppArcomTextFieldPesquisa(
+                    modifier = Modifier.weight(1f),
+                    text = pesquisa,
+                    setText = {
+                        pesquisa = it
+                        setSearch(it)
+                    }
+                )
+                AppArcomIcons.FILTRO.Composable(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clickable(
+                            interactionSource = null,
+                            indication = null
+                        ) {
+                            openFiltro = !openFiltro
+                        },
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            if (uiState.solicitacoes.isEmpty()) {
+                NaoEncontrado(stringResource(R.string.sem_solicitacoes_no_momento))
+            } else {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth(),

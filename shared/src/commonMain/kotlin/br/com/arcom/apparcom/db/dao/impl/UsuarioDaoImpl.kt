@@ -3,6 +3,7 @@ package br.com.arcom.apparcom.db.dao.impl
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import br.com.arcom.apparcom.db.dao.UsuarioDao
+import br.com.arcom.apparcom.db.solicitacao.UsuarioEntity
 import br.com.arcom.apparcom.network.models.NetworkUsuarioAppArcom
 import br.com.arcom.apparcom.db.solicitacao.UsuarioQueries
 import kotlinx.coroutines.Dispatchers
@@ -20,5 +21,6 @@ class UsuarioDaoImpl(
         )
     }
 
-    override fun get() = usuarioQueries.get().asFlow().mapToOneOrNull(Dispatchers.IO)
+    override fun getStream() = usuarioQueries.get().asFlow().mapToOneOrNull(Dispatchers.IO)
+    override fun get(): UsuarioEntity? = usuarioQueries.get().executeAsOneOrNull()
 }

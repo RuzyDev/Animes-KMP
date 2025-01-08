@@ -1,6 +1,7 @@
 package br.com.arcom.apparcom.presentation
 
 import br.com.arcom.apparcom.domain.collectStatus
+import br.com.arcom.apparcom.domain.interactor.GetUsuario
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.apparcom.domain.observers.ObserveSolicitacoes
@@ -27,6 +28,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     private val observeSolicitacoes: ObserveSolicitacoes by inject()
     private val updateSolicitacoes: UpdateSolicitacoes by inject()
     private val registrarSolicitacao: RegistrarSolicitacao by inject()
+    private val getUsuario: GetUsuario by inject()
 
     private val uiMessage = UiMessageManager()
     private val _pesquisa = MutableStateFlow("" to TipoSolicitacao.TODOS)
@@ -52,7 +54,12 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 
     fun refresh() {
         coroutineScope.launch {
-            updateSolicitacoes.invoke(UpdateSolicitacoes.Params(145078, 0))
+            val usuario = getUsuario.invoke(Unit).getOrNull()
+            if (usuario != null){
+                updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, 0))
+            }else{
+                uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
+            }
         }
     }
 

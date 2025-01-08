@@ -9,6 +9,6 @@ class ObserveUsuario(
     private val usuarioRepository: UsuarioRepository
 ) : SubjectInteractor<Unit, Usuario?>() {
     override fun createObservable(params: Unit): Flow<Usuario?> {
-        return usuarioRepository.getUsuario()
+        return usuarioRepository.getUsuarioStream()
     }
 }

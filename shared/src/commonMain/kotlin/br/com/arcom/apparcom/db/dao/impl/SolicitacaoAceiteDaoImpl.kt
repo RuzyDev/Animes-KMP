@@ -7,6 +7,7 @@ import br.com.arcom.apparcom.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
 import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteQueries
+import br.com.arcom.apparcom.db.util.toStringDb
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -19,7 +20,7 @@ class SolicitacaoAceiteDaoImpl(
         solicitacaoAceiteQueries.insertOrUpdate(
             id = solicitacao.id,
             id_solicitacao = solicitacao.idSolicitacao,
-            id_usuario = solicitacao.idUsuario,
+            id_usuarios = solicitacao.idUsuarios.toStringDb(),
             id_empresa = solicitacao.idEmpresa,
             descricao = solicitacao.descricao,
             status = solicitacao.status,
@@ -29,7 +30,10 @@ class SolicitacaoAceiteDaoImpl(
         )
     }
 
-    override fun getAllStream(search: String, filtro: TipoSolicitacao): Flow<List<SolicitacaoAceiteEntity>> {
+    override fun getAllStream(
+        search: String,
+        filtro: TipoSolicitacao
+    ): Flow<List<SolicitacaoAceiteEntity>> {
         val pesquisa = if (search.isEmpty()) "%" else "%$search%"
         return solicitacaoAceiteQueries.getAll(pesquisa, filtro.value).asFlow()
             .mapToList(Dispatchers.IO)

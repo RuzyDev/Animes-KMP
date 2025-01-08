@@ -1,7 +1,7 @@
 CREATE TABLE solicitacaoAceiteEntity (
     id TEXT NOT NULL PRIMARY KEY,
     id_solicitacao INTEGER NOT NULL,
-    id_usuario INTEGER NOT NULL,
+    id_usuarios TEXT NOT NULL,
     id_empresa INTEGER NOT NULL,
     descricao TEXT NOT NULL,
     status TEXT NOT NULL,
@@ -14,7 +14,7 @@ insertOrUpdate:
 INSERT OR REPLACE INTO solicitacaoAceiteEntity (
     id,
     id_solicitacao,
-    id_usuario,
+    id_usuarios,
     id_empresa,
     descricao,
     status,

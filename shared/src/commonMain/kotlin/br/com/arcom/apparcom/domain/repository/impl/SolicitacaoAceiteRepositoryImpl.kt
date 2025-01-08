@@ -20,6 +20,7 @@ class SolicitacaoAceiteRepositoryImpl(
         val solicitacoes = solicitacaoService.buscarSolicitacoes(idUsuario, page) ?: emptyList()
         if (solicitacoes.isNotEmpty()) {
             solicitacoes.forEach {
+                println("Entrou aqui")
                 solicitacaoAceiteDao.insertOrUpdate(it)
             }
         }

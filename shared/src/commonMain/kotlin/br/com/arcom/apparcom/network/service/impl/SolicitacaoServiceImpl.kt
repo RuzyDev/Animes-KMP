@@ -27,7 +27,7 @@ class SolicitacaoServiceImpl(
 
     override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite){
         safeApiCall<Unit> {
-            api.post(urlString = "api/apparcom/atualizar?rotina=registrar-solicitacao") {
+            api.post(urlString = "api/apparcom/v1/atualizar?rotina=registrar-solicitacao") {
                 setBody(solicitacao)
                 contentType(ContentType.Application.Json)
             }.body()

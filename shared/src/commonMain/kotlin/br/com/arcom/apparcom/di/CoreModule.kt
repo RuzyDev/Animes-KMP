@@ -5,6 +5,7 @@ import br.com.arcom.apparcom.db.dao.impl.SolicitacaoAceiteDaoImpl
 import br.com.arcom.apparcom.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.apparcom.db.dao.UsuarioDao
 import br.com.arcom.apparcom.db.dao.impl.UsuarioDaoImpl
+import br.com.arcom.apparcom.domain.interactor.GetUsuario
 import br.com.arcom.apparcom.domain.interactor.RealizarLogin
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
@@ -65,6 +66,7 @@ val coreModule = module {
     single { UpdateSolicitacoes(get(), get()) }
     single { RegistrarSolicitacao(get(), get()) }
     single { RealizarLogin(get(), get()) }
+    single { GetUsuario(get(), get()) }
     //Solicitacao - Observers
     single { ObserveSolicitacoes(get()) }
     single { ObserveDetalhesSolicitacao(get()) }

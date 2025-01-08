@@ -9,7 +9,7 @@ import kotlinx.serialization.SerialName
 data class NetworkSolicitacaoAceite (
   @SerialName("id")               val id: String,
   @SerialName("idSolicitacao")    val idSolicitacao: Long,
-  @SerialName("idUsuario")        val idUsuario: Long,
+  @SerialName("idUsuarios")       val idUsuarios: List<Long>,
   @SerialName("data")             val data: LocalDateTime,
   @SerialName("dataResposta")     val dataResposta: LocalDateTime?,
   @SerialName("descricao")        val descricao: String,

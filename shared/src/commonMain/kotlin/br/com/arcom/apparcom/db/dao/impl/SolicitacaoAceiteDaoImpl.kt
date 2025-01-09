@@ -12,6 +12,7 @@ import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.LocalDateTime
 
 class SolicitacaoAceiteDaoImpl(
     private val solicitacaoAceiteQueries: SolicitacaoAceiteQueries
@@ -28,6 +29,10 @@ class SolicitacaoAceiteDaoImpl(
             data_ = solicitacao.data.toString(),
             data_resposta = solicitacao.dataResposta?.toString(),
         )
+    }
+
+    override suspend fun updateResposta(id: String, status: String, dataResposta: LocalDateTime) {
+        solicitacaoAceiteQueries.updateResposta(status, dataResposta.toString(), id)
     }
 
     override fun getAllStream(

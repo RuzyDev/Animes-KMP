@@ -1,7 +1,9 @@
 package br.com.arcom.apparcom.android.ui.screens.solicitacao.solicitacoes
 
 import Composable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,6 +43,7 @@ import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.DialogCheck
+import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
 import org.koin.compose.koinInject
@@ -104,7 +107,8 @@ private fun SolicitacoesScreen(
                 onBackClick = onBackClick,
                 onRefresh = refresh
             )
-        }
+        },
+        loading = uiState.loadingSolicitacoes || uiState.loadingRegistrando
     ) {
 
         Column(
@@ -199,30 +203,50 @@ fun CardSolicitacao(
             )
         }
 
-        Text(
-            text = stringResource(R.string.autorizar),
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.White,
-            modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .clickable { responder(true) }
-                .background(Verde)
-                .padding(6.dp),
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
+        if (solicitacao.status != StatusSolicitacao.AGUARDANDO_REPOSTA) {
+            val color = when(solicitacao.status){
+                StatusSolicitacao.APROVADO -> Verde
+                StatusSolicitacao.NEGADO -> MaterialTheme.colorScheme.error
+                else -> MaterialTheme.colorScheme.onSurface
+            }
 
-        Text(
-            text = stringResource(R.string.negar),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onError,
-            modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .clickable { responder(false) }
-                .background(MaterialTheme.colorScheme.error)
-                .padding(6.dp),
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
+            Text(
+                text = solicitacao.status.descricao,
+                style = MaterialTheme.typography.bodySmall,
+                color = color,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .border(BorderStroke(2.dp, color), RoundedCornerShape(8.dp))
+                    .padding(6.dp),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+        }else{
+            Text(
+                text = stringResource(R.string.autorizar),
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.White,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable { responder(true) }
+                    .background(Verde)
+                    .padding(6.dp),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = stringResource(R.string.negar),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onError,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable { responder(false) }
+                    .background(MaterialTheme.colorScheme.error)
+                    .padding(6.dp),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }

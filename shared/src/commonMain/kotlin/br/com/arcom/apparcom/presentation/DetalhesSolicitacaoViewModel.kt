@@ -1,6 +1,7 @@
 package br.com.arcom.apparcom.presentation
 
 import br.com.arcom.apparcom.domain.collectStatus
+import br.com.arcom.apparcom.domain.interactor.GetUsuario
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.observers.ObserveDetalhesSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
@@ -24,6 +25,7 @@ class DetalhesSolicitacaoViewModel(
 
     private val observeDetalhesSolicitacao: ObserveDetalhesSolicitacao by inject()
     private val registrarSolicitacao: RegistrarSolicitacao by inject()
+    private val getUsuario:GetUsuario by inject()
 
     private val uiMessage = UiMessageManager()
 
@@ -45,7 +47,13 @@ class DetalhesSolicitacaoViewModel(
             dataResposta = dataHoraAtual()
         )
         coroutineScope.launch {
-            registrarSolicitacao.invoke(RegistrarSolicitacao.Params(result)).collectStatus(uiMessage)
+            val usuario = getUsuario.invoke(Unit).getOrNull()
+            if (usuario != null) {
+                registrarSolicitacao.invoke(RegistrarSolicitacao.Params(result, usuario.id))
+                    .collectStatus(uiMessage)
+            } else {
+                uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
+            }
         }
     }
 

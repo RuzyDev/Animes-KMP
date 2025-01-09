@@ -25,9 +25,10 @@ class SolicitacaoServiceImpl(
             }.body()
         }
 
-    override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite){
+    override suspend fun registrarSolicitacao(solicitacao: NetworkSolicitacaoAceite, idUsuario: Long){
         safeApiCall<Unit> {
             api.post(urlString = "api/apparcom/v1/atualizar?rotina=registrar-solicitacao") {
+                parameter("idUsuario", idUsuario)
                 setBody(solicitacao)
                 contentType(ContentType.Application.Json)
             }.body()

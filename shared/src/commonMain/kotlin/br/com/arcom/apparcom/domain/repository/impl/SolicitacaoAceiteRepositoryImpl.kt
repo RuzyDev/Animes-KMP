@@ -20,14 +20,16 @@ class SolicitacaoAceiteRepositoryImpl(
         val solicitacoes = solicitacaoService.buscarSolicitacoes(idUsuario, page) ?: emptyList()
         if (solicitacoes.isNotEmpty()) {
             solicitacoes.forEach {
-                println("Entrou aqui")
                 solicitacaoAceiteDao.insertOrUpdate(it)
             }
         }
     }
 
-    override suspend fun registrarSolicitacao(solicitacao: SolicitacaoAceite) {
-        solicitacaoService.registrarSolicitacao(solicitacao.toNetwork())
+    override suspend fun registrarSolicitacao(solicitacao: SolicitacaoAceite, idUsuario: Long) {
+        solicitacaoService.registrarSolicitacao(solicitacao.toNetwork(), idUsuario)
+        solicitacao.dataResposta?.let { resposta ->
+            solicitacaoAceiteDao.updateResposta(solicitacao.id, solicitacao.status.value, resposta)
+        }
     }
 
     override fun observeSolicitacoesAceite(page: Long, search: String, filtro: TipoSolicitacao): Flow<List<SolicitacaoAceite>> =

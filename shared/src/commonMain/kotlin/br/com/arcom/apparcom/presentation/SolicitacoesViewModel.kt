@@ -55,9 +55,9 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     fun refresh() {
         coroutineScope.launch {
             val usuario = getUsuario.invoke(Unit).getOrNull()
-            if (usuario != null){
+            if (usuario != null) {
                 updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, 0))
-            }else{
+            } else {
                 uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
             }
         }
@@ -69,7 +69,13 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
             dataResposta = dataHoraAtual()
         )
         coroutineScope.launch {
-            registrarSolicitacao.invoke(RegistrarSolicitacao.Params(result)).collectStatus(uiMessage)
+            val usuario = getUsuario.invoke(Unit).getOrNull()
+            if (usuario != null) {
+                registrarSolicitacao.invoke(RegistrarSolicitacao.Params(result, usuario.id))
+                    .collectStatus(uiMessage)
+            } else {
+                uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
+            }
         }
     }
 
@@ -79,13 +85,13 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
-    fun setSearch(search: String){
+    fun setSearch(search: String) {
         _pesquisa.update {
             search to it.second
         }
     }
 
-    fun setFiltro(filtro: TipoSolicitacao){
+    fun setFiltro(filtro: TipoSolicitacao) {
         _pesquisa.update {
             it.first to filtro
         }
@@ -101,7 +107,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 
 data class SolicitacoesUiState(
     val loadingSolicitacoes: Boolean = false,
-    val loadingRegistando: Boolean = false,
+    val loadingRegistrando: Boolean = false,
     val solicitacoes: List<SolicitacaoAceite> = emptyList(),
     val uiMessage: UiMessage? = null
 ) {

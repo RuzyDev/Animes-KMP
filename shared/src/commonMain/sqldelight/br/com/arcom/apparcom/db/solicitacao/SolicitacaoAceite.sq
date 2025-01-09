@@ -31,3 +31,6 @@ SELECT * FROM solicitacaoAceiteEntity WHERE descricao LIKE :descricao AND (tipo_
 
 getQtdNaoRespondidas:
 SELECT count(*) FROM solicitacaoAceiteEntity WHERE data_resposta IS NULL;
+
+updateResposta:
+UPDATE solicitacaoAceiteEntity SET status = :status, data_resposta = :dataResposta WHERE id = :id;

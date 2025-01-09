@@ -12,12 +12,13 @@ class RegistrarSolicitacao(
 ) : Interactor<RegistrarSolicitacao.Params, Unit>() {
 
     data class Params(
-        val solicitacao: SolicitacaoAceite
+        val solicitacao: SolicitacaoAceite,
+        val idUsuario: Long
     )
 
     override suspend fun doWork(params: Params) {
         withContext(dispatchers.io){
-            solicitacaoAceiteRepository.registrarSolicitacao(params.solicitacao)
+            solicitacaoAceiteRepository.registrarSolicitacao(params.solicitacao, params.idUsuario)
         }
     }
 }

@@ -14,6 +14,7 @@ struct SolicitacoesView: View {
     @Binding var path: NavigationPath
     @StateObject var state: SolicitacoesState
     
+    
     init(path: Binding<NavigationPath>) {
         _path = path
         _state = StateObject(wrappedValue: SolicitacoesState())
@@ -23,13 +24,14 @@ struct SolicitacoesView: View {
             
         // Lista de solicitações
         VStack{
+            SearchWithFilterView(
+                searchText: $state.search,
+                selectedFilter: $state.filter
+            )
             if(state.uiState.solicitacoes.isEmpty){
                 SemDados(label: "Sem solicitações no momento")
+                    .frame(height: .infinity)
             }else{
-                SearchWithFilterView(
-                    searchText: $state.search,
-                    selectedFilter: $state.filter
-                )
                 List(state.uiState.solicitacoes, id: \.id) { solicitacao in
                     CardSolicitacaoView(solicitacao: solicitacao,
                     verDetalhes: {id in
@@ -72,29 +74,51 @@ struct CardSolicitacaoView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.trailing, 4)
 
-            // Botão Autorizar
-            Text("Autorizar")
-                .font(.footnote)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .padding(6)
-                .background(Color.green)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .onTapGesture {
-                    responder(true)
-                }
+            if(solicitacao.status.value != "aguardando-reposta"){
+                // Botão Autorizar
+                Text("Autorizar")
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(6)
+                    .background(Color.green)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .onTapGesture {
+                        responder(true)
+                    }
 
-            // Botão Negar
-            Text("Negar")
-                .font(.footnote)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .padding(6)
-                .background(Color.red)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .onTapGesture {
-                    responder(false)
-                }
+                // Botão Negar
+                Text("Negar")
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(6)
+                    .background(Color.red)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .onTapGesture {
+                        responder(false)
+                    }
+            }else{
+                var color: Color {
+                    switch solicitacao.status.value {
+                    case "aprovado":
+                       return Color.green
+                    case "negado":
+                       return Color.red
+                    default:
+                       return Color.primary
+                    }}
+                
+                Text(solicitacao.status.descricao)
+                    .font(.system(size: 14, weight: .bold, design: .default)) // Equivalente ao MaterialTheme.typography.bodySmall com negrito
+                    .foregroundColor(color) // Define a cor do texto
+                    .padding(6) // Espaçamento interno
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(color, lineWidth: 2) // Borda arredondada com espessura
+                    )
+            }
+            
         }
         .padding(12)
         .background(Color(.systemGray6))

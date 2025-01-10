@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS solicitacaoAceiteEntity (
+                               id TEXT NOT NULL PRIMARY KEY,
+                               id_solicitacao INTEGER NOT NULL,
+                               id_usuarios TEXT NOT NULL,
+                               id_empresa INTEGER NOT NULL,
+                               descricao TEXT NOT NULL,
+                               status TEXT NOT NULL,
+                               tipo_solicitacao TEXT NOT NULL,
+                               data TEXT NOT NULL,
+                               data_resposta TEXT
+                           );
+
+CREATE TABLE IF NOT EXISTS usuarioEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    nome TEXT NOT NULL,
+    data_bloqueio TEXT
+);

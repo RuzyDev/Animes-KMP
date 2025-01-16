@@ -1,6 +1,7 @@
 package br.com.arcom.apparcom.di
 
 import app.cash.sqldelight.db.SqlDriver
+import br.com.arcom.apparcom.core.domain.FirebaseUtil
 import br.com.arcom.apparcom.data.datastore.AppArcomStorage
 import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
@@ -22,4 +23,5 @@ actual val platformModule: Module = module {
     single<FirebaseCrashlytics> { FirebaseCrashlytics.getInstance() }
     single<FirebaseAnalytics> { FirebaseAnalytics.getInstance(get()) }
     single<FirebaseMessaging> { FirebaseMessaging.getInstance() }
+    single<FirebaseUtil> { FirebaseUtil(get<FirebaseMessaging>()) }
 }

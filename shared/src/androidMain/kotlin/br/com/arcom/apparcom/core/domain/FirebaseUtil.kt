@@ -1,4 +1,4 @@
-package br.com.arcom.apparcom.android.core.domain
+package br.com.arcom.apparcom.core.domain
 
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlin.coroutines.resume

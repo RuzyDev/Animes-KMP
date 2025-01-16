@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.db.dao
 
-import br.com.arcom.apparcom.db.solicitacao.SolicitacaoAceiteEntity
+import database.SolicitacaoAceiteEntity
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
 import kotlinx.coroutines.flow.Flow

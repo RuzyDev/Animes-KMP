@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.model
 
-import br.com.arcom.apparcom.db.solicitacao.UsuarioEntity
+import database.UsuarioEntity
 import kotlinx.datetime.LocalDateTime
 
 data class Usuario(

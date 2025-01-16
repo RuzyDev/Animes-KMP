@@ -29,7 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,14 +36,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
 import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
-import br.com.arcom.apparcom.android.ui.designsystem.theme.TopCornerShapeAppArcomCard
-import br.com.arcom.apparcom.designsystem.theme.secondaryColor
 import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.presentation.HomeUiState
 import br.com.arcom.apparcom.presentation.HomeViewModel
 import br.com.arcom.apparcom.util.format.getPeriodoDia
 import br.com.arcom.apparcom.android.R
-import br.com.arcom.apparcom.android.core.domain.FirebaseUtil
+import br.com.arcom.apparcom.core.domain.FirebaseUtil
 import br.com.arcom.apparcom.util.format.getQtdPalavras
 import br.com.arcom.apparcom.util.format.toNome
 import com.google.accompanist.permissions.ExperimentalPermissionsApi

@@ -8,6 +8,7 @@ import br.com.arcom.apparcom.db.dao.UsuarioDao
 import br.com.arcom.apparcom.domain.repository.UsuarioRepository
 import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.model.toExternalModel
+import br.com.arcom.apparcom.network.models.NetworkPushToken
 import br.com.arcom.apparcom.network.service.UsuarioService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -39,4 +40,16 @@ class UsuarioRepositoryImpl(
         return usuarioDao.get()?.toExternalModel()
     }
 
+    override suspend fun registrarPushToken(token: String) {
+        val usuario = getUsuario()
+        if (usuario != null){
+            usuarioService.enviarToken(
+                NetworkPushToken(
+                    token = token,
+                    app = "app-arcom",
+                    setor = usuario.id
+                )
+            )
+        }
+    }
 }

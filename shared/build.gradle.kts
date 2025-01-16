@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.sqldelight.driver.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.security)
+            implementation(libs.bundles.firebase)
         }
         iosMain.dependencies {
             implementation(libs.sqldelight.driver.ios)

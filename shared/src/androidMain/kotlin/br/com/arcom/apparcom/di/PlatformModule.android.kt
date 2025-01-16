@@ -6,6 +6,9 @@ import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
 import br.com.arcom.apparcom.db.SqlDelightDriverFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.messaging.FirebaseMessaging
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
 import org.koin.core.module.Module
@@ -16,4 +19,7 @@ actual val platformModule: Module = module {
     single<HttpClientEngine> { OkHttp.create {} }
     single<AppArcomStorage> { AppArcomStorage(createDataStore(context = get())) }
     single<PreferencesManager> { AndroidPreferencesManager(context = get()) }
+    single<FirebaseCrashlytics> { FirebaseCrashlytics.getInstance() }
+    single<FirebaseAnalytics> { FirebaseAnalytics.getInstance(get()) }
+    single<FirebaseMessaging> { FirebaseMessaging.getInstance() }
 }

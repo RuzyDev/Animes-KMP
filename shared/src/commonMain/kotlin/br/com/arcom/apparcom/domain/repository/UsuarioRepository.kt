@@ -7,4 +7,5 @@ interface UsuarioRepository {
     suspend fun realizarLogin(idUsuario: Long, senha: String)
     fun getUsuarioStream(): Flow<Usuario?>
     fun getUsuario(): Usuario?
+    suspend fun registrarPushToken(token: String)
 }

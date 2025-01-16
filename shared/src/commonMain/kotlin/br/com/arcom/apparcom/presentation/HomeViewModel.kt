@@ -1,5 +1,6 @@
 package br.com.arcom.apparcom.presentation
 
+import br.com.arcom.apparcom.domain.interactor.AtualizarPushToken
 import br.com.arcom.apparcom.domain.observers.ObserveQtdSolicitacoesPendentes
 import br.com.arcom.apparcom.domain.observers.ObserveUsuario
 import br.com.arcom.apparcom.model.Usuario
@@ -19,6 +20,7 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
 
     private val observeUsuario: ObserveUsuario by inject()
     private val observeQtdSolicitacoesPendentes: ObserveQtdSolicitacoesPendentes by inject()
+    private val atualizarPushToken: AtualizarPushToken by inject()
     private val uiMessage = UiMessageManager()
 
     val uiState: StateFlow<HomeUiState> =
@@ -43,6 +45,14 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
         uiState.onEach {
             onChange(it)
         }.launchIn(coroutineScope)
+    }
+
+    fun registrarPushToken(getToken: suspend () -> String?) {
+        coroutineScope.launch {
+            getToken()?.let {
+                atualizarPushToken.invoke(AtualizarPushToken.Params(it))
+            }
+        }
     }
 
     init {

@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.di
 
 import app.cash.sqldelight.db.SqlDriver
-import br.com.arcom.apparcom.core.domain.FirebaseUtil
+import br.com.arcom.apparcom.data.AndroidAppArcomFiles
 import br.com.arcom.apparcom.data.datastore.AppArcomStorage
 import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
@@ -17,11 +17,8 @@ import org.koin.dsl.module
 
 actual val platformModule: Module = module {
     single<SqlDriver> { SqlDelightDriverFactory(context = get()).createDriver() }
+    single{ AndroidAppArcomFiles(context = get()) }
     single<HttpClientEngine> { OkHttp.create {} }
     single<AppArcomStorage> { AppArcomStorage(createDataStore(context = get())) }
     single<PreferencesManager> { AndroidPreferencesManager(context = get()) }
-    single<FirebaseCrashlytics> { FirebaseCrashlytics.getInstance() }
-    single<FirebaseAnalytics> { FirebaseAnalytics.getInstance(get()) }
-    single<FirebaseMessaging> { FirebaseMessaging.getInstance() }
-    single<FirebaseUtil> { FirebaseUtil(get<FirebaseMessaging>()) }
 }

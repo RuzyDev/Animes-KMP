@@ -1,13 +1,14 @@
-package br.com.arcom.apparcom.core.domain
+package br.com.arcom.apparcom.android.core.service
 
+import br.com.arcom.apparcom.service.TokenService
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class FirebaseUtil(
+class AndroidTokenService(
     private val firebaseMessaging: FirebaseMessaging
-) {
-    suspend fun getToken(): String? =
+): TokenService {
+    override suspend fun getToken(): String? =
         suspendCoroutine { cont ->
             firebaseMessaging.token.addOnCompleteListener { task ->
                 if (task.isSuccessful) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Autoriza</string>
     <string name="pesquisa">Pesquisa</string>
     <string name="check">Check</string>
     <string name="solicitacoes">Solicitações</string>
@@ -44,4 +45,9 @@
     <string name="menus">Menus</string>
     <string name="filtrar">Filtrar</string>
     <string name="refresh">Refresh</string>
+    <string name="atualizacao_disponivel">Atualização disponível</string>
+    <string name="versao_muito_antiga">Você está em uma versão muito antiga, atualize o seu app para que você possa continuar a usá-lo!</string>
+    <string name="instalar">Instalar</string>
+    <string name="baixar">Baixar</string>
+    <string name="baixar_novamente">Baixar novamente</string>
 </resources>

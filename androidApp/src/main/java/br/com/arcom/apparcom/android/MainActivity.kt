@@ -25,7 +25,11 @@ class MainActivity : ComponentActivity() {
             AppArcomTheme {
                 uiState.logado?.let { logado ->
                     if (logado) {
-                        AppArcomApp(uiState.usuario)
+                        AppArcomApp(
+                            uiState = uiState,
+                            baixarAtualizacao = viewModel::baixarAtualizacao,
+                            clearUltimaVersao = viewModel::clearUltimaVersao
+                        )
                     } else {
                         LoginRoute()
                     }

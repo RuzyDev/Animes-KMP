@@ -38,6 +38,7 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.korio)
             implementation(libs.androidx.datastore)
+            implementation(libs.okio)
         }
         commonTest.dependencies {
             implementation(libs.bundles.test)

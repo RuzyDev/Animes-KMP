@@ -1,11 +1,13 @@
 package br.com.arcom.apparcom.presentation
 
 import br.com.arcom.apparcom.domain.interactor.AtualizarPushToken
+import br.com.arcom.apparcom.domain.interactor.RealizarAtualizacao
 import br.com.arcom.apparcom.domain.observers.ObserveQtdSolicitacoesPendentes
 import br.com.arcom.apparcom.domain.observers.ObserveUsuario
 import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.presentation.util.UiMessage
 import br.com.arcom.apparcom.presentation.util.UiMessageManager
+import br.com.arcom.apparcom.service.TokenService
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -21,6 +23,7 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
     private val observeUsuario: ObserveUsuario by inject()
     private val observeQtdSolicitacoesPendentes: ObserveQtdSolicitacoesPendentes by inject()
     private val atualizarPushToken: AtualizarPushToken by inject()
+    private val tokenService: TokenService by inject()
     private val uiMessage = UiMessageManager()
 
     val uiState: StateFlow<HomeUiState> =
@@ -47,9 +50,9 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun registrarPushToken(getToken: suspend () -> String?) {
+    fun registrarPushToken() {
         coroutineScope.launch {
-            getToken()?.let {
+            tokenService.getToken()?.let {
                 atualizarPushToken.invoke(AtualizarPushToken.Params(it))
             }
         }

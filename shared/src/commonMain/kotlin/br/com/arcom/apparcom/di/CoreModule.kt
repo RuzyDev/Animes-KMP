@@ -1,12 +1,15 @@
 package br.com.arcom.apparcom.di
 
+import br.com.arcom.apparcom.data.AndroidAppArcomFiles
 import br.com.arcom.apparcom.database.AppArcomDatabase
 import br.com.arcom.apparcom.db.dao.impl.SolicitacaoAceiteDaoImpl
 import br.com.arcom.apparcom.db.dao.SolicitacaoAceiteDao
 import br.com.arcom.apparcom.db.dao.UsuarioDao
 import br.com.arcom.apparcom.db.dao.impl.UsuarioDaoImpl
 import br.com.arcom.apparcom.domain.interactor.AtualizarPushToken
+import br.com.arcom.apparcom.domain.interactor.AtualizarVersaoApp
 import br.com.arcom.apparcom.domain.interactor.GetUsuario
+import br.com.arcom.apparcom.domain.interactor.RealizarAtualizacao
 import br.com.arcom.apparcom.domain.interactor.RealizarLogin
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
@@ -69,9 +72,13 @@ val coreModule = module {
     single { RealizarLogin(get(), get()) }
     single { GetUsuario(get(), get()) }
     single { AtualizarPushToken(get(), get()) }
+    single { AtualizarVersaoApp(get(), get(), get()) }
     //Solicitacao - Observers
     single { ObserveSolicitacoes(get()) }
     single { ObserveDetalhesSolicitacao(get()) }
     single { ObserveUsuario(get()) }
     single { ObserveQtdSolicitacoesPendentes(get()) }
+
+    //Outros
+    single { RealizarAtualizacao(get(), get(), get()) }
 }

@@ -42,6 +42,9 @@ android-material = "1.13.0-alpha09"
 firebase = "24.1.0"
 firebaseAnalytics = "22.1.2"
 firebaseCrashlytics = "19.2.1"
+services = "4.4.2"
+crashlytics = "3.0.2"
+okio = "3.5.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -125,6 +128,9 @@ google-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-
 google-firebase-analytics-ktx = { group = "com.google.firebase", name = "firebase-analytics-ktx", version.ref = "firebaseAnalytics" }
 google-firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebase" }
 
+#Files
+okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-serialization", "ktor-client-contentNegotiation", "ktor-client-auth"]
 test = ["junit",
@@ -157,6 +163,8 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+google-services = { id = "com.google.gms.google-services", version.ref = "services" }
 #SqlDelight
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 multiplatform-resources = { id = "dev.icerock.mobile.multiplatform-resources:dev.icerock.mobile.multiplatform-resources.gradle.plugin", version.ref = "multiplatform-resources" }

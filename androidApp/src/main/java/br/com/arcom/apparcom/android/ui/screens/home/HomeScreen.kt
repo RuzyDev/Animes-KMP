@@ -41,7 +41,6 @@ import br.com.arcom.apparcom.presentation.HomeUiState
 import br.com.arcom.apparcom.presentation.HomeViewModel
 import br.com.arcom.apparcom.util.format.getPeriodoDia
 import br.com.arcom.apparcom.android.R
-import br.com.arcom.apparcom.core.domain.FirebaseUtil
 import br.com.arcom.apparcom.util.format.getQtdPalavras
 import br.com.arcom.apparcom.util.format.toNome
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -52,17 +51,14 @@ import org.koin.compose.koinInject
 @Composable
 fun HomeRoute(
     navigateToSolicitacoes: () -> Unit,
-    viewModel: HomeViewModel = koinInject(),
-    firebase: FirebaseUtil = koinInject()
+    viewModel: HomeViewModel = koinInject()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val permissions = rememberPermissionState(Manifest.permission.POST_NOTIFICATIONS)
 
     LaunchedEffect(Unit) {
-        viewModel.registrarPushToken {
-            firebase.getToken()
-        }
+        viewModel.registrarPushToken()
         permissions.launchPermissionRequest()
     }
 

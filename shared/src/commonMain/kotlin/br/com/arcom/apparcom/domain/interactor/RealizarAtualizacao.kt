@@ -13,9 +13,9 @@ class RealizarAtualizacao(
 ) {
     val _progressFlow = MutableStateFlow<Pair<Long, Long>>(Pair(0, 0))
 
-    suspend fun baixar(idUsuario: Long, ultimaVersao: String, baixarNovamente: Boolean = false): String {
+    suspend fun baixar(ultimaVersao: String, baixarNovamente: Boolean = false): String {
         return withContext(dispatchers.io) {
-            val fileName = "apparcom-1.0.0.apk"
+            val fileName = "apparcom-$ultimaVersao.apk"
             val url = "https://cdn02.arcom.com.br/appDownload/apparcom/$fileName"
 
             val file = androidAppArcomFiles.getFile(fileName)

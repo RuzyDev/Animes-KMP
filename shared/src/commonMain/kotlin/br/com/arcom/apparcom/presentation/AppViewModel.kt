@@ -37,7 +37,7 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
             val versaoAtual = VersaoApp.parseVersao(ConstantsShared.VERSAO_APP)
             val ultimaVersao = VersaoApp.parseVersao(it)
             val possui = if (versaoAtual != null && ultimaVersao != null) {
-                versaoAtual > ultimaVersao
+                versaoAtual < ultimaVersao
             } else {
                 false
             }
@@ -67,7 +67,7 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
     ) {
         coroutineScope.launch {
             try {
-                val fileName = realizarAtualizacao.baixar(idUsuario, ultimaVersao, baixarNovamente)
+                val fileName = realizarAtualizacao.baixar( ultimaVersao, baixarNovamente)
                 abrirApk(fileName)
             } catch (e: Exception) {
                 onError(e.message ?: "Ocorreu um erro")

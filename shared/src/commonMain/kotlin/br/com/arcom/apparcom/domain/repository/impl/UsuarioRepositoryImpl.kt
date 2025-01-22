@@ -46,7 +46,7 @@ class UsuarioRepositoryImpl(
             usuarioService.enviarToken(
                 NetworkPushToken(
                     token = token,
-                    app = "app-arcom",
+                    app = "apparcom",
                     setor = usuario.id
                 )
             )

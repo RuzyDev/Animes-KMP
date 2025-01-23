@@ -27,7 +27,7 @@ getById:
 SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;
 
 getAll:
-SELECT * FROM solicitacaoAceiteEntity WHERE descricao LIKE :descricao AND (tipo_solicitacao = :tipo OR :tipo = 'todos') ORDER BY data;
+SELECT * FROM solicitacaoAceiteEntity WHERE descricao LIKE :descricao AND (tipo_solicitacao = :tipo OR :tipo = 'todos') ORDER BY data DESC;
 
 getQtdNaoRespondidas:
 SELECT count(*) FROM solicitacaoAceiteEntity WHERE data_resposta IS NULL;

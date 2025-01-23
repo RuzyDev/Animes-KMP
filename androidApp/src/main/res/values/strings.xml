@@ -38,7 +38,7 @@
     <string name="sem_solicitacoes">Sem solicitações</string>
     <plurals name="pendentes_plural">
         <item quantity="zero">Nenhuma pendente</item>
-        <item quantity="one">1 pendente</item>
+        <item quantity="one">%1$d pendente</item>
         <item quantity="other">%1$d pendentes</item>
     </plurals>
     <string name="solicitacao_descricao">Aceite ou recuse solicitações</string>

@@ -39,7 +39,7 @@
         </provider>
 
         <service
-            android:name=".core.service.NotificacaoService"
+            android:name=".core.service.notificacao.NotificacaoService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

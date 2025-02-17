@@ -1,4 +1,4 @@
-package br.com.arcom.apparcom.android.core.service
+package br.com.arcom.apparcom.android.core.service.notificacao
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +12,10 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.NotificationCompat
 import br.com.arcom.apparcom.android.MainActivity
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.android.core.service.notificacao.model.NovaSolicitacaoAceite
+import br.com.arcom.apparcom.android.core.service.notificacao.model.RespostaSolicitacaoAceite
+import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
+import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineScope
@@ -37,11 +41,30 @@ class NotificacaoService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
         remoteMessage.data.forEach { (key, value) ->
-            sendNotification(
-                "Aplicativo arcom",
-                value,
-                random().toInt()
-            )
+
+            when(key){
+                "retorno-solicitacao" -> {
+                    val solicitacao = json.decodeFromString<RespostaSolicitacaoAceite>(value)
+                    val tipo = TipoSolicitacao.getByValue(solicitacao.tipoSolicitacao)
+                    val mensagem = "Retorno da solicitação de ${tipo.descricao}:\n${solicitacao.msg}"
+
+                    sendNotification(
+                        "Retorno de autorização",
+                        mensagem,
+                        random().toInt()
+                    )
+                }
+                "nova-solicitacao" -> {
+                    val solicitacao = json.decodeFromString<NovaSolicitacaoAceite>(value)
+                    val mensagem = solicitacao.msg
+
+                    sendNotification(
+                        "Nova Aprovação",
+                        mensagem,
+                        random().toInt()
+                    )
+                }
+            }
         }
     }
 

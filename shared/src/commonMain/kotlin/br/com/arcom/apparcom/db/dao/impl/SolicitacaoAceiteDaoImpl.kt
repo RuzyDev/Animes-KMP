@@ -17,7 +17,7 @@ import kotlinx.datetime.LocalDateTime
 class SolicitacaoAceiteDaoImpl(
     private val solicitacaoAceiteQueries: SolicitacaoAceiteQueries
 ) : SolicitacaoAceiteDao {
-    override suspend fun insertOrUpdate(solicitacao: NetworkSolicitacaoAceite) {
+    override suspend fun insertOrUpdate(solicitacao: NetworkSolicitacaoAceite, page: Long) {
         solicitacaoAceiteQueries.insertOrUpdate(
             id = solicitacao.id,
             id_solicitacao = solicitacao.idSolicitacao,
@@ -28,6 +28,7 @@ class SolicitacaoAceiteDaoImpl(
             tipo_solicitacao = solicitacao.tipoSolicitacao,
             data_ = solicitacao.data.toString(),
             data_resposta = solicitacao.dataResposta?.toString(),
+            page = page
         )
     }
 
@@ -37,10 +38,11 @@ class SolicitacaoAceiteDaoImpl(
 
     override fun getAllStream(
         search: String,
-        filtro: TipoSolicitacao
+        filtro: TipoSolicitacao,
+        page: Long
     ): Flow<List<SolicitacaoAceiteEntity>> {
         val pesquisa = if (search.isEmpty()) "%" else "%$search%"
-        return solicitacaoAceiteQueries.getAll(pesquisa, filtro.value).asFlow()
+        return solicitacaoAceiteQueries.getAll(pesquisa, filtro.value, page).asFlow()
             .mapToList(Dispatchers.IO)
     }
 

@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDateTime
 
 interface SolicitacaoAceiteDao {
-    suspend fun insertOrUpdate(solicitacao: NetworkSolicitacaoAceite)
+    suspend fun insertOrUpdate(solicitacao: NetworkSolicitacaoAceite, page: Long)
     suspend fun updateResposta(id: String, status: String, dataResposta: LocalDateTime)
-    fun getAllStream(search: String, filtro: TipoSolicitacao): Flow<List<SolicitacaoAceiteEntity>>
+    fun getAllStream(search: String, filtro: TipoSolicitacao, page: Long): Flow<List<SolicitacaoAceiteEntity>>
     fun getById(id: String): Flow<SolicitacaoAceiteEntity>
     fun getQtdNaoRespondidas(): Flow<Long>
 }

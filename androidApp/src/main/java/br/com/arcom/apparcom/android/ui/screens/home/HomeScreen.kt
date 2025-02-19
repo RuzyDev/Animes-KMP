@@ -88,8 +88,7 @@ fun HomeScreen(
             contentPadding = PaddingValues(top = 16.dp, bottom = 32.dp),
         ) {
             menuSolicitacoes(
-                navigateToSolicitacoes = navigateToSolicitacoes,
-                qtdSolicitacoesPendentes = uiState.qtdSolicitacoesPendentes)
+                navigateToSolicitacoes = navigateToSolicitacoes)
         }
     }
 }
@@ -142,8 +141,7 @@ private fun TopBarHome(usuario: Usuario?) {
 
 
 private fun LazyListScope.menuSolicitacoes(
-    navigateToSolicitacoes: () -> Unit,
-    qtdSolicitacoesPendentes: Long
+    navigateToSolicitacoes: () -> Unit
 ) {
     item {
         Row(
@@ -174,7 +172,7 @@ private fun LazyListScope.menuSolicitacoes(
                     maxLines = 1
                 )
                 Text(
-                    text = pluralStringResource(R.plurals.pendentes_plural, qtdSolicitacoesPendentes.toInt(), qtdSolicitacoesPendentes),
+                    text = stringResource(R.string.autorizar),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier,

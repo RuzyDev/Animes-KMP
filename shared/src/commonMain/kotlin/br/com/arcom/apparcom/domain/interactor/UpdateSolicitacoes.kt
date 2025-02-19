@@ -8,15 +8,15 @@ import kotlinx.coroutines.withContext
 class UpdateSolicitacoes(
     private val solicitacaoAceiteRepository: SolicitacaoAceiteRepository,
     private val dispatchers: AppCoroutineDispatchers
-) : Interactor<UpdateSolicitacoes.Params, Unit>() {
+) : Interactor<UpdateSolicitacoes.Params, Long>() {
 
     data class Params(
         val idUsuario: Long,
-        val page: Short
+        val page: Long
     )
 
-    override suspend fun doWork(params: Params) {
-        withContext(dispatchers.io){
+    override suspend fun doWork(params: Params): Long {
+        return withContext(dispatchers.io){
             solicitacaoAceiteRepository.updateSolicitacaoAceite(
                 idUsuario = params.idUsuario,
                 page = params.page

@@ -1,11 +1,13 @@
 package br.com.arcom.apparcom.android.ui.screens.solicitacao.solicitacoes
 
+import AppArcomIcons
 import Composable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,9 +47,11 @@ import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.DialogCheck
+import br.com.arcom.apparcom.designsystem.theme.lightColor
 import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
+import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
 @Composable
@@ -59,7 +65,7 @@ fun SolicitacoesRoute(
     SolicitacoesScreen(
         onBackClick = onBackClick,
         uiState = uiState,
-        refresh = viewModel::refresh,
+        buscarSolicitacoes = viewModel::buscarSolicitacoes,
         responderSolicitacao = viewModel::responderSolicitacao,
         setSearch = viewModel::setSearch,
         setFiltro = viewModel::setFiltro,
@@ -72,7 +78,7 @@ fun SolicitacoesRoute(
 private fun SolicitacoesScreen(
     onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
-    refresh: () -> Unit,
+    buscarSolicitacoes: (Long, () -> Unit) -> Unit,
     setSearch: (String) -> Unit,
     setFiltro: (TipoSolicitacao) -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
@@ -82,6 +88,8 @@ private fun SolicitacoesScreen(
     var pesquisa by remember { mutableStateOf("") }
     var filtro by remember { mutableStateOf(TipoSolicitacao.TODOS) }
     var openFiltro by remember { mutableStateOf(false) }
+    val lazyState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
 
     if (openFiltro) {
         DialogCheck(
@@ -105,7 +113,7 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
-                onRefresh = refresh
+                onRefresh = { buscarSolicitacoes(0){} }
             )
         },
         loading = uiState.loadingSolicitacoes || uiState.loadingRegistrando
@@ -150,16 +158,111 @@ private fun SolicitacoesScreen(
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp)
+                    contentPadding = PaddingValues(bottom = 16.dp),
+                    state = lazyState
                 ) {
                     items(uiState.solicitacoes) { solicitacao ->
                         CardSolicitacao(solicitacao, navigateToDetalhesSolicitacao) { resposta ->
                             responderSolicitacao(solicitacao, resposta)
                         }
                     }
+                    item {
+                        Pagination(
+                            currentPage = uiState.paginacao.page,
+                            totalPages = uiState.paginacao.totalPaginas,
+                            onPageChange = {
+                                buscarSolicitacoes(it){
+                                    scope.launch { lazyState.animateScrollToItem(0) }
+                                }
+                            }
+                        )
+                    }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Pagination(
+    currentPage: Long,
+    totalPages: Long,
+    onPageChange: (Long) -> Unit
+) {
+    val list = (0..totalPages).toList()
+    val filtro = list.filter {
+        val restante = list.size - it
+        if (restante > 5) {
+            it >= currentPage
+        }else{
+            true
+        }
+    }.take(5)
+
+    Row(
+        modifier = Modifier.padding(top = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Botão de página anterior
+        val voltarHabilitado = currentPage > 0
+        AppArcomIcons.VOLTAR.Composable(
+            modifier = Modifier
+                .clip(RoundedCornerShape(8.dp))
+                .size(36.dp)
+                .background(MaterialTheme.colorScheme.primary.apply {
+                    if (!voltarHabilitado) this.lightColor()
+                })
+                .clickable(enabled = voltarHabilitado) {
+                    onPageChange(currentPage - 1L)
+                }
+                .padding(8.dp),
+            tint = MaterialTheme.colorScheme.onPrimary
+        )
+
+
+        // Botões de números de página
+        filtro.forEach { page ->
+            val isSelected = page == currentPage
+
+            Box(
+                Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .size(36.dp)
+                    .border(
+                        BorderStroke(
+                            2.dp,
+                            MaterialTheme.colorScheme.primary.copy(if (isSelected) 1f else 0.3f)
+                        ), RoundedCornerShape(8.dp)
+                    )
+                    .clickable {
+                        onPageChange(page)
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    (page + 1).toString(),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.titleSmall
+                )
+            }
+        }
+
+        // Botão de página seguinte
+        val proximoHabilitado = currentPage < totalPages
+        AppArcomIcons.AVANCAR.Composable(
+            modifier = Modifier
+                .clip(RoundedCornerShape(8.dp))
+                .size(36.dp)
+                .background(MaterialTheme.colorScheme.primary.apply {
+                    if (!proximoHabilitado) this.lightColor()
+                })
+                .clickable(enabled = proximoHabilitado) {
+                    onPageChange(currentPage + 1L)
+                }
+                .padding(8.dp),
+            tint = MaterialTheme.colorScheme.onPrimary
+        )
     }
 }
 
@@ -204,7 +307,7 @@ fun CardSolicitacao(
         }
 
         if (solicitacao.status != StatusSolicitacao.AGUARDANDO_REPOSTA) {
-            val color = when(solicitacao.status){
+            val color = when (solicitacao.status) {
                 StatusSolicitacao.APROVADO -> Verde
                 StatusSolicitacao.NEGADO -> MaterialTheme.colorScheme.error
                 else -> MaterialTheme.colorScheme.onSurface
@@ -221,7 +324,7 @@ fun CardSolicitacao(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
             )
-        }else{
+        } else {
             Text(
                 text = stringResource(R.string.autorizar),
                 style = MaterialTheme.typography.bodySmall,

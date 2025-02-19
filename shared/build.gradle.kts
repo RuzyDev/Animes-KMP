@@ -75,6 +75,6 @@ sqldelight{
         packageName.set("br.com.arcom.apparcom.database")
         schemaOutputDirectory = file("src/commonMain/db/database")
         migrationOutputDirectory = file("src/commonMain/db/migrations")
-        version = 1
+        version = 2
     }
 }

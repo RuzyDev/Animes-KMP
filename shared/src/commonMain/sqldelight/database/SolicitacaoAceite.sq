@@ -7,7 +7,8 @@ CREATE TABLE solicitacaoAceiteEntity (
     status TEXT NOT NULL,
     tipo_solicitacao TEXT NOT NULL,
     data TEXT NOT NULL,
-    data_resposta TEXT
+    data_resposta TEXT,
+    page INTEGER NOT NULL
 );
 
 insertOrUpdate:
@@ -20,14 +21,15 @@ INSERT OR REPLACE INTO solicitacaoAceiteEntity (
     status,
     tipo_solicitacao,
     data,
-    data_resposta
-) VALUES ( ?, ? , ?,?,?,?,?,?, ?);
+    data_resposta,
+    page
+) VALUES ( ?, ? , ?,?,?,?,?,?, ?, ?);
 
 getById:
 SELECT * FROM solicitacaoAceiteEntity WHERE id = ?;
 
 getAll:
-SELECT * FROM solicitacaoAceiteEntity WHERE descricao LIKE :descricao AND (tipo_solicitacao = :tipo OR :tipo = 'todos') ORDER BY data DESC;
+SELECT * FROM solicitacaoAceiteEntity WHERE descricao LIKE :descricao AND (tipo_solicitacao = :tipo OR :tipo = 'todos') AND page = :page ORDER BY data DESC;
 
 getQtdNaoRespondidas:
 SELECT count(*) FROM solicitacaoAceiteEntity WHERE data_resposta IS NULL;

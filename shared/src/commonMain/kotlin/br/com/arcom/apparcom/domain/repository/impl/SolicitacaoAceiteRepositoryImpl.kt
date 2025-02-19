@@ -16,13 +16,15 @@ class SolicitacaoAceiteRepositoryImpl(
     private val solicitacaoAceiteDao: SolicitacaoAceiteDao
 ) : SolicitacaoAceiteRepository {
 
-    override suspend fun updateSolicitacaoAceite(idUsuario: Long, page: Short) {
-        val solicitacoes = solicitacaoService.buscarSolicitacoes(idUsuario, page) ?: emptyList()
+    override suspend fun updateSolicitacaoAceite(idUsuario: Long, page: Long) : Long {
+        val result = solicitacaoService.buscarSolicitacoes(idUsuario, page)
+        val solicitacoes = result?.solicitacoes ?: emptyList()
         if (solicitacoes.isNotEmpty()) {
             solicitacoes.forEach {
-                solicitacaoAceiteDao.insertOrUpdate(it)
+                solicitacaoAceiteDao.insertOrUpdate(it, page)
             }
         }
+        return result?.totalPaginas ?: 0
     }
 
     override suspend fun registrarSolicitacao(solicitacao: SolicitacaoAceite, idUsuario: Long) {
@@ -33,7 +35,7 @@ class SolicitacaoAceiteRepositoryImpl(
     }
 
     override fun observeSolicitacoesAceite(page: Long, search: String, filtro: TipoSolicitacao): Flow<List<SolicitacaoAceite>> =
-        solicitacaoAceiteDao.getAllStream(search, filtro).map {
+        solicitacaoAceiteDao.getAllStream(search, filtro, page).map {
             it.map(SolicitacaoAceiteEntity::toExternalModel)
         }
 

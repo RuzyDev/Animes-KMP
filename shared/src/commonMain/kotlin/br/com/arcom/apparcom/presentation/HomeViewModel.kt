@@ -21,7 +21,6 @@ import org.koin.core.component.inject
 class HomeViewModel : CoroutineViewModel(), KoinComponent {
 
     private val observeUsuario: ObserveUsuario by inject()
-    private val observeQtdSolicitacoesPendentes: ObserveQtdSolicitacoesPendentes by inject()
     private val atualizarPushToken: AtualizarPushToken by inject()
     private val tokenService: TokenService by inject()
     private val uiMessage = UiMessageManager()
@@ -30,7 +29,6 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
         combine(
             uiMessage.observable,
             observeUsuario.flow,
-            observeQtdSolicitacoesPendentes.flow,
             ::HomeUiState
         ).stateIn(
             coroutineScope,
@@ -60,14 +58,12 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
 
     init {
         observeUsuario(Unit)
-        observeQtdSolicitacoesPendentes(Unit)
     }
 }
 
 data class HomeUiState(
     val uiMessage: UiMessage? = null,
-    val usuario: Usuario? = null,
-    val qtdSolicitacoesPendentes: Long = 0
+    val usuario: Usuario? = null
 ) {
     companion object {
         val Empty = HomeUiState()

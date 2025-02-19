@@ -32,6 +32,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 
     private val uiMessage = UiMessageManager()
     private val _pesquisa = MutableStateFlow("" to TipoSolicitacao.TODOS)
+    private val _page = MutableStateFlow(PageSolicitacao.Empty)
 
     val uiState: StateFlow<SolicitacoesUiState> =
         combine(
@@ -39,6 +40,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
             registrarSolicitacao.inProgress,
             observeSolicitacoes.flow,
             uiMessage.observable,
+            _page,
             ::SolicitacoesUiState
         ).stateIn(
             coroutineScope,
@@ -52,11 +54,13 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun refresh() {
+    fun buscarSolicitacoes(page: Long = 0, callback: () -> Unit) {
         coroutineScope.launch {
             val usuario = getUsuario.invoke(Unit).getOrNull()
             if (usuario != null) {
-                updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, 0))
+                val pageMax = updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, page))
+                _page.emit(PageSolicitacao(page, pageMax.getOrNull() ?: 0))
+                callback()
             } else {
                 uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
             }
@@ -98,10 +102,19 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     }
 
     init {
-        refresh()
-        _pesquisa.onEach { (search, filtro) ->
-            observeSolicitacoes(ObserveSolicitacoes.Params(search = search, filtro = filtro))
+        buscarSolicitacoes()
+        combine(_pesquisa, _page, ::Pair).onEach { (pesquisa, page) ->
+            observeSolicitacoes(ObserveSolicitacoes.Params(search = pesquisa.first, filtro = pesquisa.second, page = page.page))
         }.launchIn(coroutineScope)
+    }
+}
+
+data class PageSolicitacao(
+    val page: Long,
+    val totalPaginas: Long
+){
+    companion object {
+        val Empty = PageSolicitacao(0,0)
     }
 }
 
@@ -109,7 +122,8 @@ data class SolicitacoesUiState(
     val loadingSolicitacoes: Boolean = false,
     val loadingRegistrando: Boolean = false,
     val solicitacoes: List<SolicitacaoAceite> = emptyList(),
-    val uiMessage: UiMessage? = null
+    val uiMessage: UiMessage? = null,
+    val paginacao: PageSolicitacao = PageSolicitacao.Empty
 ) {
     companion object {
         val Empty = SolicitacoesUiState()

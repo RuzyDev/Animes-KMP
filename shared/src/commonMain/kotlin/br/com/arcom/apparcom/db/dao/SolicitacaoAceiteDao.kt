@@ -12,4 +12,5 @@ interface SolicitacaoAceiteDao {
     fun getAllStream(search: String, filtro: TipoSolicitacao, page: Long): Flow<List<SolicitacaoAceiteEntity>>
     fun getById(id: String): Flow<SolicitacaoAceiteEntity>
     fun getQtdNaoRespondidas(): Flow<Long>
+    fun deleteByPage(page: Long)
 }

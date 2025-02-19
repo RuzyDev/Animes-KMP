@@ -7,6 +7,11 @@ import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
 import br.com.arcom.apparcom.db.SqlDelightDriverFactory
+import br.com.arcom.apparcom.presentation.AppViewModel
+import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoViewModel
+import br.com.arcom.apparcom.presentation.HomeViewModel
+import br.com.arcom.apparcom.presentation.LoginViewModel
+import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging

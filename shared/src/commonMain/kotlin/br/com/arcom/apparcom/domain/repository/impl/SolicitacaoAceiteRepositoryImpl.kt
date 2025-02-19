@@ -20,6 +20,7 @@ class SolicitacaoAceiteRepositoryImpl(
         val result = solicitacaoService.buscarSolicitacoes(idUsuario, page)
         val solicitacoes = result?.solicitacoes ?: emptyList()
         if (solicitacoes.isNotEmpty()) {
+            solicitacaoAceiteDao.deleteByPage(page)
             solicitacoes.forEach {
                 solicitacaoAceiteDao.insertOrUpdate(it, page)
             }

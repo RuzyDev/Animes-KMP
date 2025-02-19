@@ -36,3 +36,6 @@ SELECT count(*) FROM solicitacaoAceiteEntity WHERE data_resposta IS NULL;
 
 updateResposta:
 UPDATE solicitacaoAceiteEntity SET status = :status, data_resposta = :dataResposta WHERE id = :id;
+
+deleteByPage:
+DELETE FROM solicitacaoAceiteEntity WHERE page = :page;

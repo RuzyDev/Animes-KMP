@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,10 +32,12 @@ import org.koin.compose.koinInject
 import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomButton
 import br.com.arcom.apparcom.presentation.LoginUiState
 import br.com.arcom.apparcom.android.R
+import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomKeyboardActions
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LoginRoute(
-    viewModel: LoginViewModel = koinInject(),
+    viewModel: LoginViewModel = koinViewModel<LoginViewModel>(),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -54,6 +58,7 @@ fun LoginScreen(
     var idUsuario by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
     var ocultarSenha by remember { mutableStateOf(true) }
+    val keyboard = LocalSoftwareKeyboardController.current
 
 
     AppArcomScaffold (
@@ -120,6 +125,10 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
+                keyboardActions = AppArcomKeyboardActions(onNext = {
+                    keyboard?.hide()
+                    idUsuario.toLongOrNull()?.let { realizarLogin(it, senha) }
+                }),
                 singleLine = true,
                 icon = if (ocultarSenha) AppArcomIcons.NAO_VISIVEL else AppArcomIcons.VISIVEL,
                 iconClick = { ocultarSenha = !ocultarSenha },
@@ -128,7 +137,7 @@ fun LoginScreen(
 
             AppArcomButton(
                 onClick = {
-                    realizarLogin(idUsuario.toLong(), senha)
+                    idUsuario.toLongOrNull()?.let { realizarLogin(it, senha) }
                 },
                 text = stringResource(id = R.string.entrar),
                 modifier = Modifier

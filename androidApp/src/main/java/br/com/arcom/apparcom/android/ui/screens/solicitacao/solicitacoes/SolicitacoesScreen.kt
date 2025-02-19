@@ -52,13 +52,13 @@ import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
 import kotlinx.coroutines.launch
-import org.koin.compose.koinInject
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SolicitacoesRoute(
     onBackClick: () -> Unit,
     navigateToDetalhesSolicitacao: (String) -> Unit,
-    viewModel: SolicitacoesViewModel = koinInject()
+    viewModel: SolicitacoesViewModel = koinViewModel<SolicitacoesViewModel>()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -78,7 +78,7 @@ fun SolicitacoesRoute(
 private fun SolicitacoesScreen(
     onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
-    buscarSolicitacoes: (Long, () -> Unit) -> Unit,
+    buscarSolicitacoes: (page: Long, () -> Unit) -> Unit,
     setSearch: (String) -> Unit,
     setFiltro: (TipoSolicitacao) -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
@@ -113,7 +113,7 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
-                onRefresh = { buscarSolicitacoes(0){} }
+                onRefresh = { buscarSolicitacoes(1){} }
             )
         },
         loading = uiState.loadingSolicitacoes || uiState.loadingRegistrando
@@ -189,10 +189,10 @@ fun Pagination(
     totalPages: Long,
     onPageChange: (Long) -> Unit
 ) {
-    val list = (0..totalPages).toList()
+    val list = (1..totalPages).toList()
     val filtro = list.filter {
         val restante = list.size - it
-        if (restante > 5) {
+        if (restante >= 5) {
             it >= currentPage
         }else{
             true
@@ -205,14 +205,12 @@ fun Pagination(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Botão de página anterior
-        val voltarHabilitado = currentPage > 0
+        val voltarHabilitado = currentPage > 1
         AppArcomIcons.VOLTAR.Composable(
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .size(36.dp)
-                .background(MaterialTheme.colorScheme.primary.apply {
-                    if (!voltarHabilitado) this.lightColor()
-                })
+                .background(MaterialTheme.colorScheme.primary.copy(if (voltarHabilitado) 1f else 0.3f))
                 .clickable(enabled = voltarHabilitado) {
                     onPageChange(currentPage - 1L)
                 }
@@ -241,7 +239,7 @@ fun Pagination(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    (page + 1).toString(),
+                    page.toString(),
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.titleSmall
                 )
@@ -254,9 +252,7 @@ fun Pagination(
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .size(36.dp)
-                .background(MaterialTheme.colorScheme.primary.apply {
-                    if (!proximoHabilitado) this.lightColor()
-                })
+                .background(MaterialTheme.colorScheme.primary.copy(if (proximoHabilitado) 1f else 0.3f))
                 .clickable(enabled = proximoHabilitado) {
                     onPageChange(currentPage + 1L)
                 }

@@ -7,10 +7,7 @@ import kotlinx.coroutines.cancel
 actual abstract class CoroutineViewModel : ViewModel(){
     actual val coroutineScope = viewModelScope
 
-    actual fun dispose() {
-        coroutineScope.cancel()
-        onCleared()
-    }
+    actual fun dispose() {}
 
     actual override fun onCleared() {
         super.onCleared()

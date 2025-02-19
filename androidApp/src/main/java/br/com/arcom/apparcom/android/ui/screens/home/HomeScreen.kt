@@ -45,13 +45,14 @@ import br.com.arcom.apparcom.util.format.getQtdPalavras
 import br.com.arcom.apparcom.util.format.toNome
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeRoute(
     navigateToSolicitacoes: () -> Unit,
-    viewModel: HomeViewModel = koinInject()
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

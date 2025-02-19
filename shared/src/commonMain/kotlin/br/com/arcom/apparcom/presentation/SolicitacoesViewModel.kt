@@ -54,7 +54,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun buscarSolicitacoes(page: Long = 0, callback: () -> Unit) {
+    fun buscarSolicitacoes(page: Long = 1, callback: () -> Unit) {
         coroutineScope.launch {
             val usuario = getUsuario.invoke(Unit).getOrNull()
             if (usuario != null) {
@@ -102,7 +102,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     }
 
     init {
-        buscarSolicitacoes()
+        buscarSolicitacoes(){}
         combine(_pesquisa, _page, ::Pair).onEach { (pesquisa, page) ->
             observeSolicitacoes(ObserveSolicitacoes.Params(search = pesquisa.first, filtro = pesquisa.second, page = page.page))
         }.launchIn(coroutineScope)
@@ -114,7 +114,7 @@ data class PageSolicitacao(
     val totalPaginas: Long
 ){
     companion object {
-        val Empty = PageSolicitacao(0,0)
+        val Empty = PageSolicitacao(1,1)
     }
 }
 

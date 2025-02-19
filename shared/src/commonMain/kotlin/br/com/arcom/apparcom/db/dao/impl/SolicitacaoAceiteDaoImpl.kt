@@ -51,4 +51,8 @@ class SolicitacaoAceiteDaoImpl(
 
     override fun getQtdNaoRespondidas(): Flow<Long> =
         solicitacaoAceiteQueries.getQtdNaoRespondidas().asFlow().mapToOne(Dispatchers.IO)
+
+    override fun deleteByPage(page: Long) {
+        solicitacaoAceiteQueries.deleteByPage(page)
+    }
 }

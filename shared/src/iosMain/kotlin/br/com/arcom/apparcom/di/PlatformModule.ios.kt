@@ -6,6 +6,11 @@ import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.IOSPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
 import br.com.arcom.apparcom.db.SqlDelightDriverFactory
+import br.com.arcom.apparcom.presentation.AppViewModel
+import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoViewModel
+import br.com.arcom.apparcom.presentation.HomeViewModel
+import br.com.arcom.apparcom.presentation.LoginViewModel
+import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.util.AppChecker
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
@@ -25,6 +30,12 @@ actual val platformModule = module {
     single { AppChecker }
     single<AppArcomStorage> { AppArcomStorage(createDataStore()) }
     single<PreferencesManager> { IOSPreferencesManager() }
+
+    factory { HomeViewModel() }
+    factory { SolicitacoesViewModel() }
+    factory { (id: String) -> DetalhesSolicitacaoViewModel(id) }
+    factory { LoginViewModel() }
+    factory { AppViewModel() }
 }
 
 @BetaInteropApi

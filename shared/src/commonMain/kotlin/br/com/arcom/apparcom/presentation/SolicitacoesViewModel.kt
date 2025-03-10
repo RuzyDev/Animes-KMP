@@ -54,11 +54,15 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun buscarSolicitacoes(page: Long = 1, callback: () -> Unit) {
+    fun buscarSolicitacoes(
+        page: Long = 1,
+        tipoSolicitacao: TipoSolicitacao = TipoSolicitacao.TODOS,
+        callback: () -> Unit
+    ) {
         coroutineScope.launch {
             val usuario = getUsuario.invoke(Unit).getOrNull()
             if (usuario != null) {
-                val pageMax = updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, page))
+                val pageMax = updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, page, tipoSolicitacao))
                 _page.emit(PageSolicitacao(page, pageMax.getOrNull() ?: 0))
                 callback()
             } else {
@@ -96,15 +100,23 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     }
 
     fun setFiltro(filtro: TipoSolicitacao) {
-        _pesquisa.update {
-            it.first to filtro
+        buscarSolicitacoes(1, filtro) {
+            _pesquisa.update {
+                it.first to filtro
+            }
         }
     }
 
     init {
-        buscarSolicitacoes(){}
+        buscarSolicitacoes() {}
         combine(_pesquisa, _page, ::Pair).onEach { (pesquisa, page) ->
-            observeSolicitacoes(ObserveSolicitacoes.Params(search = pesquisa.first, filtro = pesquisa.second, page = page.page))
+            observeSolicitacoes(
+                ObserveSolicitacoes.Params(
+                    search = pesquisa.first,
+                    filtro = pesquisa.second,
+                    page = page.page
+                )
+            )
         }.launchIn(coroutineScope)
     }
 }
@@ -112,9 +124,9 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 data class PageSolicitacao(
     val page: Long,
     val totalPaginas: Long
-){
+) {
     companion object {
-        val Empty = PageSolicitacao(1,1)
+        val Empty = PageSolicitacao(1, 1)
     }
 }
 

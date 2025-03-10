@@ -16,8 +16,9 @@ class SolicitacaoAceiteRepositoryImpl(
     private val solicitacaoAceiteDao: SolicitacaoAceiteDao
 ) : SolicitacaoAceiteRepository {
 
-    override suspend fun updateSolicitacaoAceite(idUsuario: Long, page: Long) : Long {
-        val result = solicitacaoService.buscarSolicitacoes(idUsuario, page)
+    override suspend fun updateSolicitacaoAceite(idUsuario: Long, page: Long, tipoSolicitacao: TipoSolicitacao) : Long {
+        val tipo = if (tipoSolicitacao == TipoSolicitacao.TODOS) null else tipoSolicitacao
+        val result = solicitacaoService.buscarSolicitacoes(idUsuario, page, tipo)
         val solicitacoes = result?.solicitacoes ?: emptyList()
         if (solicitacoes.isNotEmpty()) {
             solicitacaoAceiteDao.deleteByPage(page)

@@ -51,6 +51,7 @@ import br.com.arcom.apparcom.designsystem.theme.lightColor
 import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
+import br.com.arcom.apparcom.util.format.formatBrasil
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -78,7 +79,7 @@ fun SolicitacoesRoute(
 private fun SolicitacoesScreen(
     onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
-    buscarSolicitacoes: (page: Long, () -> Unit) -> Unit,
+    buscarSolicitacoes: (page: Long, tipo: TipoSolicitacao, () -> Unit) -> Unit,
     setSearch: (String) -> Unit,
     setFiltro: (TipoSolicitacao) -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
@@ -113,7 +114,7 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
-                onRefresh = { buscarSolicitacoes(1){} }
+                onRefresh = { buscarSolicitacoes(1, filtro){} }
             )
         },
         loading = uiState.loadingSolicitacoes || uiState.loadingRegistrando
@@ -171,7 +172,7 @@ private fun SolicitacoesScreen(
                             currentPage = uiState.paginacao.page,
                             totalPages = uiState.paginacao.totalPaginas,
                             onPageChange = {
-                                buscarSolicitacoes(it){
+                                buscarSolicitacoes(it, filtro){
                                     scope.launch { lazyState.animateScrollToItem(0) }
                                 }
                             }
@@ -283,6 +284,14 @@ fun CardSolicitacao(
                 .weight(1f)
                 .padding(end = 4.dp)
         ) {
+            Text(
+                solicitacao.data.formatBrasil(),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier,
+                fontWeight = FontWeight.SemiBold
+            )
+
             Text(
                 solicitacao.tipoSolicitacao.descricao,
                 style = MaterialTheme.typography.titleSmall,

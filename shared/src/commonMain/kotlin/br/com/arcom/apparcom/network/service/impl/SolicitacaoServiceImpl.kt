@@ -1,5 +1,6 @@
 package br.com.arcom.apparcom.network.service.impl
 
+import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceite
 import br.com.arcom.apparcom.network.models.NetworkSolicitacaoAceitePaginado
 import br.com.arcom.apparcom.network.service.SolicitacaoService
@@ -17,11 +18,14 @@ class SolicitacaoServiceImpl(
     private val api: HttpClient
 ) : SolicitacaoService {
 
-    override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Long): NetworkSolicitacaoAceitePaginado? =
+    override suspend fun buscarSolicitacoes(idUsuario: Long, nroPagina: Long, tipoSolicitacao: TipoSolicitacao?): NetworkSolicitacaoAceitePaginado? =
         safeApiCall {
             api.get(urlString = "/api/apparcom/v1/buscar?rotina=buscar-solicitacoes-paginado"){
                 parameter("idUsuario", idUsuario)
                 parameter("nroPagina", nroPagina)
+                if (tipoSolicitacao != null){
+                    parameter("tipoSolicitacao", tipoSolicitacao.value)
+                }
                 contentType(ContentType.Application.Json)
             }.body()
         }

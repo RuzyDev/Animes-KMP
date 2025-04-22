@@ -35,8 +35,7 @@ struct HomeScreen: View {
             ScrollView {
                 VStack(spacing: 8) {
                     MenuSolicitacoes(
-                        navigateToSolicitacoes: navigateToSolicitacoes,
-                        qtdSolicitacoesPendentes: uiState.qtdSolicitacoesPendentes
+                        navigateToSolicitacoes: navigateToSolicitacoes
                     )
                 }
                 .padding(.top, 16)
@@ -77,7 +76,6 @@ struct TopBarHome: View {
 
 struct MenuSolicitacoes: View {
     var navigateToSolicitacoes: () -> Void
-    var qtdSolicitacoesPendentes: Int64
 
     var body: some View {
         HStack(spacing: 8) {
@@ -96,7 +94,7 @@ struct MenuSolicitacoes: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
 
-                Text("\(qtdSolicitacoesPendentes) pendente(s)")
+                Text("Autorizar")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)

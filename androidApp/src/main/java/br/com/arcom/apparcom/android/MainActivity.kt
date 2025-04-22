@@ -10,6 +10,7 @@ import br.com.arcom.apparcom.android.ui.app.AppArcomApp
 import br.com.arcom.apparcom.android.ui.screens.login.LoginRoute
 import br.com.arcom.apparcom.android.ui.designsystem.theme.AppArcomTheme
 import br.com.arcom.apparcom.presentation.AppViewModel
+import br.com.arcom.apparcom.presentation.AtualizacaoViewModel
 import br.com.arcom.apparcom.util.ResultState
 import org.koin.compose.koinInject
 
@@ -20,14 +21,17 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val viewModel: AppViewModel = koinInject()
+            val atualizacao: AtualizacaoViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+            val atualizacaoUiState by atualizacao.uiState.collectAsStateWithLifecycle()
 
             AppArcomTheme {
                 uiState.logado?.let { logado ->
                     if (logado) {
                         AppArcomApp(
                             uiState = uiState,
-                            baixarAtualizacao = viewModel::baixarAtualizacao,
+                            atualizacao = atualizacaoUiState,
+                            baixarAtualizacao = atualizacao::baixarAtualizacao,
                             clearUltimaVersao = viewModel::clearUltimaVersao
                         )
                     } else {

@@ -3,7 +3,7 @@ import shared
 
 class ContentState: ObservableObject {
     
-    let viewModel:AppViewModel
+    let viewModel: AppViewModel
 
     @Published
     private(set) var uiState: AppUiState = AppUiState.companion.Empty

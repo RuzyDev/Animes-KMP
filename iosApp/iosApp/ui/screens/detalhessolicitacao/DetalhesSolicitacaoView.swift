@@ -51,37 +51,59 @@ struct InformacoesSolicitacao: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            // Coluna com os botões
-            VStack(spacing: 8) {
-                Button(action: {
-                    responderSolicitacao(solicitacaoAceite, true)
-                }) {
-                    Text("Autorizar")
-                        .font(.body)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 16)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+            if(solicitacaoAceite.status.value != "aguardando-reposta"){
+                var color: Color {
+                    switch solicitacaoAceite.status.value {
+                    case "aprovado":
+                       return Color.green
+                    case "negado":
+                       return Color.red
+                    default:
+                       return Color.primary
+                    }}
                 
-                Button(action: {
-                    responderSolicitacao(solicitacaoAceite, false)
-                }) {
-                    Text("Negar")
-                        .font(.body)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 16)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+                Text(solicitacaoAceite.status.descricao)
+                    .font(.body)
+                    .fontWeight(.bold)
+                    .foregroundColor(color) // Define a cor do texto
+                    .padding(6) // Espaçamento interno
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(color, lineWidth: 2) // Borda arredondada com espessura
+                    )
+            }else{
+                // Coluna com os botões
+                VStack(spacing: 8) {
+                    Button(action: {
+                        responderSolicitacao(solicitacaoAceite, true)
+                    }) {
+                        Text("Autorizar")
+                            .font(.body)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 16)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    
+                    Button(action: {
+                        responderSolicitacao(solicitacaoAceite, false)
+                    }) {
+                        Text("Negar")
+                            .font(.body)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 16)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }.frame(width: 120) // Define a largura dos botões para garantir alinhamento
             }
-            .frame(width: 120) // Define a largura dos botões para garantir alinhamento
+            
         }
         .padding()
     }

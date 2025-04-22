@@ -50,6 +50,7 @@ import br.com.arcom.apparcom.android.utils.instalarApk
 import br.com.arcom.apparcom.designsystem.theme.divider
 import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.presentation.AppUiState
+import br.com.arcom.apparcom.presentation.AtualizacaoUiState
 import br.com.arcom.apparcom.util.versaoAtualMuitoAntiga
 import kotlin.reflect.KClass
 
@@ -59,6 +60,7 @@ fun AppArcomApp(
     appState: AppArcomState = rememberAppArcomState(),
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
     uiState: AppUiState,
+    atualizacao: AtualizacaoUiState,
     baixarAtualizacao: (
         idUsuario: Long,
         ultimaVersao: String,
@@ -70,12 +72,12 @@ fun AppArcomApp(
 ) {
     val context = LocalContext.current
 
-    if (uiState.atualizacao.possuiAtualizacao) {
+    if (atualizacao.atualizacao.possuiAtualizacao) {
         BaixarAtualizacaoDialog(
             onBaixarClick = { baixarNovamente ->
                 baixarAtualizacao(
                     uiState.usuario!!.id,
-                    uiState.atualizacao.ultimaVersao,
+                    atualizacao.atualizacao.ultimaVersao,
                     baixarNovamente,
                     {
                         instalarApk(context = context, file = it) { erro ->
@@ -88,9 +90,9 @@ fun AppArcomApp(
                 )
             },
             closeDialog = clearUltimaVersao,
-            progress = uiState.progress,
-            versaoAtualMuitoAntiga = versaoAtualMuitoAntiga(uiState.atualizacao.ultimaVersao),
-            versaoInstalada = uiState.atualizacao.versaoInstalada
+            progress = atualizacao.progress,
+            versaoAtualMuitoAntiga = versaoAtualMuitoAntiga(atualizacao.atualizacao.ultimaVersao),
+            versaoInstalada = atualizacao.atualizacao.versaoInstalada
         )
     }
 

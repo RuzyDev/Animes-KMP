@@ -306,7 +306,7 @@ fun CardSolicitacao(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier,
                 fontWeight = FontWeight.Normal,
-                maxLines = 2,
+                maxLines = 4,
                 overflow = TextOverflow.Ellipsis
             )
         }

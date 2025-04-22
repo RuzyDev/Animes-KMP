@@ -40,8 +40,8 @@ class SolicitacoesState: ObservableObject {
         viewModel.dispose()
     }
     
-    func refresh(){
-        viewModel.refresh()
+    func refresh(page: Int64 = 0, tipo: TipoSolicitacao){
+        viewModel.buscarSolicitacoes(page: page, tipoSolicitacao: tipo, callback: {})
     }
     
     func responderSolicitacao(solicitacao: SolicitacaoAceite, resposta: Bool){

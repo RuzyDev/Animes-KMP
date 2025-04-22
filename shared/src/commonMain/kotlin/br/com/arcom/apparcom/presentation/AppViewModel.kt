@@ -23,29 +23,10 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
 
     private val appArcomStorage: AppArcomStorage by inject()
     private val observeUsuario: ObserveUsuario by inject()
-    private val realizarAtualizacao: RealizarAtualizacao by inject()
-    private val atualizarVersaoApp: AtualizarVersaoApp by inject()
-    private val androidAppArcomFiles: AndroidAppArcomFiles by inject()
 
     private val _logado = appArcomStorage.getBooleanStream(Keys.LOGADO)
-    private val _atualizacao = appArcomStorage.getStringStream(Keys.VERSAO_APP).map {
-        if (it.isEmpty()) {
-            false to it
-            AtualizacaoApp(false, it, false)
-        } else {
-            val versaoInstalada = androidAppArcomFiles.getFile("apparcom-$it.apk") != null
-            val versaoAtual = VersaoApp.parseVersao(ConstantsShared.VERSAO_APP)
-            val ultimaVersao = VersaoApp.parseVersao(it)
-            val possui = if (versaoAtual != null && ultimaVersao != null) {
-                versaoAtual < ultimaVersao
-            } else {
-                false
-            }
-            AtualizacaoApp(possui, it, versaoInstalada)
-        }
-    }
 
-    val uiState = combine(_logado, observeUsuario.flow,_atualizacao, realizarAtualizacao._progressFlow, ::AppUiState).stateIn(
+    val uiState = combine(_logado, observeUsuario.flow, ::AppUiState).stateIn(
         coroutineScope,
         SharingStarted.WhileSubscribed(5000),
         AppUiState.Empty
@@ -53,27 +34,6 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
 
     init {
         observeUsuario(Unit)
-        observeUsuario.flow.onEach {
-            it?.id?.let { it1 -> atualizarVersaoApp(idUsuario = it1) }
-        }.launchIn(coroutineScope)
-    }
-
-    fun baixarAtualizacao(
-        idUsuario: Long,
-        ultimaVersao: String,
-        baixarNovamente: Boolean = false,
-        abrirApk: (String) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        coroutineScope.launch {
-            try {
-                val fileName = realizarAtualizacao.baixar( ultimaVersao, baixarNovamente)
-                abrirApk(fileName)
-            } catch (e: Exception) {
-                onError(e.message ?: "Ocorreu um erro")
-                e.printStackTrace()
-            }
-        }
     }
 
     fun clearUltimaVersao() {
@@ -82,11 +42,6 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
-    fun atualizarVersaoApp(idUsuario: Long) {
-        coroutineScope.launch {
-            atualizarVersaoApp.invoke(AtualizarVersaoApp.Params(idUsuario))
-        }
-    }
 
     fun observeUiState(onChange: (AppUiState) -> Unit) {
         uiState.onEach {
@@ -97,22 +52,9 @@ class AppViewModel : CoroutineViewModel(), KoinComponent {
 
 data class AppUiState(
     val logado: Boolean? = null,
-    val usuario: Usuario? = null,
-    val atualizacao: AtualizacaoApp = AtualizacaoApp.Empty,
-    val progress: Pair<Long, Long>? = null
+    val usuario: Usuario? = null
 ) {
     companion object {
         val Empty = AppUiState()
-    }
-}
-
-
-data class AtualizacaoApp(
-    val possuiAtualizacao: Boolean,
-    val ultimaVersao: String,
-    val versaoInstalada: Boolean
-){
-    companion object {
-        val Empty = AtualizacaoApp(false, "", false)
     }
 }

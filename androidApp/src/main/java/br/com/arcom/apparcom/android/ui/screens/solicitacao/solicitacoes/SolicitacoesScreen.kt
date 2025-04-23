@@ -66,7 +66,7 @@ fun SolicitacoesRoute(
     SolicitacoesScreen(
         onBackClick = onBackClick,
         uiState = uiState,
-        buscarSolicitacoes = viewModel::buscarSolicitacoes,
+        setPage = viewModel::setPage,
         responderSolicitacao = viewModel::responderSolicitacao,
         setSearch = viewModel::setSearch,
         setFiltro = viewModel::setFiltro,
@@ -79,7 +79,7 @@ fun SolicitacoesRoute(
 private fun SolicitacoesScreen(
     onBackClick: () -> Unit,
     uiState: SolicitacoesUiState,
-    buscarSolicitacoes: (page: Long, tipo: TipoSolicitacao, () -> Unit) -> Unit,
+    setPage: (page: Long) -> Unit,
     setSearch: (String) -> Unit,
     setFiltro: (TipoSolicitacao) -> Unit,
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
@@ -114,7 +114,7 @@ private fun SolicitacoesScreen(
             AppArcomTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
-                onRefresh = { buscarSolicitacoes(1, filtro){} }
+                onRefresh = { setPage(1) }
             )
         },
         loading = uiState.loadingSolicitacoes || uiState.loadingRegistrando
@@ -172,9 +172,7 @@ private fun SolicitacoesScreen(
                             currentPage = uiState.paginacao.page,
                             totalPages = uiState.paginacao.totalPaginas,
                             onPageChange = {
-                                buscarSolicitacoes(it, filtro){
-                                    scope.launch { lazyState.animateScrollToItem(0) }
-                                }
+                                setPage(it)
                             }
                         )
                     }

@@ -20,14 +20,16 @@ class DetalhesSolicitacaoState: ObservableObject {
     private(set) var result: ResultState<SolicitacaoAceite> = ResultState.loading
     
     init(idSolicitacao: String) {
+        print("DetalhesSolicitacaoState viveu")
         viewModel = DetalhesSolicitacaoViewModel(idSolicitacao: idSolicitacao )
         
-        viewModel.observeUiState{ value in
-            self.uiState = value
+        viewModel.observeUiState{ [weak self] value in
+            self?.uiState = value
         }
     }
     
     deinit {
+        print("DetalhesSolicitacaoState morreu")
         viewModel.dispose()
     }
     

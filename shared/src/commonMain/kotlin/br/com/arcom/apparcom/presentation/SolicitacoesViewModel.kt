@@ -5,6 +5,7 @@ import br.com.arcom.apparcom.domain.interactor.GetUsuario
 import br.com.arcom.apparcom.domain.interactor.RegistrarSolicitacao
 import br.com.arcom.apparcom.domain.interactor.UpdateSolicitacoes
 import br.com.arcom.apparcom.domain.observers.ObserveSolicitacoes
+import br.com.arcom.apparcom.model.Usuario
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
@@ -32,6 +33,7 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
 
     private val uiMessage = UiMessageManager()
     private val _pesquisa = MutableStateFlow("" to TipoSolicitacao.TODOS)
+    private val _usuario = MutableStateFlow<Usuario?>(null)
     private val _page = MutableStateFlow(PageSolicitacao.Empty)
 
     val uiState: StateFlow<SolicitacoesUiState> =
@@ -54,21 +56,33 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun buscarSolicitacoes(
-        page: Long = 1,
-        tipoSolicitacao: TipoSolicitacao = TipoSolicitacao.TODOS,
-        callback: () -> Unit
-    ) {
+    fun getUsuario(){
         coroutineScope.launch {
             val usuario = getUsuario.invoke(Unit).getOrNull()
-            if (usuario != null) {
-                val pageMax = updateSolicitacoes.invoke(UpdateSolicitacoes.Params(usuario.id, page, tipoSolicitacao))
-                _page.emit(PageSolicitacao(page, pageMax.getOrNull() ?: 0))
-                callback()
-            } else {
-                uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
-            }
+            _usuario.emit(usuario)
+            buscarSolicitacoes(1)
         }
+    }
+
+    private suspend fun buscarSolicitacoes(
+        page: Long,
+        tipoSolicitacao: TipoSolicitacao = TipoSolicitacao.TODOS,
+        callback: (() -> Unit) = {}
+    ) {
+       val usuario = _usuario.value
+       if (usuario != null) {
+           val pageMax = updateSolicitacoes.invoke(
+               UpdateSolicitacoes.Params(
+                   usuario.id,
+                   page,
+                   tipoSolicitacao
+               )
+           )
+           _page.emit(PageSolicitacao(page, pageMax.getOrNull() ?: 0))
+           callback()
+       } else {
+           uiMessage.emitMessage(UiMessage(message = "Usuário não encontrado!"))
+       }
     }
 
     fun responderSolicitacao(solicitacao: SolicitacaoAceite, reposta: Boolean) {
@@ -93,6 +107,12 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
         }
     }
 
+    fun setPage(page: Long) {
+        _page.update {
+            it.copy(page = page)
+        }
+    }
+
     fun setSearch(search: String) {
         _pesquisa.update {
             search to it.second
@@ -100,15 +120,18 @@ class SolicitacoesViewModel : CoroutineViewModel(), KoinComponent {
     }
 
     fun setFiltro(filtro: TipoSolicitacao) {
-        buscarSolicitacoes(1, filtro) {
-            _pesquisa.update {
-                it.first to filtro
-            }
-        }
+       _pesquisa.update {
+           it.first to filtro
+       }
     }
 
     init {
-        buscarSolicitacoes() {}
+        getUsuario()
+
+        combine(_pesquisa, _page, ::Pair).onEach { (pesquisa, page) ->
+            buscarSolicitacoes(page = page.page, tipoSolicitacao = pesquisa.second)
+        }.launchIn(coroutineScope)
+
         combine(_pesquisa, _page, ::Pair).onEach { (pesquisa, page) ->
             observeSolicitacoes(
                 ObserveSolicitacoes.Params(

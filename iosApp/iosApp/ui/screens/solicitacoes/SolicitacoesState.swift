@@ -29,19 +29,21 @@ class SolicitacoesState: ObservableObject {
     private(set) var uiState: SolicitacoesUiState = SolicitacoesUiState.companion.Empty
     
     init() {
+        print("SolicitacoesState viveu")
         viewModel = SolicitacoesViewModel()
         
-        viewModel.observeUiState{ value in
-            self.uiState = value
+        viewModel.observeUiState{ [weak self] value in
+            self?.uiState = value
         }
     }
     
     deinit {
+        print("SolicitacoesState morreu")
         viewModel.dispose()
     }
     
-    func refresh(page: Int64 = 0, tipo: TipoSolicitacao){
-        viewModel.buscarSolicitacoes(page: page, tipoSolicitacao: tipo, callback: {})
+    func refresh(page: Int64 = 0){
+        viewModel.setPage(page: page)
     }
     
     func responderSolicitacao(solicitacao: SolicitacaoAceite, resposta: Bool){

@@ -9,11 +9,11 @@
 import SwiftUI
 import shared
 
+
 struct SolicitacoesView: View {
     
     @Binding var path: NavigationPath
     @StateObject var state: SolicitacoesState
-    
     
     init(path: Binding<NavigationPath>) {
         _path = path
@@ -27,7 +27,7 @@ struct SolicitacoesView: View {
             SearchWithFilterView(
                 searchText: $state.search,
                 selectedFilter: $state.filter,
-                refresh: { tipo in state.refresh(page: 1, tipo: tipo) }
+                refresh: { tipo in state.refresh(page: 1) }
             )
             if(state.uiState.solicitacoes.isEmpty){
                 SemDados(label: "Sem solicitações no momento")
@@ -46,7 +46,7 @@ struct SolicitacoesView: View {
                 }
                 Pagination(currentPage: state.uiState.paginacao.page,
                            totalPages: state.uiState.paginacao.totalPaginas,
-                           onPageChange: { page in state.refresh(page: page, tipo: state.filter)}
+                           onPageChange: { page in state.refresh(page: page)}
                 )
             }
         }

@@ -30,12 +30,6 @@ actual val platformModule = module {
     single { AppChecker }
     single<AppArcomStorage> { AppArcomStorage(createDataStore()) }
     single<PreferencesManager> { IOSPreferencesManager() }
-
-    factory { HomeViewModel() }
-    factory { SolicitacoesViewModel() }
-    factory { (id: String) -> DetalhesSolicitacaoViewModel(id) }
-    factory { LoginViewModel() }
-    factory { AppViewModel() }
 }
 
 @BetaInteropApi

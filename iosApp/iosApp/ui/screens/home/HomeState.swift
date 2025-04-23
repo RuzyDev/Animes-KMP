@@ -19,8 +19,8 @@ class HomeState: ObservableObject {
     init() {
         viewModel = HomeViewModel()
         
-        viewModel.observeUiState{ value in
-            self.uiState = value
+        viewModel.observeUiState{ [weak self] value in
+            self?.uiState = value
         }
     }
     

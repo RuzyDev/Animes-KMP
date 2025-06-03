@@ -55,6 +55,14 @@ kotlin {
             implementation(libs.ktor.client.ios)
         }
     }
+
+    val cocoapods by getting {
+        // ...
+        pod("Firebase/Core") // Verifique a versão mais recente e estável do Firebase iOS
+        pod("Firebase/Messaging") // Verifique a versão mais recente e estável do Firebase iOS
+        // Você pode especificar a versão: pod("Firebase/Messaging", version = "10.25.0")
+        // Use a versão que funciona para você. Evite usar ">=" ou "~>" em produção.
+    }
 }
 
 

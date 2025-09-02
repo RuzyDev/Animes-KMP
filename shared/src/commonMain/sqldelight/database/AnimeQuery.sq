@@ -1,0 +1,36 @@
+CREATE TABLE AnimeQueryEntity (
+    query_type TEXT NOT NULL,
+    query_param TEXT,
+    current_page INTEGER NOT NULL,
+    last_visible_page INTEGER NOT NULL,
+    has_next_page INTEGER NOT NULL, -- 0 = false, 1 = true
+    total_items INTEGER NOT NULL,
+    per_page INTEGER NOT NULL,
+    PRIMARY KEY (query_type, query_param)
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeQueryEntity (
+   query_type,
+   query_param,
+   current_page,
+   last_visible_page,
+   has_next_page,
+   total_items,
+   per_page
+) VALUES (?,?,?,?,?,?,?);
+
+getQuery:
+SELECT * FROM AnimeQueryEntity WHERE query_type = :type AND query_param = :param;
+
+getAnimes:
+SELECT aq.*, a.*
+FROM AnimeQueryEntity aq
+LEFT JOIN AnimeQueryCrossRefEntity aqc
+    ON aq.query_type   = aqc.query_type
+   AND aq.query_param  = aqc.query_param
+   AND aq.current_page = aqc.page
+LEFT JOIN AnimeEntity a
+   ON a.id           = aqc.anime_id
+WHERE aq.query_type  = :type
+  AND aq.query_param = :param;

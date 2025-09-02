@@ -60,7 +60,7 @@ kotlin {
 
 android {
     namespace = "br.com.arcom.apparcom"
-    compileSdk = 34
+    compileSdk = 36
     defaultConfig {
         minSdk = 26
     }

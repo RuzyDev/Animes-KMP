@@ -2,6 +2,6 @@ package br.com.arcom.apparcom.util
 
 object ConstantsShared {
 
-    const val BASE_URL = "cdn02.arcom.com.br"
-    const val VERSAO_APP = "1.0.2"
+    const val BASE_URL = "api.jikan.moe"
+    const val VERSAO_APP = "1.0.0"
 }

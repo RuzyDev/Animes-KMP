@@ -1,0 +1,53 @@
+CREATE TABLE AnimeEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    url TEXT,
+    approved INTEGER,        -- 0 = false, 1 = true
+    title TEXT,
+    title_english TEXT,
+    title_japanese TEXT,
+    type TEXT,
+    source TEXT,
+    episodes INTEGER,
+    status TEXT,
+    airing INTEGER,          -- 0 = false, 1 = true
+    duration TEXT,
+    rating TEXT,
+    score REAL,
+    scored_by INTEGER,
+    rank INTEGER,
+    popularity INTEGER,
+    members INTEGER,
+    favorites INTEGER,
+    synopsis TEXT,
+    background TEXT,
+    season TEXT,
+    year TEXT
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeEntity (
+   id,
+   url,
+   approved,
+   title,
+   title_english,
+   title_japanese,
+   type,
+   source,
+   episodes,
+   status,
+   airing,
+   duration,
+   rating,
+   score,
+   scored_by,
+   rank,
+   popularity,
+   members,
+   favorites,
+   synopsis,
+   background,
+   season,
+   year
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+

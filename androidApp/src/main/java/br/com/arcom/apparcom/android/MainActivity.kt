@@ -21,23 +21,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val viewModel: AppViewModel = koinInject()
-            val atualizacao: AtualizacaoViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-            val atualizacaoUiState by atualizacao.uiState.collectAsStateWithLifecycle()
 
             AppArcomTheme {
-                uiState.logado?.let { logado ->
-                    if (logado) {
-                        AppArcomApp(
-                            uiState = uiState,
-                            atualizacao = atualizacaoUiState,
-                            baixarAtualizacao = atualizacao::baixarAtualizacao,
-                            clearUltimaVersao = viewModel::clearUltimaVersao
-                        )
-                    } else {
-                        LoginRoute()
-                    }
-                }
+               AppArcomApp()
             }
         }
     }

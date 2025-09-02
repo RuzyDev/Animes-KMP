@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -57,51 +58,14 @@ import kotlin.reflect.KClass
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AppArcomApp(
-    appState: AppArcomState = rememberAppArcomState(),
-    windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
-    uiState: AppUiState,
-    atualizacao: AtualizacaoUiState,
-    baixarAtualizacao: (
-        idUsuario: Long,
-        ultimaVersao: String,
-        baixarNovamente: Boolean,
-        abrirApk: (String) -> Unit,
-        onError: (String) -> Unit
-    ) -> Unit,
-    clearUltimaVersao: () -> Unit
+    appState: AppArcomState = rememberAppArcomState()
 ) {
-    val context = LocalContext.current
-
-    if (atualizacao.atualizacao.possuiAtualizacao) {
-        BaixarAtualizacaoDialog(
-            onBaixarClick = { baixarNovamente ->
-                baixarAtualizacao(
-                    uiState.usuario!!.id,
-                    atualizacao.atualizacao.ultimaVersao,
-                    baixarNovamente,
-                    {
-                        instalarApk(context = context, file = it) { erro ->
-                            Toast.makeText(context, erro, Toast.LENGTH_LONG).show()
-                        }
-                    },
-                    {
-                        Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-                    }
-                )
-            },
-            closeDialog = clearUltimaVersao,
-            progress = atualizacao.progress,
-            versaoAtualMuitoAntiga = versaoAtualMuitoAntiga(atualizacao.atualizacao.ultimaVersao),
-            versaoInstalada = atualizacao.atualizacao.versaoInstalada
-        )
-    }
-
     Scaffold(
         modifier = Modifier.semantics {
             testTagsAsResourceId = true
         },
         contentColor = MaterialTheme.colorScheme.onBackground,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+        contentWindowInsets = WindowInsets.safeDrawing
     ) { padding ->
         AppArcomNavHost(
             appState = appState,
@@ -111,100 +75,3 @@ fun AppArcomApp(
         )
     }
 }
-
-@Composable
-fun DrawerAppArcom(
-    appState: AppArcomState, currentDestination: NavDestination?,
-    closeDrawer: () -> Unit,
-    usuario: Usuario?
-) {
-    val state = rememberScrollState()
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier
-            .clip(RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainer)
-            .fillMaxWidth(0.9f)
-            .fillMaxHeight()
-            .verticalScroll(state)
-    ) {
-        Row(
-            Modifier
-                .padding(top = 16.dp, bottom = 8.dp)
-                .fillMaxWidth(.9f),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                Modifier
-                    .weight(1f)
-                    .padding(end = 4.dp)
-            ) {
-                usuario?.let {
-                    Text(
-                        text = it.nome,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        text = it.id.toString(),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
-            AppArcomIcons.CLOSE.Composable(
-                modifier = Modifier
-                    .size(24.dp)
-                    .clickable(
-                        onClick = closeDrawer,
-                        indication = null,
-                        interactionSource = null
-                    ),
-                tint = MaterialTheme.colorScheme.onSurface
-            )
-        }
-        HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.divider())
-
-        appState.topLevelDestinations.forEach { destination ->
-            val selected = currentDestination.isRouteInHierarchy(destination.route)
-            NavigationDrawerItem(
-                label = { Text(text = stringResource(destination.iconTextId)) },
-                selected = selected,
-                onClick = {
-                    appState.navigateToTopLevelDestination(destination)
-                    closeDrawer()
-                },
-                icon = { destination.unselectedIcon.Composable() },
-                modifier = Modifier.fillMaxWidth(.9f)
-            )
-        }
-    }
-}
-
-private fun Modifier.notificationDot(): Modifier =
-    composed {
-        val tertiaryColor = MaterialTheme.colorScheme.tertiary
-        drawWithContent {
-            drawContent()
-            drawCircle(
-                tertiaryColor,
-                radius = 5.dp.toPx(),
-                // This is based on the dimensions of the NavigationBar's "indicator pill";
-                // however, its parameters are private, so we must depend on them implicitly
-                // (NavigationBarTokens.ActiveIndicatorWidth = 64.dp)
-                center = center + Offset(
-                    64.dp.toPx() * .45f,
-                    32.dp.toPx() * -.45f - 6.dp.toPx(),
-                ),
-            )
-        }
-    }
-
-private fun NavDestination?.isRouteInHierarchy(route: KClass<*>) =
-    this?.hierarchy?.any {
-        it.hasRoute(route)
-    } ?: false
-

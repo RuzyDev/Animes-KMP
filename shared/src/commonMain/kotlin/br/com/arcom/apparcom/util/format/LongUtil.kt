@@ -11,3 +11,5 @@ fun formatBytes(bytes: Long): String {
         "${bytes / 1048576} MB"
     }
 }
+
+fun Long?.toBoolean() = this == 1L

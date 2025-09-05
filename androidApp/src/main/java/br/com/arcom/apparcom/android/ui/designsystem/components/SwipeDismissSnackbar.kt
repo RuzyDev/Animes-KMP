@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import br.com.arcom.apparcom.designsystem.theme.Amarelo
+import br.com.arcom.apparcom.android.ui.designsystem.theme.Amarelo
 import br.com.arcom.apparcom.presentation.util.MessageType
 import br.com.arcom.apparcom.presentation.util.UiMessage
 

@@ -1,7 +1,8 @@
 CREATE TABLE AnimeQueryCrossRefEntity (
     query_type TEXT NOT NULL,
-    query_param TEXT,
+    query_param TEXT NOT NULL,
     page INTEGER NOT NULL,
+    position INTEGER NOT NULL,
     anime_id INTEGER NOT NULL,
     PRIMARY KEY (query_type, query_param, page, anime_id),
     FOREIGN KEY (query_type, query_param) REFERENCES AnimeQueryEntity(query_type, query_param) ON DELETE CASCADE,
@@ -13,9 +14,19 @@ INSERT OR REPLACE INTO AnimeQueryCrossRefEntity (
    query_type,
    query_param,
    page,
+   position,
    anime_id
-) VALUES (?,?,?, ?);
+) VALUES (?,?,?, ?, ?);
 
 deleteByPage:
 DELETE FROM AnimeQueryCrossRefEntity WHERE query_type = :type AND query_param = :param AND page = :page;
 
+getAnimes:
+SELECT a.*
+    FROM AnimeQueryCrossRefEntity aqc
+    INNER JOIN AnimeEntity a
+      ON a.id = aqc.anime_id
+    WHERE aqc.query_type = :queryType
+      AND aqc.query_param = :queryParam
+      AND aqc.page = :page
+    ORDER BY position ASC;

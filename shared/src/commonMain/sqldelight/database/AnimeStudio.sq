@@ -1,0 +1,16 @@
+CREATE TABLE AnimeStudioEntity (
+    anime_id INTEGER NOT NULL,
+    type TEXT,
+    name TEXT,
+    url TEXT,
+    PRIMARY KEY (anime_id, name),
+    FOREIGN KEY (anime_id) REFERENCES AnimeEntity(id) ON DELETE CASCADE
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeStudioEntity (
+    anime_id,
+    type,
+    name,
+    url
+) VALUES (?, ?, ?, ?);

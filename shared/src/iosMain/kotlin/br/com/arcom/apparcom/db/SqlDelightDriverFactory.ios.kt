@@ -2,10 +2,10 @@ package br.com.arcom.apparcom.db
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
-import br.com.arcom.apparcom.database.AppArcomDatabase
+import br.com.arcom.apparcom.database.AppAnimeDatabase
 
 actual class SqlDelightDriverFactory {
     actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(AppArcomDatabase.Schema, "apparcom.db")
+        return NativeSqliteDriver(AppAnimeDatabase.Schema, "apparcom.db")
     }
 }

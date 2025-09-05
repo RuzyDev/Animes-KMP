@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.android.ui.screens.solicitacao.solicitacoes
 
-import AppArcomIcons
+import AppAnimeIcons
 import Composable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -37,22 +37,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomTopBar
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeScaffold
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeTopBar
 import br.com.arcom.apparcom.android.ui.designsystem.components.NaoEncontrado
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcomCard
-import br.com.arcom.apparcom.designsystem.theme.Verde
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppAnimeCard
+import br.com.arcom.apparcom.android.ui.designsystem.theme.Verde
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.SolicitacoesUiState
 import br.com.arcom.apparcom.presentation.SolicitacoesViewModel
 import br.com.arcom.apparcom.android.R
 import br.com.arcom.apparcom.android.ui.designsystem.components.DialogCheck
-import br.com.arcom.apparcom.designsystem.theme.lightColor
 import br.com.arcom.apparcom.model.solicitacao.StatusSolicitacao
 import br.com.arcom.apparcom.model.solicitacao.TipoSolicitacao
-import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextFieldPesquisa
+import br.com.arcom.apparcom.ui.designsystem.components.text.AppAnimeTextFieldPesquisa
 import br.com.arcom.apparcom.util.format.formatBrasil
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -106,12 +104,12 @@ private fun SolicitacoesScreen(
         )
     }
 
-    AppArcomScaffold(
+    AppAnimeScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         topBar = {
-            AppArcomTopBar(
+            AppAnimeTopBar(
                 title = stringResource(R.string.solicitacoes),
                 onBackClick = onBackClick,
                 onRefresh = { setPage(1) }
@@ -131,7 +129,7 @@ private fun SolicitacoesScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                AppArcomTextFieldPesquisa(
+                AppAnimeTextFieldPesquisa(
                     modifier = Modifier.weight(1f),
                     text = pesquisa,
                     setText = {
@@ -139,7 +137,7 @@ private fun SolicitacoesScreen(
                         setSearch(it)
                     }
                 )
-                AppArcomIcons.FILTRO.Composable(
+                AppAnimeIcons.FILTRO.Composable(
                     modifier = Modifier
                         .size(32.dp)
                         .clickable(
@@ -205,7 +203,7 @@ fun Pagination(
     ) {
         // Botão de página anterior
         val voltarHabilitado = currentPage > 1
-        AppArcomIcons.VOLTAR.Composable(
+        AppAnimeIcons.VOLTAR.Composable(
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .size(36.dp)
@@ -247,7 +245,7 @@ fun Pagination(
 
         // Botão de página seguinte
         val proximoHabilitado = currentPage < totalPages
-        AppArcomIcons.AVANCAR.Composable(
+        AppAnimeIcons.AVANCAR.Composable(
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .size(36.dp)
@@ -269,7 +267,7 @@ fun CardSolicitacao(
 ) {
     Row(
         modifier = Modifier
-            .clip(CornerShapeAppArcomCard)
+            .clip(CornerShapeAppAnimeCard)
             .clickable { verDetalhes(solicitacao.id) }
             .fillMaxWidth(.9f)
             .background(MaterialTheme.colorScheme.surfaceContainer)

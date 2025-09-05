@@ -1,0 +1,15 @@
+CREATE TABLE AnimeAiredEntity (
+    anime_id INTEGER NOT NULL PRIMARY KEY,
+    from_date TEXT,
+    to_date TEXT,
+    string TEXT,
+    FOREIGN KEY (anime_id) REFERENCES AnimeEntity(id) ON DELETE CASCADE
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeAiredEntity (
+    anime_id,
+    from_date,
+    to_date,
+    string
+) VALUES (?, ?, ?, ?);

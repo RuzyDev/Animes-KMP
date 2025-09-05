@@ -1,0 +1,26 @@
+CREATE TABLE AnimeTrailerEntity (
+    anime_id INTEGER NOT NULL,
+    youtube_id TEXT NOT NULL,
+    url TEXT,
+    embed_url TEXT,
+    image_url TEXT,
+    small_image_url TEXT,
+    medium_image_url TEXT,
+    large_image_url TEXT,
+    maximum_image_url TEXT,
+    PRIMARY KEY (anime_id, youtube_id),
+    FOREIGN KEY (anime_id) REFERENCES AnimeEntity(id) ON DELETE CASCADE
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeTrailerEntity (
+    anime_id,
+    youtube_id,
+    url,
+    embed_url,
+    image_url,
+    small_image_url,
+    medium_image_url,
+    large_image_url,
+    maximum_image_url
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);

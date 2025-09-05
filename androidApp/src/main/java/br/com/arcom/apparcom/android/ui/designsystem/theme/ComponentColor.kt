@@ -4,9 +4,10 @@ import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import br.com.arcom.apparcom.android.ui.designsystem.theme.lightColor
 
 @Composable
-fun iconButtonColorAppArcom() = IconButtonColors(
+fun iconButtonColorAppAnime() = IconButtonColors(
     containerColor = Color.Transparent,
     contentColor = MaterialTheme.colorScheme.primary,
     disabledContainerColor = Color.Transparent,

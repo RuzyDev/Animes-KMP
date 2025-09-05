@@ -29,11 +29,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomTopBar
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
-import br.com.arcom.apparcom.designsystem.theme.Verde
-import br.com.arcom.apparcom.designsystem.theme.divider
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeScaffold
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeTopBar
+import br.com.arcom.apparcom.android.ui.designsystem.theme.Verde
+import br.com.arcom.apparcom.android.ui.designsystem.theme.divider
 import br.com.arcom.apparcom.model.solicitacao.SolicitacaoAceite
 import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoUiState
 import br.com.arcom.apparcom.presentation.DetalhesSolicitacaoViewModel
@@ -67,12 +66,12 @@ fun DetalhesSolicitacaoScreen(
     responderSolicitacao: (SolicitacaoAceite, Boolean) -> Unit,
 ) {
 
-    AppArcomScaffold(
+    AppAnimeScaffold(
         modifier = Modifier.fillMaxSize(),
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         topBar = {
-            AppArcomTopBar(
+            AppAnimeTopBar(
                 title = stringResource(R.string.solicitacao),
                 onBackClick = onBackClick,
             )

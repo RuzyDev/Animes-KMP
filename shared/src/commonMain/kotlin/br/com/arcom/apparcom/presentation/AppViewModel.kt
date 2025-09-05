@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.presentation
 
-import br.com.arcom.apparcom.data.AndroidAppArcomFiles
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.AndroidAppAnimeFiles
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.Keys
 import br.com.arcom.apparcom.domain.interactor.AtualizarVersaoApp
 import br.com.arcom.apparcom.domain.interactor.RealizarAtualizacao
@@ -21,7 +21,7 @@ import org.koin.core.component.inject
 
 class AppViewModel : CoroutineViewModel(), KoinComponent {
 
-    private val appArcomStorage: AppArcomStorage by inject()
+    private val appArcomStorage: AppAnimeStorage by inject()
     private val observeUsuario: ObserveUsuario by inject()
 
     private val _logado = appArcomStorage.getBooleanStream(Keys.LOGADO)

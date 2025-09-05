@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.android.ui.designsystem.components
 
-import AppArcomIcons
+import AppAnimeIcons
 import Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun AppArcomTopBar(
+fun AppAnimeTopBar(
     title: String,
     onBackClick: (() -> Unit)? = null,
     onRefresh: (() -> Unit)? = null,
@@ -36,7 +36,7 @@ fun AppArcomTopBar(
                 onClick = onBackClick,
                 modifier = Modifier.align(Alignment.CenterStart)
             ) {
-                AppArcomIcons.VOLTAR.Composable(
+                AppAnimeIcons.VOLTAR.Composable(
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                 )
@@ -60,7 +60,7 @@ fun AppArcomTopBar(
                 IconButton(
                     onClick = onRefresh
                 ) {
-                    AppArcomIcons.RECARREGAR.Composable(
+                    AppAnimeIcons.RECARREGAR.Composable(
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -71,7 +71,7 @@ fun AppArcomTopBar(
 }
 
 @Composable
-fun AppArcomTopBarDrawer(
+fun AppAnimeTopBarDrawer(
     title: String,
     openDrawer: () -> Unit
 ) {
@@ -85,7 +85,7 @@ fun AppArcomTopBarDrawer(
             onClick = openDrawer,
             modifier = Modifier.align(Alignment.CenterStart)
         ) {
-            AppArcomIcons.MENU.Composable(
+            AppAnimeIcons.MENU.Composable(
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
             )

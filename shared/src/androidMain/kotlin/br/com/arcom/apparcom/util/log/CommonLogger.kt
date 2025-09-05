@@ -1,9 +1,9 @@
 package br.com.arcom.apparcom.util.log
 
+import android.util.Log
+
 actual interface CommonLogger {
     actual fun log(tag:String, message:String){
-//        if(BuildConfig.DEBUG){
-//            Log.d(BuildConfig.BUILD_TYPE, message)
-//        }
+         Log.d(tag, message)
     }
 }

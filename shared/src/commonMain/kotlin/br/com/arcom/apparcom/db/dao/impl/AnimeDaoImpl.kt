@@ -34,6 +34,9 @@ class AnimeDaoImpl(
             background = anime.background,
             season = anime.season,
             year = anime.year,
+            image = anime.images?.jpg?.imageUrl,
+            image_small = anime.images?.jpg?.smallImageUrl,
+            image_large = anime.images?.jpg?.largeImageUrl
         )
     }
 

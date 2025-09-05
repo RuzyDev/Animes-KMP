@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.presentation
 
-import br.com.arcom.apparcom.data.AndroidAppArcomFiles
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.AndroidAppAnimeFiles
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.Keys
 import br.com.arcom.apparcom.domain.interactor.AtualizarVersaoApp
 import br.com.arcom.apparcom.domain.interactor.RealizarAtualizacao
@@ -21,16 +21,16 @@ import org.koin.core.component.inject
 
 class AtualizacaoViewModel : CoroutineViewModel(), KoinComponent {
 
-    private val appArcomStorage: AppArcomStorage by inject()
+    private val appArcomStorage: AppAnimeStorage by inject()
     private val realizarAtualizacao: RealizarAtualizacao by inject()
     private val atualizarVersaoApp: AtualizarVersaoApp by inject()
-    private val androidAppArcomFiles: AndroidAppArcomFiles by inject()
+    private val androidAppAnimeFiles: AndroidAppAnimeFiles by inject()
     private val _atualizacao = appArcomStorage.getStringStream(Keys.VERSAO_APP).map {
         if (it.isEmpty()) {
             false to it
             AtualizacaoApp(false, it, false)
         } else {
-            val versaoInstalada = androidAppArcomFiles.getFile("apparcom-$it.apk") != null
+            val versaoInstalada = androidAppAnimeFiles.getFile("apparcom-$it.apk") != null
             val versaoAtual = VersaoApp.parseVersao(ConstantsShared.VERSAO_APP)
             val ultimaVersao = VersaoApp.parseVersao(it)
             val possui = if (versaoAtual != null && ultimaVersao != null) {

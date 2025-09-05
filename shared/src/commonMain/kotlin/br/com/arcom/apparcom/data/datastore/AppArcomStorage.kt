@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class AppArcomStorage(
+class AppAnimeStorage(
     private val dataStore: DataStore<Preferences>
 ) {
     fun getStringStream(key: Keys): Flow<String> {

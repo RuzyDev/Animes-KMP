@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Environment
 import java.io.File
 
-actual class AndroidAppArcomFiles(
+actual class AndroidAppAnimeFiles(
     private val context: Context
 ) {
     private val downloadsDir: File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)

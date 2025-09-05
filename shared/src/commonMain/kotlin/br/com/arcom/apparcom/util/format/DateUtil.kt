@@ -1,6 +1,5 @@
 package br.com.arcom.apparcom.util.format
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
@@ -8,12 +7,14 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
 
 @OptIn(FormatStringsInDatetimeFormats::class)
 fun LocalDateTime.formatBrasil() = this.format(LocalDateTime.Format { byUnicodePattern("dd/MM/yyyy HH:mm:ss") })
 
+@OptIn(ExperimentalTime::class)
 fun dataHoraAtual(): LocalDateTime{
-    val current = Clock.System.now()
+    val current = kotlin.time.Clock.System.now()
     return current.toLocalDateTime(TimeZone.currentSystemDefault())
 }
 

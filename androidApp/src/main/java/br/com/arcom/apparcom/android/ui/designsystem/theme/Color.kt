@@ -1,68 +1,80 @@
-package br.com.arcom.apparcom.designsystem.theme
+package br.com.arcom.apparcom.android.ui.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-val light_primary = Color(0xFF006590)
-val light_onPrimary = Color(0xFFFFFFFF)
-val light_primaryContainer = Color(0xFFC8E6FF)
-val light_onPrimaryContainer = Color(0xFF001E2F)
-val light_secondary = Color(0xFF4F606E)
+// ---------- LIGHT THEME ----------
+val light_primary = Color(0xFF6750A4)         // Roxo principal
+val light_onPrimary = Color(0xFFFFFFFF)       // Texto/branco sobre roxo
+val light_primaryContainer = Color(0xFFEADDFF) // Roxo bem claro (container)
+val light_onPrimaryContainer = Color(0xFF21005D) // Texto sobre container roxo
+
+// Mantive os outros como estavam, mas você pode ajustar se quiser harmonia
+val light_secondary = Color(0xFF625B71)
 val light_onSecondary = Color(0xFFFFFFFF)
-val light_secondaryContainer = Color(0xFFD3E5F5)
-val light_onSecondaryContainer = Color(0xFF0B1D29)
-val light_tertiary = Color(0xFF006494)
+val light_secondaryContainer = Color(0xFFE8DEF8)
+val light_onSecondaryContainer = Color(0xFF1D192B)
+
+val light_tertiary = Color(0xFF7D5260)
 val light_onTertiary = Color(0xFFFFFFFF)
-val light_tertiaryContainer = Color(0xFFCBE6FF)
-val light_onTertiaryContainer = Color(0xFF001E30)
+val light_tertiaryContainer = Color(0xFFFFD8E4)
+val light_onTertiaryContainer = Color(0xFF31111D)
+
 val light_error = Color(0xFFBA1A1A)
 val light_errorContainer = Color(0xFFFFDAD6)
 val light_onError = Color(0xFFFFFFFF)
 val light_onErrorContainer = Color(0xFF410002)
+
 val light_background = Color(0xFFFCFCFF)
 val light_onBackground = Color(0xFF191C1E)
 val light_surface = Color(0xFFFCFCFF)
 val light_onSurface = Color(0xFF191C1E)
-val light_surfaceVariant = Color(0xFFDDE3EA)
-val light_onSurfaceVariant = Color(0xFF41474D)
-val light_outline = Color(0xFF71787E)
-val light_inverseOnSurface = Color(0xFFF0F0F3)
-val light_inverseSurface = Color(0xFF2E3133)
-val light_inversePrimary = Color(0xFF89CEFF)
+val light_surfaceVariant = Color(0xFFE7E0EC)
+val light_onSurfaceVariant = Color(0xFF49454F)
+val light_outline = Color(0xFF79747E)
+val light_inverseOnSurface = Color(0xFFF4EFF4)
+val light_inverseSurface = Color(0xFF313033)
+val light_inversePrimary = Color(0xFFD0BCFF)
 val light_shadow = Color(0xFF000000)
-val light_surfaceTint = Color(0xFF006590)
-val light_outlineVariant = Color(0xFFC1C7CE)
+val light_surfaceTint = light_primary
+val light_outlineVariant = Color(0xFFCAC4D0)
 val light_scrim = Color(0xFF000000)
 
-val dark_primary = Color(0xFF89CEFF)
-val dark_onPrimary = Color(0xFF00344D)
-val dark_primaryContainer = Color(0xFF004C6E)
-val dark_onPrimaryContainer = Color(0xFFC8E6FF)
-val dark_secondary = Color(0xFFB7C9D9)
-val dark_onSecondary = Color(0xFF21323F)
-val dark_secondaryContainer = Color(0xFF384956)
-val dark_onSecondaryContainer = Color(0xFFD3E5F5)
-val dark_tertiary = Color(0xFF8ECDFF)
-val dark_onTertiary = Color(0xFF00344F)
-val dark_tertiaryContainer = Color(0xFF004B71)
-val dark_onTertiaryContainer = Color(0xFFCBE6FF)
+// ---------- DARK THEME ----------
+val dark_primary = Color(0xFFD0BCFF)          // Roxo claro no dark
+val dark_onPrimary = Color(0xFF381E72)
+val dark_primaryContainer = Color(0xFF4F378B)
+val dark_onPrimaryContainer = Color(0xFFEADDFF)
+
+val dark_secondary = Color(0xFFCCC2DC)
+val dark_onSecondary = Color(0xFF332D41)
+val dark_secondaryContainer = Color(0xFF4A4458)
+val dark_onSecondaryContainer = Color(0xFFE8DEF8)
+
+val dark_tertiary = Color(0xFFEFB8C8)
+val dark_onTertiary = Color(0xFF492532)
+val dark_tertiaryContainer = Color(0xFF633B48)
+val dark_onTertiaryContainer = Color(0xFFFFD8E4)
+
 val dark_error = Color(0xFFFFB4AB)
 val dark_errorContainer = Color(0xFF93000A)
 val dark_onError = Color(0xFF690005)
 val dark_onErrorContainer = Color(0xFFFFDAD6)
-val dark_background = Color(0xFF191C1E)
-val dark_onBackground = Color(0xFFE2E2E5)
-val dark_surface = Color(0xFF191C1E)
-val dark_onSurface = Color(0xFFE2E2E5)
-val dark_surfaceVariant = Color(0xFF41474D)
-val dark_onSurfaceVariant = Color(0xFFC1C7CE)
-val dark_outline = Color(0xFF8B9198)
-val dark_inverseOnSurface = Color(0xFF191C1E)
-val dark_inverseSurface = Color(0xFFE2E2E5)
-val dark_inversePrimary = Color(0xFF006590)
+
+val dark_background = Color(0xFF1C1B1F)
+val dark_onBackground = Color(0xFFE6E1E5)
+val dark_surface = Color(0xFF1C1B1F)
+val dark_onSurface = Color(0xFFE6E1E5)
+val dark_surfaceVariant = Color(0xFF49454F)
+val dark_onSurfaceVariant = Color(0xFFCAC4D0)
+val dark_outline = Color(0xFF938F99)
+val dark_inverseOnSurface = Color(0xFF1C1B1F)
+val dark_inverseSurface = Color(0xFFE6E1E5)
+val dark_inversePrimary = Color(0xFF6750A4)
 val dark_shadow = Color(0xFF000000)
-val dark_surfaceTint = Color(0xFF89CEFF)
-val dark_outlineVariant = Color(0xFF41474D)
+val dark_surfaceTint = dark_primary
+val dark_outlineVariant = Color(0xFF49454F)
 val dark_scrim = Color(0xFF000000)
+
 
 val Verde = Color(0xFF7ED4AD)
 val Amarelo = Color(0xFFFFEB3B)

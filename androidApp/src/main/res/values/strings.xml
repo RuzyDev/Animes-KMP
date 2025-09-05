@@ -50,4 +50,9 @@
     <string name="instalar">Instalar</string>
     <string name="baixar">Baixar</string>
     <string name="baixar_novamente">Baixar novamente</string>
+    <string name="top_animes_in_airing">Melhores em lançamento</string>
+    <string name="top_animes_in_ranking">Melhores animes</string>
+    <string name="lancamentos">Lançamentos</string>
+    <string name="melhores">Melhores</string>
+    <string name="upcoming">Em breve</string>
 </resources>

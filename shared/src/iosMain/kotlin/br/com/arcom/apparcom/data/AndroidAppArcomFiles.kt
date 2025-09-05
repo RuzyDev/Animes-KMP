@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.data
 
-actual class AndroidAppArcomFiles {
+actual class AndroidAppAnimeFiles {
     actual suspend fun saveFile(data: ByteArray, fileName: String): String {
         return ""
     }

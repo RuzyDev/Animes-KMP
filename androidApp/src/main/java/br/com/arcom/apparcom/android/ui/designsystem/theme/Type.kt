@@ -16,7 +16,7 @@ val Poppins = FontFamily(
     Font(R.font.poppins_bold, weight = FontWeight.Bold)
 )
 
-val AppArcomTypography = Typography(
+val AppAnimeTypography = Typography(
     displayLarge = TextStyle(
         fontWeight = FontWeight.W400,
         fontSize = 57.sp,

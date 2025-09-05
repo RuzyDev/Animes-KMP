@@ -1,0 +1,16 @@
+CREATE TABLE AnimeImageEntity (
+    anime_id INTEGER NOT NULL,
+    image_url TEXT NOT NULL,
+    small_image_url TEXT,
+    large_image_url TEXT,
+    PRIMARY KEY (anime_id, image_url),
+    FOREIGN KEY (anime_id) REFERENCES AnimeEntity(id) ON DELETE CASCADE
+);
+
+insertOrUpdate:
+INSERT OR REPLACE INTO AnimeImageEntity (
+    anime_id,
+    image_url,
+    small_image_url,
+    large_image_url
+) VALUES (?, ?, ?, ?);

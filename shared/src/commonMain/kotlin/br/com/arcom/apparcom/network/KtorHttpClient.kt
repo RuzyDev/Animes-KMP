@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.network
 
 import br.com.arcom.apparcom.util.ConstantsShared.BASE_URL
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.Keys
 import br.com.arcom.apparcom.data.preferences.KeysPreferences
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
@@ -25,7 +25,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class KtorHttpClient(
-    private val appArcomStorage: AppArcomStorage,
+    private val appArcomStorage: AppAnimeStorage,
     private val preferencesManager: PreferencesManager
 ) {
     var accessToken = preferencesManager.get(KeysPreferences.ACCESS_TOKEN) ?:  ""

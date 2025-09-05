@@ -9,65 +9,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import br.com.arcom.apparcom.designsystem.theme.DynamicPalette
-import br.com.arcom.apparcom.designsystem.theme.dark_background
-import br.com.arcom.apparcom.designsystem.theme.dark_error
-import br.com.arcom.apparcom.designsystem.theme.dark_errorContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_inverseOnSurface
-import br.com.arcom.apparcom.designsystem.theme.dark_inversePrimary
-import br.com.arcom.apparcom.designsystem.theme.dark_inverseSurface
-import br.com.arcom.apparcom.designsystem.theme.dark_onBackground
-import br.com.arcom.apparcom.designsystem.theme.dark_onError
-import br.com.arcom.apparcom.designsystem.theme.dark_onErrorContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_onPrimary
-import br.com.arcom.apparcom.designsystem.theme.dark_onPrimaryContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_onSecondary
-import br.com.arcom.apparcom.designsystem.theme.dark_onSecondaryContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_onSurface
-import br.com.arcom.apparcom.designsystem.theme.dark_onSurfaceVariant
-import br.com.arcom.apparcom.designsystem.theme.dark_onTertiary
-import br.com.arcom.apparcom.designsystem.theme.dark_onTertiaryContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_outline
-import br.com.arcom.apparcom.designsystem.theme.dark_outlineVariant
-import br.com.arcom.apparcom.designsystem.theme.dark_primary
-import br.com.arcom.apparcom.designsystem.theme.dark_primaryContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_scrim
-import br.com.arcom.apparcom.designsystem.theme.dark_secondary
-import br.com.arcom.apparcom.designsystem.theme.dark_secondaryContainer
-import br.com.arcom.apparcom.designsystem.theme.dark_surface
-import br.com.arcom.apparcom.designsystem.theme.dark_surfaceTint
-import br.com.arcom.apparcom.designsystem.theme.dark_surfaceVariant
-import br.com.arcom.apparcom.designsystem.theme.dark_tertiary
-import br.com.arcom.apparcom.designsystem.theme.dark_tertiaryContainer
 import br.com.arcom.apparcom.designsystem.theme.dynamicTonalPalette
-import br.com.arcom.apparcom.designsystem.theme.light_background
-import br.com.arcom.apparcom.designsystem.theme.light_error
-import br.com.arcom.apparcom.designsystem.theme.light_errorContainer
-import br.com.arcom.apparcom.designsystem.theme.light_inverseOnSurface
-import br.com.arcom.apparcom.designsystem.theme.light_inversePrimary
-import br.com.arcom.apparcom.designsystem.theme.light_inverseSurface
-import br.com.arcom.apparcom.designsystem.theme.light_onBackground
-import br.com.arcom.apparcom.designsystem.theme.light_onError
-import br.com.arcom.apparcom.designsystem.theme.light_onErrorContainer
-import br.com.arcom.apparcom.designsystem.theme.light_onPrimary
-import br.com.arcom.apparcom.designsystem.theme.light_onPrimaryContainer
-import br.com.arcom.apparcom.designsystem.theme.light_onSecondary
-import br.com.arcom.apparcom.designsystem.theme.light_onSecondaryContainer
-import br.com.arcom.apparcom.designsystem.theme.light_onSurface
-import br.com.arcom.apparcom.designsystem.theme.light_onSurfaceVariant
-import br.com.arcom.apparcom.designsystem.theme.light_onTertiary
-import br.com.arcom.apparcom.designsystem.theme.light_onTertiaryContainer
-import br.com.arcom.apparcom.designsystem.theme.light_outline
-import br.com.arcom.apparcom.designsystem.theme.light_outlineVariant
-import br.com.arcom.apparcom.designsystem.theme.light_primary
-import br.com.arcom.apparcom.designsystem.theme.light_primaryContainer
-import br.com.arcom.apparcom.designsystem.theme.light_scrim
-import br.com.arcom.apparcom.designsystem.theme.light_secondary
-import br.com.arcom.apparcom.designsystem.theme.light_secondaryContainer
-import br.com.arcom.apparcom.designsystem.theme.light_surface
-import br.com.arcom.apparcom.designsystem.theme.light_surfaceTint
-import br.com.arcom.apparcom.designsystem.theme.light_surfaceVariant
-import br.com.arcom.apparcom.designsystem.theme.light_tertiary
-import br.com.arcom.apparcom.designsystem.theme.light_tertiaryContainer
 
 
 private val LightColors = lightColorScheme(
@@ -206,7 +148,7 @@ private fun darkColorsDynamic(palette: DynamicPalette) = darkColorScheme(
 )
 
 @Composable
-fun AppArcomTheme(
+fun AppAnimeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicColor: Boolean = true,
     content: @Composable () -> Unit
@@ -226,7 +168,7 @@ fun AppArcomTheme(
 
     MaterialTheme(
         colorScheme = myColorScheme,
-        typography = AppArcomTypography,
+        typography = AppAnimeTypography,
         content = content
     )
 }

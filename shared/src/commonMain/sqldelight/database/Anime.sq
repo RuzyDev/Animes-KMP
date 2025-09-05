@@ -21,7 +21,10 @@ CREATE TABLE AnimeEntity (
     synopsis TEXT,
     background TEXT,
     season TEXT,
-    year TEXT
+    year TEXT,
+    image TEXT,
+    image_small TEXT,
+    image_large TEXT
 );
 
 insertOrUpdate:
@@ -48,6 +51,9 @@ INSERT OR REPLACE INTO AnimeEntity (
    synopsis,
    background,
    season,
-   year
-) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+   year,
+   image,
+   image_small,
+   image_large
+) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,? ,?);
 

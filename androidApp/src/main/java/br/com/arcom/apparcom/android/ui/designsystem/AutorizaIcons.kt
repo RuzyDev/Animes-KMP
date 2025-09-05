@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
@@ -42,11 +41,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
-import br.com.arcom.apparcom.designsystem.theme.lightColor
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppAnime
+import br.com.arcom.apparcom.android.ui.designsystem.theme.lightColor
 import br.com.arcom.apparcom.android.R
 
-enum class AppArcomIcons(val icon: TypeIcon, val title: Int) {
+enum class AppAnimeIcons(val icon: TypeIcon, val title: Int) {
     PESQUISA(
         TypeIcon.ImageVectorTypeIcon(Icons.Default.Search),
         R.string.pesquisa
@@ -142,7 +141,7 @@ fun Boolean.IconExpanded(tint: Color) {
 }
 
 @Composable
-fun AppArcomIcons.Composable(
+fun AppAnimeIcons.Composable(
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current
 ) {
@@ -171,7 +170,7 @@ fun AppArcomIcons.Composable(
 }
 
 @Composable
-fun AppArcomIcons.ExtendedFloating(
+fun AppAnimeIcons.ExtendedFloating(
     title: Int? = null,
     onClick: () -> Unit
 ) {
@@ -218,7 +217,7 @@ fun AppArcomIcons.ExtendedFloating(
 }
 
 @Composable
-fun AppArcomIcons.Floating(
+fun AppAnimeIcons.Floating(
     onClick: () -> Unit
 ) {
     when (this.icon) {
@@ -256,7 +255,7 @@ fun AppArcomIcons.Floating(
 
 
 @Composable
-fun AppArcomIcons.IconButton(
+fun AppAnimeIcons.IconButton(
     modifier: Modifier = Modifier,
     colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     notification: Boolean = false,
@@ -306,14 +305,14 @@ fun AppArcomIcons.IconButton(
 }
 
 @Composable
-fun AppArcomIcons.ComposableButton(
+fun AppAnimeIcons.ComposableButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     val icon = this.icon
     Button(
         onClick = onClick,
-        shape = CornerShapeAppArcom,
+        shape = CornerShapeAppAnime,
         contentPadding = PaddingValues(8.dp),
         modifier = modifier.size(42.dp),
         colors = ButtonColors(

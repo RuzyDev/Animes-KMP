@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.ui.designsystem.components.text
 
-import AppArcomIcons
+import AppAnimeIcons
 import Composable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -45,17 +45,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import br.com.arcom.apparcom.R
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppAnime
 import br.com.arcom.apparcom.android.utils.conditional
 import br.com.arcom.apparcom.android.utils.shake
-import br.com.arcom.apparcom.designsystem.theme.lightColor
-import br.com.arcom.apparcom.designsystem.theme.secondaryColor
+import br.com.arcom.apparcom.android.ui.designsystem.theme.lightColor
+import br.com.arcom.apparcom.android.ui.designsystem.theme.secondaryColor
 import br.com.arcom.apparcom.util.format.isNumberOrEmpty
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppArcomTextField(
+fun AppAnimeTextField(
     valueState: MutableFieldStringRemember,
     modifier: Modifier = Modifier,
     label: String? = null,
@@ -64,7 +64,7 @@ fun AppArcomTextField(
         keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Done
     ),
-    keyboardActions: AppArcomKeyboardActions = AppArcomKeyboardActions(),
+    keyboardActions: AppAnimeKeyboardActions = AppAnimeKeyboardActions(),
     enabled: Boolean = true,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     maxLength: Int = Int.MAX_VALUE,
@@ -73,7 +73,7 @@ fun AppArcomTextField(
     readOnly: Boolean = false,
     onlyNumbers: Boolean = false
 ) {
-    AppArcomTextField(
+    AppAnimeTextField(
         setText = { valueState.setValue(it) },
         text = valueState.value,
         modifier = modifier,
@@ -94,7 +94,7 @@ fun AppArcomTextField(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppArcomTextField(
+fun AppAnimeTextField(
     modifier: Modifier = Modifier,
     label: String? = null,
     placeholder: String? = null,
@@ -105,7 +105,7 @@ fun AppArcomTextField(
         keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Done
     ),
-    keyboardActions: AppArcomKeyboardActions = AppArcomKeyboardActions(),
+    keyboardActions: AppAnimeKeyboardActions = AppAnimeKeyboardActions(),
     isError: Boolean = false,
     enabled: Boolean = true,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -113,7 +113,7 @@ fun AppArcomTextField(
     maxLines: Int = Int.MAX_VALUE,
     readOnly: Boolean = false,
     onlyNumbers: Boolean = false,
-    icon: AppArcomIcons? = null,
+    icon: AppAnimeIcons? = null,
     iconClick: (() -> Unit)? = null
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
@@ -171,7 +171,7 @@ fun AppArcomTextField(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(CornerShapeAppArcom)
+                        .clip(CornerShapeAppAnime)
                         .background(MaterialTheme.colorScheme.surfaceContainer)
                         .conditional(isFocused || isError) {
                             this.border(
@@ -179,7 +179,7 @@ fun AppArcomTextField(
                                     (1.5).dp,
                                     if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
                                 ),
-                                CornerShapeAppArcom
+                                CornerShapeAppAnime
                             )
                         }
                         .padding(horizontal = 16.dp, vertical = 12.dp),
@@ -215,7 +215,7 @@ fun AppArcomTextField(
 }
 
 @Composable
-fun AppArcomTextFieldPesquisa(
+fun AppAnimeTextFieldPesquisa(
     modifier: Modifier = Modifier,
     setText: (String) -> Unit,
     text: String,
@@ -261,7 +261,7 @@ fun AppArcomTextFieldPesquisa(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(CornerShapeAppArcom)
+                    .clip(CornerShapeAppAnime)
                     .background(MaterialTheme.colorScheme.surfaceContainer)
                     .conditional(isFocused || isError) {
                         this.border(
@@ -269,14 +269,14 @@ fun AppArcomTextFieldPesquisa(
                                 (1.5).dp,
                                 if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
                             ),
-                            CornerShapeAppArcom
+                            CornerShapeAppAnime
                         )
                     }
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                AppArcomIcons.PESQUISA.Composable(
+                AppAnimeIcons.PESQUISA.Composable(
                     tint = MaterialTheme.colorScheme.onSurface.lightColor(),
                     modifier = Modifier.requiredSize(18.dp)
                 )
@@ -295,7 +295,7 @@ fun AppArcomTextFieldPesquisa(
     )
 }
 
-class AppArcomKeyboardActions(
+class AppAnimeKeyboardActions(
     val onDone: (() -> Unit)? = null,
     val onGo: (() -> Unit)? = null,
     val onNext: (() -> Unit)? = null,

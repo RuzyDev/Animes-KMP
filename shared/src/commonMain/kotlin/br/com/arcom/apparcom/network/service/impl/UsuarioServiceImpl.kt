@@ -2,7 +2,7 @@ package br.com.arcom.apparcom.network.service.impl
 
 import br.com.arcom.apparcom.network.models.NetworkLogin
 import br.com.arcom.apparcom.network.models.NetworkPushToken
-import br.com.arcom.apparcom.network.models.NetworkUsuarioAppArcom
+import br.com.arcom.apparcom.network.models.NetworkUsuarioAppAnime
 import br.com.arcom.apparcom.network.service.UsuarioService
 import br.com.arcom.apparcom.network.util.bodyOrNull
 import br.com.arcom.apparcom.network.util.safeApiCall
@@ -17,7 +17,7 @@ class UsuarioServiceImpl(
     private val api: HttpClient
 ) : UsuarioService {
 
-    override suspend fun login(idUsuario: Long, senha: String): NetworkUsuarioAppArcom? {
+    override suspend fun login(idUsuario: Long, senha: String): NetworkUsuarioAppAnime? {
         return safeApiCall {
             api.post(urlString = "api/apparcom/v1/login") {
                 setBody(NetworkLogin(idUsuario, senha))

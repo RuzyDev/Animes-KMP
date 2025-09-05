@@ -24,7 +24,7 @@ class AppServiceImpl(
         // Baixa os bytes do arquivo
         val response: HttpResponse = api.get(url){
             onDownload { bytesSentTotal, contentLength ->
-                onDowload(bytesSentTotal, contentLength)
+                onDowload(bytesSentTotal, contentLength ?: 0)
             }
         }
         val fileBytes = response.readBytes()

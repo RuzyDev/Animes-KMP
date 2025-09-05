@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import br.com.arcom.apparcom.presentation.util.UiMessage
 
 @Composable
-fun AppArcomScaffold(
+fun AppAnimeScaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -33,7 +33,7 @@ fun AppArcomScaffold(
     uiMessage: UiMessage?,
     loading: Boolean = false,
     clearMessage: (Long) -> Unit,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     if (onBackClick != null) BackHandler(onBack = onBackClick)
     val snackbarHostState = remember { SnackbarHostState() }
@@ -63,11 +63,10 @@ fun AppArcomScaffold(
         },
         contentWindowInsets = contentWindowInsets
     ) { innerPadding ->
-        Column(
+        Box(
             Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(innerPadding)
         ) {
             content()
         }
@@ -76,7 +75,7 @@ fun AppArcomScaffold(
 }
 
 @Composable
-fun AppArcomScaffoldWithAnimationSuccess(
+fun AppAnimeScaffoldWithAnimationSuccess(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -88,11 +87,11 @@ fun AppArcomScaffoldWithAnimationSuccess(
     clearMessage: (Long) -> Unit,
     success: Boolean,
     onSuccess: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     Crossfade(success, label = "") { s ->
         if (!s) {
-            AppArcomScaffold(
+            AppAnimeScaffold(
                 modifier = modifier,
                 topBar = topBar,
                 bottomBar = bottomBar,

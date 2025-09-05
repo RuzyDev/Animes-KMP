@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.android.ui.designsystem.components
 
-import AppArcomIcons
+import AppAnimeIcons
 import Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,10 +37,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import br.com.arcom.apparcom.presentation.util.UiMessage
 import br.com.arcom.apparcom.android.R
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
-import br.com.arcom.apparcom.designsystem.theme.divider
-import br.com.arcom.apparcom.designsystem.theme.lightColor
-import br.com.arcom.apparcom.designsystem.theme.secondaryColor
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppAnime
+import br.com.arcom.apparcom.android.ui.designsystem.theme.divider
+import br.com.arcom.apparcom.android.ui.designsystem.theme.secondaryColor
 import br.com.arcom.apparcom.util.format.formatBytes
 
 @Composable
@@ -51,10 +50,10 @@ fun UiMessageDialog(
     AlertDialog(
         onDismissRequest = { /*TODO*/ },
         title = { Text(text = stringResource(id = R.string.alerta)) },
-        icon = { AppArcomIcons.ALERTA.Composable() },
+        icon = { AppAnimeIcons.ALERTA.Composable() },
         text = { Text(text = uiMessage.message) },
         confirmButton = {
-            stringResource(id = R.string.confirmar).TextButtonAppArcom(onClick = confirmMsg)
+            stringResource(id = R.string.confirmar).TextButtonAppAnime(onClick = confirmMsg)
         },
         properties = DialogProperties(
             usePlatformDefaultWidth = true
@@ -72,7 +71,7 @@ fun DialogConfirmacao(
     modifier: Modifier = Modifier,
     title: String = stringResource(id = R.string.voce_tem_certeza),
     text: String? = null,
-    icon: AppArcomIcons? = null,
+    icon: AppAnimeIcons? = null,
     closeDialog: () -> Unit,
     confirmClick: () -> Unit
 ) {
@@ -147,7 +146,7 @@ fun <T> DialogCheck(
         Column(
             modifier = Modifier
                 .fillMaxWidth(.9f)
-                .clip(CornerShapeAppArcom)
+                .clip(CornerShapeAppAnime)
                 .background(MaterialTheme.colorScheme.surface)
         ) {
             itens.forEachIndexed { index, item ->
@@ -159,7 +158,7 @@ fun <T> DialogCheck(
                         .padding(horizontal = 16.dp, vertical = 12.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    (if (selectedItem) AppArcomIcons.CHECK else AppArcomIcons.CHECK_BOX).Composable(
+                    (if (selectedItem) AppAnimeIcons.CHECK else AppAnimeIcons.CHECK_BOX).Composable(
                         tint = if (selectedItem) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.secondaryColor(),
                         modifier = Modifier.size(18.dp)
                     )
@@ -263,7 +262,7 @@ fun BaixarAtualizacaoDialog(
                     .fillMaxWidth()
                     .padding(top = 16.dp),
                 enabled = enabledButtons,
-                shape = CornerShapeAppArcom
+                shape = CornerShapeAppAnime
             ) {
                 Text(
                     text = stringResource(id = if (versaoInstalada) R.string.instalar else R.string.baixar),
@@ -277,7 +276,7 @@ fun BaixarAtualizacaoDialog(
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 4.dp)
-                        .clip(CornerShapeAppArcom)
+                        .clip(CornerShapeAppAnime)
                         .clickable(enabledButtons) {
                             onBaixarClick(true)
                         }

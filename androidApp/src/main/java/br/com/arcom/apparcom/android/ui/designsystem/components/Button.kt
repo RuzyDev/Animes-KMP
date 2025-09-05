@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.android.ui.designsystem.components
 
-import AppArcomIcons
+import AppAnimeIcons
 import Composable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -23,10 +23,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppArcom
+import br.com.arcom.apparcom.android.ui.designsystem.theme.CornerShapeAppAnime
 
 @Composable
-fun String.TextButtonAppArcom(
+fun String.TextButtonAppAnime(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
@@ -38,7 +38,7 @@ fun String.TextButtonAppArcom(
         onClick = onClick,
         colors = ButtonDefaults.textButtonColors(contentColor = color),
         contentPadding = contentPadding,
-        shape = CornerShapeAppArcom
+        shape = CornerShapeAppAnime
     ) {
         Text(
             text = text, style = MaterialTheme.typography.bodyMedium,
@@ -51,7 +51,7 @@ fun String.TextButtonAppArcom(
 }
 
 @Composable
-fun AppArcomButton(
+fun AppAnimeButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -60,8 +60,8 @@ fun AppArcomButton(
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     textStyle: TextStyle = MaterialTheme.typography.bodyMedium,
-    leadingIcon: AppArcomIcons? = null,
-    trailingIcon: AppArcomIcons? = null,
+    leadingIcon: AppAnimeIcons? = null,
+    trailingIcon: AppAnimeIcons? = null,
     text: String
 ) {
     Button(
@@ -74,7 +74,7 @@ fun AppArcomButton(
         ),
         elevation = elevation,
         interactionSource = interactionSource,
-        shape = CornerShapeAppArcom,
+        shape = CornerShapeAppAnime,
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
     ) {
         Row(

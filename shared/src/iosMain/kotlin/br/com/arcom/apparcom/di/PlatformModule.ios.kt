@@ -1,7 +1,7 @@
 package br.com.arcom.apparcom.di
 
 import app.cash.sqldelight.db.SqlDriver
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.IOSPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
@@ -28,7 +28,7 @@ actual val platformModule = module {
     single<SqlDriver> { SqlDelightDriverFactory().createDriver() }
     single<HttpClientEngine> { Darwin.create {} }
     single { AppChecker }
-    single<AppArcomStorage> { AppArcomStorage(createDataStore()) }
+    single<AppAnimeStorage> { AppAnimeStorage(createDataStore()) }
     single<PreferencesManager> { IOSPreferencesManager() }
 }
 

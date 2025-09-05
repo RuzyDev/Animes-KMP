@@ -6,7 +6,7 @@ import br.com.arcom.apparcom.network.models.NetworkAnimeWithPagination
 import br.com.arcom.apparcom.network.models.NetworkGenre
 import br.com.arcom.apparcom.network.models.NetworkLogin
 import br.com.arcom.apparcom.network.models.NetworkPushToken
-import br.com.arcom.apparcom.network.models.NetworkUsuarioAppArcom
+import br.com.arcom.apparcom.network.models.NetworkUsuarioAppAnime
 import br.com.arcom.apparcom.network.service.AnimeService
 import br.com.arcom.apparcom.network.service.UsuarioService
 import br.com.arcom.apparcom.network.util.bodyOrNull
@@ -37,7 +37,9 @@ class AnimeServiceImpl(
     ): NetworkAnimeWithPagination? =
         safeApiCall {
             api.get(urlString = "/v4/top/anime"){
-                parameter("filter", filter.filter)
+                filter.filter?.let {
+                    parameter("filter", it)
+                }
                 parameter("page", page)
                 contentType(ContentType.Application.Json)
             }.body()

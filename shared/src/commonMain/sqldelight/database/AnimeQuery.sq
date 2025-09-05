@@ -1,6 +1,6 @@
 CREATE TABLE AnimeQueryEntity (
     query_type TEXT NOT NULL,
-    query_param TEXT,
+    query_param TEXT NOT NULL,
     current_page INTEGER NOT NULL,
     last_visible_page INTEGER NOT NULL,
     has_next_page INTEGER NOT NULL, -- 0 = false, 1 = true
@@ -23,14 +23,16 @@ INSERT OR REPLACE INTO AnimeQueryEntity (
 getQuery:
 SELECT * FROM AnimeQueryEntity WHERE query_type = :type AND query_param = :param;
 
-getAnimes:
+selectAnimesByQuery:
 SELECT aq.*, a.*
 FROM AnimeQueryEntity aq
-LEFT JOIN AnimeQueryCrossRefEntity aqc
-    ON aq.query_type   = aqc.query_type
-   AND aq.query_param  = aqc.query_param
+INNER JOIN AnimeQueryCrossRefEntity aqc
+    ON aq.query_type = aqc.query_type
+   AND aq.query_param = aqc.query_param
    AND aq.current_page = aqc.page
-LEFT JOIN AnimeEntity a
-   ON a.id           = aqc.anime_id
-WHERE aq.query_type  = :type
-  AND aq.query_param = :param;
+INNER JOIN AnimeEntity a
+    ON a.id = aqc.anime_id
+WHERE aq.query_type = :queryType
+  AND aq.query_param = :queryParam
+ORDER BY aqc.position ASC;
+

@@ -4,7 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import br.com.arcom.apparcom.db.dao.UsuarioDao
 import database.UsuarioEntity
-import br.com.arcom.apparcom.network.models.NetworkUsuarioAppArcom
+import br.com.arcom.apparcom.network.models.NetworkUsuarioAppAnime
 import database.UsuarioQueries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -12,7 +12,7 @@ import kotlinx.coroutines.IO
 class UsuarioDaoImpl(
     private val usuarioQueries: UsuarioQueries
 ): UsuarioDao {
-    override suspend fun insertOrUpdate(usuario: NetworkUsuarioAppArcom){
+    override suspend fun insertOrUpdate(usuario: NetworkUsuarioAppAnime){
         usuarioQueries.deleteAll()
         usuarioQueries.insertOrUpdate(
             id = usuario.id,

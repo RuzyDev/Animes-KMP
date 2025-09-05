@@ -11,3 +11,5 @@ fun String.getQtdPalavras(qtd: Int = 2): String {
 
 fun String.toNome() = this.split(" ")
     .joinToString(" ") { it.lowercase().replaceFirstChar { char -> char.uppercase() } }
+
+fun String?.toStringApp() = if (this.isNullOrEmpty()) "" else this

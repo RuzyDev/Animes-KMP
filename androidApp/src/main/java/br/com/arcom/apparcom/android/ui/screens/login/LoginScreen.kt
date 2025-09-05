@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.android.ui.screens.login
 
-import AppArcomIcons
+import AppAnimeIcons
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,14 +25,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomScaffold
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeScaffold
 import br.com.arcom.apparcom.presentation.LoginViewModel
-import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomTextField
+import br.com.arcom.apparcom.ui.designsystem.components.text.AppAnimeTextField
 import org.koin.compose.koinInject
-import br.com.arcom.apparcom.android.ui.designsystem.components.AppArcomButton
+import br.com.arcom.apparcom.android.ui.designsystem.components.AppAnimeButton
 import br.com.arcom.apparcom.presentation.LoginUiState
 import br.com.arcom.apparcom.android.R
-import br.com.arcom.apparcom.ui.designsystem.components.text.AppArcomKeyboardActions
+import br.com.arcom.apparcom.ui.designsystem.components.text.AppAnimeKeyboardActions
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -61,7 +61,7 @@ fun LoginScreen(
     val keyboard = LocalSoftwareKeyboardController.current
 
 
-    AppArcomScaffold (
+    AppAnimeScaffold (
         clearMessage = clearMessage,
         uiMessage = uiState.uiMessage,
         loading = uiState.loadingLogin
@@ -99,7 +99,7 @@ fun LoginScreen(
                     .padding(vertical = 16.dp)
             )
 
-            AppArcomTextField(
+            AppAnimeTextField(
                 text = idUsuario,
                 setText = { idUsuario = it },
                 label = stringResource(id = R.string.usuario),
@@ -114,7 +114,7 @@ fun LoginScreen(
                 singleLine = true
             )
 
-            AppArcomTextField(
+            AppAnimeTextField(
                 text = senha,
                 setText = { senha = it },
                 label = stringResource(id = R.string.senha),
@@ -125,17 +125,17 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
-                keyboardActions = AppArcomKeyboardActions(onNext = {
+                keyboardActions = AppAnimeKeyboardActions(onNext = {
                     keyboard?.hide()
                     idUsuario.toLongOrNull()?.let { realizarLogin(it, senha) }
                 }),
                 singleLine = true,
-                icon = if (ocultarSenha) AppArcomIcons.NAO_VISIVEL else AppArcomIcons.VISIVEL,
+                icon = if (ocultarSenha) AppAnimeIcons.NAO_VISIVEL else AppAnimeIcons.VISIVEL,
                 iconClick = { ocultarSenha = !ocultarSenha },
                 visualTransformation = if (ocultarSenha) PasswordVisualTransformation() else VisualTransformation.None,
             )
 
-            AppArcomButton(
+            AppAnimeButton(
                 onClick = {
                     idUsuario.toLongOrNull()?.let { realizarLogin(it, senha) }
                 },

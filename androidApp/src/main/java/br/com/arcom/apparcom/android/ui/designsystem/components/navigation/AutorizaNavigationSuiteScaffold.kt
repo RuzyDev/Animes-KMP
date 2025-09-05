@@ -31,7 +31,7 @@ import androidx.compose.ui.graphics.Color
     ExperimentalMaterial3AdaptiveApi::class,
 )
 @Composable
-fun AppArcomNavigationSuiteScaffold(
+fun AppAnimeNavigationSuiteScaffold(
     navigationSuiteItems: NiaNavigationSuiteScope.() -> Unit,
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),

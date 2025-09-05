@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -8,10 +10,8 @@ plugins {
 
 kotlin {
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
 
@@ -71,7 +71,7 @@ android {
 }
 
 sqldelight{
-    databases.create("AppArcomDatabase"){
+    databases.create("AppAnimeDatabase"){
         packageName.set("br.com.arcom.apparcom.database")
         schemaOutputDirectory = file("src/commonMain/db/database")
         migrationOutputDirectory = file("src/commonMain/db/migrations")

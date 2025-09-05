@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.domain.interactor
 
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.Keys
 import br.com.arcom.apparcom.domain.Interactor
 import br.com.arcom.apparcom.domain.repository.SolicitacaoAceiteRepository
@@ -12,7 +12,7 @@ import br.com.arcom.apparcom.util.AppCoroutineDispatchers
 import kotlinx.coroutines.withContext
 
 class AtualizarVersaoApp(
-    private val appArcomStorage: AppArcomStorage,
+    private val appArcomStorage: AppAnimeStorage,
     private val appService: AppService,
     private val dispatchers: AppCoroutineDispatchers
 ) : Interactor<AtualizarVersaoApp.Params, Unit>() {

@@ -1,8 +1,8 @@
 package br.com.arcom.apparcom.di
 
 import app.cash.sqldelight.db.SqlDriver
-import br.com.arcom.apparcom.data.AndroidAppArcomFiles
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.AndroidAppAnimeFiles
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.createDataStore
 import br.com.arcom.apparcom.data.preferences.AndroidPreferencesManager
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
@@ -22,8 +22,8 @@ import org.koin.dsl.module
 
 actual val platformModule: Module = module {
     single<SqlDriver> { SqlDelightDriverFactory(context = get()).createDriver() }
-    single{ AndroidAppArcomFiles(context = get()) }
+    single{ AndroidAppAnimeFiles(context = get()) }
     single<HttpClientEngine> { OkHttp.create {} }
-    single<AppArcomStorage> { AppArcomStorage(createDataStore(context = get())) }
+    single<AppAnimeStorage> { AppAnimeStorage(createDataStore(context = get())) }
     single<PreferencesManager> { AndroidPreferencesManager(context = get()) }
 }

@@ -13,9 +13,8 @@ fun NavController.navigateToHome(navOptions: NavOptions) =
     navigate(route = HomeNavigation, navOptions)
 
 fun NavGraphBuilder.home(
-    navigateToSolicitacoes: () -> Unit
 ) {
     composable<HomeNavigation> {
-        HomeRoute(navigateToSolicitacoes = navigateToSolicitacoes)
+        HomeRoute()
     }
 }

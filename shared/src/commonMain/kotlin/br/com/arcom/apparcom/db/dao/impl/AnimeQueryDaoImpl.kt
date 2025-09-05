@@ -1,16 +1,15 @@
 package br.com.arcom.apparcom.db.dao.impl
 
 import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToOne
-import br.com.arcom.apparcom.db.dao.AnimeDao
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOneOrNull
 import br.com.arcom.apparcom.db.dao.AnimeQueryDao
-import br.com.arcom.apparcom.model.FilterTopAnimes
 import br.com.arcom.apparcom.model.QueryTypeAnime
 import br.com.arcom.apparcom.network.models.NetworkPagination
 import br.com.arcom.apparcom.util.format.toLong
-import database.AnimeQueries
 import database.AnimeQueryEntity
 import database.AnimeQueryQueries
+import database.SelectAnimesByQuery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
@@ -34,7 +33,12 @@ class AnimeQueryDaoImpl(
         )
     }
 
-    fun observeAnimeQuery(type: QueryTypeAnime, filter: String?): Flow<AnimeQueryEntity?> {
-        return animeQueryQueries.getQuery(type.type, filter).asFlow().mapToOne(Dispatchers.IO)
+    override fun observeAnimeQuery(type: QueryTypeAnime, param: String): Flow<AnimeQueryEntity?> {
+        return animeQueryQueries.getQuery(type.type, param).asFlow().mapToOneOrNull(Dispatchers.IO)
+    }
+
+    override fun observeAnimes(type: QueryTypeAnime, param: String): Flow<List<SelectAnimesByQuery>> {
+        return animeQueryQueries.selectAnimesByQuery(type.type, param)
+            .asFlow().mapToList(Dispatchers.IO)
     }
 }

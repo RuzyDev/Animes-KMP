@@ -1,6 +1,6 @@
 package br.com.arcom.apparcom.domain.repository.impl
 
-import br.com.arcom.apparcom.data.datastore.AppArcomStorage
+import br.com.arcom.apparcom.data.datastore.AppAnimeStorage
 import br.com.arcom.apparcom.data.datastore.Keys
 import br.com.arcom.apparcom.data.preferences.KeysPreferences
 import br.com.arcom.apparcom.data.preferences.PreferencesManager
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 class UsuarioRepositoryImpl(
     private val usuarioService: UsuarioService,
     private val usuarioDao: UsuarioDao,
-    private val appArcomStorage: AppArcomStorage,
+    private val appArcomStorage: AppAnimeStorage,
     private val preferencesManager: PreferencesManager
 ) : UsuarioRepository {
 
